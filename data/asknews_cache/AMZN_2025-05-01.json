@@ -1,0 +1,42 @@
+{
+  "ticker": "AMZN",
+  "date": "2025-05-01",
+  "window": "2025-04-24 \u2192 2025-05-01",
+  "articles": [
+    {
+      "title": "China's Economy Under Trump's Tariff Onslaught The Worst Since COVID | CDN",
+      "summary": "China's economy has contracted for the first time since the COVID shutdown, with the Purchasing Managers' Index (PMI) falling below 50 in April. New export orders have reached their lowest level since December 2022, according to the Wall Street Journal. Major financial institutions, including UBS and Goldman Sachs, have reduced their growth forecasts for China. Robin Xing, chief China economist at Morgan Stanley, stated, 'It's definitely worse than expected. It shows tariffs started to bite.' The downturn is attributed to Trump's trade crackdown, which has led to a 60% decline in Chinese cargo shipments and potentially up to 16 million job losses in China. Trump has steadily increased tariffs on Chinese goods, with the latest hike occurring after China was denied a 90-day tariff freeze.",
+      "source": "Conservative Daily News",
+      "url": "https://conservativedailynews.com/2025/04/chinas-economy-under-trumps-tariff-onslaught-the-worst-since-covid/",
+      "published_at": "2025-05-01 03:26:26+00:00"
+    },
+    {
+      "title": "Tariff turmoil prompts cloudy forecasts from U.S. companies for year ahead: report",
+      "summary": "The latest round of financial results and forecasts for U.S. companies is uncertain due to the impact of tariffs and a shift in U.S. policy, reported The Associated Press. The U.S. economy shrank in the first quarter, and consumer spending has increased, possibly to get ahead of tariffs. Companies are pulling back on hiring, and roughly half of the S&P 500 companies have reported their quarterly financial results, focusing on adjusting to tariffs and changing consumer behavior. The situation remains unpredictable due to President Donald Trump's on-again-off-again policy, making it difficult for companies to plan ahead and investors to seek stability. According to the report, 'stunted consumer spending and weaker employment could further hurt the U.S. economy,' and 'the situation remains unpredictable and that is problematic for companies trying to plan ahead and investors looking for stability.'",
+      "source": "The Star ",
+      "url": "https://www.thestar.com.my/news/world/2025/05/01/tariff-turmoil-prompts-cloudy-forecasts-from-us-companies-for-year-ahead-report",
+      "published_at": "2025-04-30 20:19:43+00:00"
+    },
+    {
+      "title": "Australia's Trade Balance Surplus Exceeds Expectations in March",
+      "summary": "Australia's trade balance exceeded expectations in March, with a significant increase in exports and a decline in imports, ahead of the expected US tariffs announcement this month. The trade balance recorded a surplus of AU$6.90 billion in March, much higher than the expected AU$3.23 billion surplus and the AU$2.97 billion surplus in the previous month. The result is the highest since November 2024, according to data from the Australian Bureau of Statistics released on Thursday. The strongest result was driven mainly by a 7.6% month-on-month increase in exports, with higher shipments of metallic minerals and minerals during the period. Prices of exports rose, led by a 5.4% surge in iron ore prices due to increased demand from China, while gold prices also rose 12.4% with the increase in global uncertainty and the purchase of more gold by central banks. The country, Australia's largest trading partner, has accelerated the importation of metallic minerals and minerals in anticipation of the US tariffs announcements expected in April, which have fueled fears of a global trade war. The weakness of the Australian dollar against the US dollar has driven up both import and export prices in this quarter, according to the ABS. The surplus was also supported by a decline in imports. Imports decreased by 2.2% month-on-month in March, in contrast to a 1.8% increase in February, due to lower demand for capital goods, as said the ABS.",
+      "source": "Investing.com Italia",
+      "url": "https://it.investing.com/news/economic-indicators/la-bilancia-commerciale-australiana-supera-le-previsioni-a-marzo-con-laumento-delle-esportazioni-2802291",
+      "published_at": "2025-05-01 02:01:01+00:00"
+    },
+    {
+      "title": "Global markets bounce back amid stronger earnings and a weaker dollar | Investing.com ZA",
+      "summary": "Global markets showed resilience in the face of mixed economic signals, driven by robust earnings reports from major technology firms. The S&P 500 closed at 5,444.78, 1.28% higher, while the Dow Jones Industrial Average closed at 39,832.72, 0.57% higher. The Nasdaq closed at 17,005.17, 1.78% higher. However, President Donald Trump's comments on tariffs on China were tempered by US Treasury Secretary Scott Bessent, who stated that no unilateral tariff reductions have been proposed. The Eurozone stock markets rebounded, with the FTSE 100 gaining 0.01% and the Stoxx 50 indices gaining 0.30%. Asian stocks exhibited mixed performance, with the Shanghai Composite edging up by 0.04% and the Nikkei closing at 0.49%. South Africa's benchmark 10-year bond yield rebounded to around 11%, reversing part of its recent slide, while the rand traded at 18.75 to the dollar with a drop of 0.42%.",
+      "source": "Investing.com South Africa",
+      "url": "https://za.investing.com/analysis/global-markets-bounce-back-amid-stronger-earnings-and-a-weaker-dollar-200611789",
+      "published_at": "2025-04-25 06:26:28+00:00"
+    },
+    {
+      "title": "China's Q1 industrial profits return to growth amid US tariff woes",
+      "summary": "China's industrial profits returned to growth in the first quarter, rising 0.8% to 1.5 trillion yuan ($205.86 billion), according to official data. However, the growth is likely to be short-lived due to the ongoing trade war with the US, which has imposed 145% tariffs on Chinese goods. Economists and investors are waiting for the Chinese government to roll out more support measures to cushion the blow to the economy. The government has pledged to support firms and workers affected by the tariffs, and has announced plans to set up new monetary tools and policy financing instruments to boost innovation, consumption, and foreign trade. Profits at state-owned firms dipped 1.4% in the first quarter, while private-sector companies saw a 0.3% fall, but foreign firms recorded a 2.8% gain.",
+      "source": "Business Standard",
+      "url": "https://www.business-standard.com/world-news/china-s-q1-industrial-profits-return-to-growth-amid-us-tariff-woes-125042700060_1.html",
+      "published_at": "2025-04-27 02:23:52+00:00"
+    }
+  ]
+}

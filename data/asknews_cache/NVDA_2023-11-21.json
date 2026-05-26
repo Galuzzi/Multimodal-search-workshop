@@ -1,0 +1,42 @@
+{
+  "ticker": "NVDA",
+  "date": "2023-11-21",
+  "window": "2023-11-14 \u2192 2023-11-21",
+  "articles": [
+    {
+      "title": "Nvidia Earnings Report",
+      "summary": "Nvidia's earnings report is highly anticipated, with expectations for a 200% increase in earnings. The stock has risen 2.25% in the days leading up to the report, closing at a new all-time high of 504.09 USD. Nvidia's market capitalization is now higher than Meta or Tesla's. Investors have good reason to celebrate",
+      "source": "FinanzNachrichten.de",
+      "url": "https://www.finanznachrichten.de/nachrichten-2023-11/60722853-vor-den-earnings-der-gesamte-aktienmarkt-blickt-auf-nvidia-rallye-oder-korrektur-heute-abend-049.htm",
+      "published_at": "2023-11-21 12:23:00+00:00"
+    },
+    {
+      "title": "Tencent's Business Is Thriving And It Has Taken Precautions Against The U.S. Chip Export Curbs",
+      "summary": "Tencent Holdings Limited reported impressive third quarter results, with gaming and advertising segments performing well. The company also made a deal with Meta Platforms to sell VR headsets in China. Despite a decline in net profit, Tencent has taken precautions against U.S. chip export curbs and is focusing on high-margin revenue streams.",
+      "source": "Yahoo",
+      "url": "https://finance.yahoo.com/news/tencents-business-thriving-taken-precautions-160851716.html",
+      "published_at": "2023-11-21 16:08:51+00:00"
+    },
+    {
+      "title": "Nvidia (NASDAQ",
+      "summary": "Nvidia (NASDAQ",
+      "source": "Yahoo",
+      "url": "https://finance.yahoo.com/news/nvidia-nasdaq-nvda-delivers-impressive-212547931.html",
+      "published_at": "2023-11-21 21:25:47+00:00"
+    },
+    {
+      "title": "Russia to earn 65 billion rubles from oil deal with Vietnam",
+      "summary": "Russia is expected to earn 65 billion rubles from a oil deal with Vietnam. Both countries are increasing mineral extraction projects, according to a report from 'Izvestia' TV channel. Russia will have the right to develop Vietnam's mining sites. The 'Rusvietpetro' company will receive tax benefits. The joint venture will receive government support, which will increase Russian budget income. 'Izvestia' TV channel is available on cable packages and can be found on channel 26 in Moscow. The channel's live broadcast can also be accessed on the iz.ru website.",
+      "source": "IzRus",
+      "url": "https://iz.ru/1608919/video/neftianaia-sdelka-s-vetnamom-prineset-rossii-65-mlrd-rublei",
+      "published_at": "2023-11-21 17:45:00+00:00"
+    },
+    {
+      "title": "Nvidia Reports Strong Earnings. The Stock Drops.",
+      "summary": "Nvidia reported strong earnings, but the stock price dropped. The company exceeded expectations with adjusted earnings per share of $4.02 and revenue of $18.1 billion.",
+      "source": "Yahoo",
+      "url": "https://finance.yahoo.com/m/9f8d1621-4397-3750-abe0-77e4eb77e7db/nvidia-reports-strong.html",
+      "published_at": "2023-11-21 21:26:00+00:00"
+    }
+  ]
+}

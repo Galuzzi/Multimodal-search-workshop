@@ -1,0 +1,42 @@
+{
+  "ticker": "TSLA",
+  "date": "2025-04-22",
+  "window": "2025-04-15 \u2192 2025-04-22",
+  "articles": [
+    {
+      "title": "Tariffs, Trump, and Turmoil",
+      "summary": "The Motley Fool Money podcast discussed economic uncertainty, airlines, building materials, and assorted spirits. Analysts Emily Flippen and Matt Argersinger joined Ron Gross to talk about the impact of tariffs on the economy and individual companies. They discussed the recent 90-day pause on reciprocal tariff policy, inflation data, and the potential risks of higher interest rates. The analysts also talked about the performance of various companies, including Delta, CarMax, and Constellation Brands, and how they are affected by the current economic environment. Emily Flippen noted that while tariffs are a concern, they are not the only factor affecting these companies, and that some of them are performing well despite the challenges. Matt Argersinger emphasized the importance of watching treasury yields and the potential impact of higher interest rates on the economy. The analysts concluded that the current economic environment is uncertain and that investors should be cautious.",
+      "source": "NASDAQ Stock Market",
+      "url": "https://www.nasdaq.com/articles/tariffs-trump-and-turmoil",
+      "published_at": "2025-04-16 14:22:00+00:00"
+    },
+    {
+      "title": "Management Weighs in on the Macro | The Motley Fool",
+      "summary": "The Motley Fool's podcast discusses various topics, including the impact of tariffs on the economy, the performance of big banks, and the outlook for the airline industry. The hosts, Jason Moser and Matt Argersinger, discuss the recent earnings reports from United Airlines, J.P. Morgan, Bank of America, and Goldman Sachs, and how they are affected by the tariff uncertainty. They also talk about the performance of Prologis, a bellwether for the industrial real estate market, and how it is standing firm on its guidance and outlook for the year. Additionally, they discuss the impact of tariffs on consumer behavior and how some consumers are trying to get ahead of the expected tariff impact and price increases. The hosts also mention the performance of gold and how it has been outperforming the S&P 500 over the past 20 years.",
+      "source": "The Motley Fool",
+      "url": "https://www.fool.com/investing/2025/04/21/management-weighs-in-on-the-macro/",
+      "published_at": "2025-04-21 17:28:00+00:00"
+    },
+    {
+      "title": "TSMC reports 60% increase in net profit",
+      "summary": "Taiwan Semiconductor Manufacturing Company (TSMC), the world's largest producer of advanced semiconductors, reported a 60% increase in net profit in the first quarter of this year compared to the same period last year. The company's net result for the first three months of the year was 361.56 billion Taiwanese dollars, equivalent to approximately 118 billion Norwegian kroner at current exchange rates. According to TSMC, they have not seen any changes in trading after US President Donald Trump announced comprehensive tariffs. 'We have not seen any changes in trading after the announcement of the tariffs,' said TSMC, in a statement.",
+      "source": "NRK",
+      "url": "https://www.nrk.no/nyheter/databrikkegiganten-tsmc-okte-overskuddet-mer-enn-ventet-1.17386167",
+      "published_at": "2025-04-17 06:35:18+00:00"
+    },
+    {
+      "title": "Johnson & Johnson expects $400 million in tariff-related costs, mostly related to China",
+      "summary": "Johnson & Johnson expects to incur $400 million in tariff-related costs this year, primarily in its medical technology unit. The costs are mainly due to tariffs against China and retaliatory tariffs from China, according to Joseph Wolk, the company's chief financial officer. The estimate also includes the impact of tariffs on aluminum and steel, as well as tariffs against key U.S. trading partners Canada and Mexico. CEO Joaquin Duato warned that tariffs, especially on pharmaceutical products, could lead to supply chain issues and shortages. He emphasized that the best way to build up manufacturing in the U.S. is through tax policy, not tariffs. The company is investing over $55 billion to make all its advanced medicines used in the U.S. within the U.S.",
+      "source": "The Independent",
+      "url": "https://www.independent.co.uk/news/johnson-johnson-china-canada-mexico-trump-b2733774.html",
+      "published_at": "2025-04-15 15:20:58+00:00"
+    },
+    {
+      "title": "Taiwan's Export Orders See Record High in March, with Tariff Policy Impact Uncertain",
+      "summary": "The Ministry of Economic Affairs announced that Taiwan's export orders for March reached $5.304 billion, a record high for the month, with a year-on-year increase of 12.5%. The total export orders for the first quarter of this year reached $14.947 billion, a record high for the quarter, with a year-on-year increase of 12.5%. According to Economic Department Director-General Huang Yu-ling, some manufacturers have reported that they have begun to stock up on goods in anticipation of the US's imposition of equal tariffs, which is scheduled to take effect in April. However, Huang noted that not all manufacturers have taken this step, making it difficult to determine the extent of the impact. Looking ahead, Huang stated that it is still too early to determine the impact of the tariff policy on April's export orders, as manufacturers have not yet reflected the policy's effects in their orders. Based on current trends and seasonal fluctuations, Huang predicted that April's export orders will be between $5 billion and $5.2 billion, with a year-on-year increase of 6.2% to 10.4%.",
+      "source": "UDN",
+      "url": "https://udn.com/news/story/7238/8691376",
+      "published_at": "2025-04-22 08:58:12+00:00"
+    }
+  ]
+}

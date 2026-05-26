@@ -1,0 +1,1138 @@
+{
+  "ticker": "AMZN",
+  "company": "Amazon.com Inc.",
+  "quarter": "Q1",
+  "year": 2025,
+  "date": "2025-05-01",
+  "audio_file": "amzn_q1_2025.mp3",
+  "youtube_id": "tad_DWtWpoU",
+  "chunks": [
+    {
+      "chunk_index": 0,
+      "text": "What's  up,  Zinger?  Welcome  back  to  another  earnings  coverage.  I'm  your  host,  Kevin  Dubrisky,  and  with  me  is  the  one  and  only  poll  meeks.  And  today  we're  covering  Amazon  Q1  earnings.  Now  the  report  is  already  out,  but  the  earnings  call  is  at  5  p .m.  Eastern.  So  for  the  next  half  hour,  me,  Paul,  and  you  are  all  going  to  go  over  Amazon  as  a  company,  their  roadmap  and  some  technical  analysis  as  well.  So  Amazon  Q1  earnings  report,  they  had  earnings,  EPS  earnings  per  share  beats  1",
+      "start": 1.42,
+      "end": 30.44,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 1,
+      "text": ".59  beats  1 .36  estimate.  And  their  revenue  was  also  a  beat  as  well.  Paul,  what  do  you  think  about  how  Amazon's  performing  so  far,  Q1?  So  the  interesting  thing  is  they've  outperformed.  But  of  course,  we  haven't  seen  the  impact  of  the  tariffs  yet.  And  of  course,  the  tariffs  are  going  to  hit  them  pretty  hard,  right?  This  is  a  major  e -commerce  company  and  a  company  that  sources  in  a  big  way,  or  at  least  has  in  the",
+      "start": 30.44,
+      "end": 60.34,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 2,
+      "text": "past,  from  China.  So  I  see  that  the  guidance  that  they  gave,  at  least  in  the  press  release  for  next  quarter  is  a  little  light.  And  that's  why  the  stock  is  down  a  little  bit.  Obviously,  the  devil's  in  the  details  and  I  want  some  more  color.  But  the  quarter  just  ended,  looked  okay,  looked  solid.  But  let's  see  what  the  tariff  impact  is.  Unfortunately,  the  quarter  just  ended  did  not  feature  much  of  the  tariff  madness.  Sounds  like  a  plan,  man.",
+      "start": 60.34,
+      "end": 90.28,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 3,
+      "text": "All  right,  so  let's  see.  So  how  Amazon  makes  money,  guys.  So  obviously,  they  have  their  online  stores,  retail  sales  on  Amazon .com.  This  is  their  primary  source  of  income  for  such  a  long  time.  But  they're  not  just  Amazon .com  anymore.  They  have  their  third  party  seller  services  with  commissions,  fulfillment  and  logistics  fees.  These  fees  might  seem  small  to  people  selling  on  Amazon.  But  think  of  the  millions  of  people  that  are  active  that  pay  these  fees.  These  all  add  up.  Amazon  Web -based  services,  AWS,  that's  high  margin,  cloud",
+      "start": 90.38,
+      "end": 120.34,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 4,
+      "text": "computing  division.  And  they  also  have  advertising  services  for  search  ads,  display  ads  on  Amazon  platforms.  And  they're  subscription  services.  Amazon  Prime,  guys,  this  is  another  big  one.  And  sort  of  their  take  at  their  version  of  Netflix.  And  in  my  opinion,  I  feel  like  this  past  year,  Amazon  Prime  has  really  added  a  lot  to  their  gauntlet  of  shows  and  movies  that  they  offer.  Paul,  what  do  you  think?  Yeah,  I  think  that  you're  absolutely  right.  The  Prime",
+      "start": 120.34,
+      "end": 150.02,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 5,
+      "text": "membership,  they  could  probably  keep  almost  endlessly  hiking  that  price.  And  it  still  be  a  great  value.  You  saw  that  in  this  past  week,  they  announced  that  they're  going  to  spend  billions  of  dollars  to  add  the  same  day  delivery  even  to  rural  parts  of  America.  So  that's  actually  a  big  change.  But  again,  let's  see  what  happens  with  the  e -commerce  business.  You  know,  that's  not  their  big  money  maker.  I  also  want  to  see  with  Amazon  Web  Services  yesterday  when  Microsoft  reported",
+      "start": 150.02,
+      "end": 179.58,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 6,
+      "text": "it's  Azure  business.  They  actually  had  a  beat  versus  what  analysts  were  expecting.  And  they  were  getting  a  lot  of  that  incremental  growth  in  Azure  from  AI.  So  let's  see  how  the  standalone  versus  the  forecast,  AWS  number  looks.  And  let's  see  in  their  commentary  how  much  of  that  growth  is  actually  coming  from  hosting  AI.  Awesome.  So  products,  roadmap  and  innovation,",
+      "start": 179.58,
+      "end": 209.56,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 7,
+      "text": "right?  So  what  does  Amazon  have  going  forward?  And  then  we'll  get  in.  So  what  we  could  listen  for  on  the  call.  So  they  have  AI  and  machine  learning  just  like  Microsoft,  Apple  and  video.  And  even  as  we  saw  yesterday  on  the  medical,  AI  is  in  all  of  these  large  cap  stocks.  Even  if  they're  not  specifically  an  AI  chip  company  like  Nvidia  or  AMD,  they  still  have  their  hand  in  AI.  So  they  have  enhancing  product  search  recommendations  and  AWS  services.  Amazon  bedrock,  which  is  their  generative  AI",
+      "start": 209.56,
+      "end": 239.3,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 8,
+      "text": "platform  within  AWS,  their  logistics  automation,  which  is  robotics  and  drone  delivery  pilots.  Now  that's  also  something  that  they  started  rolling  out  drone  delivery.  You  know,  is  this  also  something  that  they're  going  to  expect  to  really  increase?  Or  is  it  something  that  they're  sort  of  just  dangling  in  front  of  us  to  show  that  they  can  do  it?  Well,  the  way  I  look  at  this,  they've  talked  about  that  for  years.  And  obviously  it  is  a  thicket  with  the  regulators  when  they  think  you  put  up  in  the  sky.  So  I  don't",
+      "start": 239.3,
+      "end": 269.14,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 9,
+      "text": "see  this  as  a  full -fledged  delivery  mechanism,  not  even  in  the  short  to  intermediate  term  many,  many  years.  Will  it  make  a  dent?  And  the  other  thing  when  you're  taking  a  look  at  Amazon  going  forward,  you  have  to  remember  that  in  and  of  itself,  it's  one  of  the  America's  largest  digital  advertising  companies.  Right.  Only  behind  meta  and  alphabet.  And  so  like  we  talked  about  yesterday,  Kevin,  if  we  have  a",
+      "start": 269.14,
+      "end": 299.12,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 10,
+      "text": "recession  in  this  country,  you  could  expect  that  the  advertising  left  advertising,  particularly  the  retail  group,  and  that  could  hit  Amazon's  digital  advertising  business,  which  is  also  more  profitable  than  their  e -commerce  business.  Absolutely.  That's  a  great  point  and  point  out,  right?  If  these  tariffs  come  in  play,  not  just  products  are  going  to  be  more  expensive,  advertising  everything  in  the  economy  is  going  to  hike  up  in  price.  Now  Amazon",
+      "start": 299.12,
+      "end": 328.94,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 11,
+      "text": "also  offers  healthcare,  right?  They  have  their  Amazon  clinics,  their  one  medical  integration.  I  think  they  also  have  a  pharmaceutical  division  at  this  point.  I  mean,  they're  really  trying  to  take  care  of  Netflix,  CVS,  and  everybody  all  at  once.  Yeah,  and  now  they've  talked  for  years  about  the  big  move  into  health  tech.  And  remember,  several  years  back,  Oracle  spent  $28  billion  to  buy  a  certainer  to  get  into  the  digitization  of  healthcare  records.  I  don't  want  to  say",
+      "start": 328.94,
+      "end": 358.66,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 12,
+      "text": "I'll  believe  it  when  I  see  it.  But  the  monetization,  the  success  in  this  field  has  been  talked  about  for  years,  and  obviously  it  has  huge  potential,  but  so  far  nobody's  realized  it.  Very  good.  And  sustainable  goals.  Let's  see,  they've  expanding  renewable  energy  and  electric  delivery  fleet.  That's  right.  They  do  have  their  new  electric  vehicles.  I  know  if  you've  seen  in  the  city,  they  have  these  very  small,  I  think  they're  even  pedal",
+      "start": 358.66,
+      "end": 388.22,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 13,
+      "text": "powered  vehicles  for  the  Amazon  delivery  drivers.  Oh,  I  haven't  seen  them.  Of  course,  they  want  to  be  a  EV  maker  at  some  point.  They're  going  to  skip  the  test  as  it  goes  straight  to  autonomous  driving.  And  you  think  about  the  resources,  the  vast  resources  that  they  can  bring  to  R &D,  why  wouldn't  they  be  big  in  this  space?  They  have  endless  resources  to  get  there.  They  may  be  behind  Tesla  and  Waymo,  but  I  imagine  that  they'll  have  a",
+      "start": 388.22,
+      "end": 418.06,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 14,
+      "text": "big  footprint  in  autonomous  driving  and  autonomous  delivery  once  that  market  opens  up.  Wow,  that  would  really  open  up  the  profitability  of  Amazon  as  a  company  for  them  to  be  able  to  profit  off  of  things  like  streaming  services,  things  like  autonomous  vehicles,  AI.  It  seems  like  Amazon's  doing  everything.  What  started  as  a  book  company  is  now  taken  over  the  world.  One  of  the  greatest  videos  of  all  time  is  go",
+      "start": 418.06,
+      "end": 447.92,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 15,
+      "text": "onto  YouTube  and  look  at  Jeff  Bezos  being  interviewed  by  60  minutes.  The  CBS  news  program,  this  goes  back  to  the  middle  90s  and  the  interviewer  was  making  fun  of  Bezos.  Look,  I  thought  was  a  little  bit  odd  saying,  you're  gonna  sell  books  online.  Are  you  kidding  me?  Of  course,  but  not  only  did  they  do  that,  they  took  over  the  entire  galaxy.  So  yeah,  they're  doing  some  things.  I  think  that  interviewer  had  a  tough  time  finding  gigs  after  that.",
+      "start": 447.92,
+      "end": 476.52,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 16,
+      "text": "So  guys,  some  risk  factors  to  watch  for  this  earnings  call.  Guys,  don't  forget  earnings  call  is  at  5  PM  Eastern.  So  earnings  report  is  already  in  Amazon  reported  a  double  beat,  but  we're  waiting  for  the  earnings  call  so  we  can  listen  into  what  they  might  have  as  far  as  their  products  and  services.  So  some  risk  factors  to  watch  out  for  is  retail  margin  pressures,  rising  fulfillment  and  shipping  costs,  which  again,  can  be  affected  by  tariffs.  AWS  growth  slowing,  cloud  competition  from  Microsoft  Azure",
+      "start": 478.4,
+      "end": 508.1,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 17,
+      "text": "and  Google  Cloud.  We  have  to  make  sure,  the  guys,  we  wanna  know  not  only  about  Amazon  as  a  company,  but  we  wanna  know  about  its  competition  as  well.  Regulatory  scrutiny,  they  are  also  dealing  with  a  bit  of  that  anti -trust  lawsuit  in  the  US  and  EU,  just  like  we  saw  with  Mehta  yesterday,  right?  Paul,  I  believe  so.  Yeah,  yeah.  Unfortunately,  the  big  tech  companies  are  not  just  under  siege  for  the  European  Union,  but  even  year  at  home,  whether  they  be  the  Department  of  Justice  or  the  Federal  Trade  Commission.",
+      "start": 508.1,
+      "end": 537.18,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 18,
+      "text": "And  people  thought  that  that  might  have  changed  as  we  migrated  from  Biden  to  Trump,  but  it  has  not.  It's  probably  only  intensified.  I,  you  know,  if  you  heard  Trump  lately,  I  think  he  said  this  is  still  Biden's  market,  but  that's  not  right.  I'm  just  kidding.  Guys,  make  sure  you  hit  that  like  button.  If  you  appreciate  me  and  Paul's  breakdown  of  Amazon,  we're  gonna  go  over  some  technical  analysis  shortly.  We're  gonna  go  through  these  slides  real  quick  just  so  we  get  an  understanding  of  Amazon  as  a  company.  And  so  we're  prepared  for  the  call.  Labor  costs  is  another  thing,",
+      "start": 538.14,
+      "end": 566.94,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 19,
+      "text": "unhingeization  of  efforts  and  higher  wages.  So  we  wanna  be  careful  with  Amazon.  So  what's  a  listen  for  on  the  call?  So  AWS  revenue  growth  and  profitability  outlook,  update  on  consumers  spending  trends  in  core  retail  business,  advertising  business  momentum.  So  do  they  have  strong  momentum  going  into  Q2?  Are  things  going  to  start  to  drag?  There  was  a  lot  of  talk  that  people  were  buying  ahead  of  tariffs,  right?  So  maybe  they  had  a  double  beat  this  first  Q1,  or  maybe  Q2  will",
+      "start": 568.48,
+      "end": 598.42,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 20,
+      "text": "look  extra  strong  due  to  the  tariffs  coming  in  play  people  buying  ahead  of  time.  So  we're  gonna  have  to  see  how  that  plays  out.  We  have  to  remember  to  the  GDP  was  slowing.  We  had  that  report  recently,  and  it's  really  not  matching  the  bull  move  we've  been  seeing  in  the  market  lately.  Progress  on  cost  efficiency  and  streamlining.  This  is  another  big  one  when  it  comes  to  Amazon.  They  love  to  try  to  save  as  much  as  they  can  where  they  can  as  any  good  company  should.  So  where  can  they  maybe  find  some  cost  efficiencies?  We  spoke  about  the",
+      "start": 598.42,
+      "end": 628.38,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 21,
+      "text": "drone  delivery  service  before.  I  don't  think  that  could  really  save  them  much.  I  feel  like  that  would  cost  more  than  anything.  But  how  could  they  save  money?  Let's  listen  on  the  call  and  see  if  they  say  anything  about  it.  And  commentary  on  AI  initiatives  and  better  our  customer  adoption.  So  we  want  to  be  sure  to  listen  for  all  of  this  on  the  call.  Paul,  do  you  have  anything  else  you  might  want  to  add  that  you're  looking  for  on  this  Amazon  call?  Yeah,  you  know  the  last  couple  of  days  we  had  that  tit  for  tat  between  the  president  and  Jeff",
+      "start": 628.38,
+      "end": 658.0,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 22,
+      "text": "Bezos  over  Amazon  purportedly.  Of  course  they  turned  around  and  said  that  was  not  part  of  the  original  plan.  Essentially  showing  their  consumers  or  customers  how  much  of  a  impact  the  tariffs  are  costing  on  their  price.  And  that's  gone  back  and  forth  back  and  forth.  I  actually  thought  it  was  a  pretty  good  idea.  I  mean,  I  love  the  transparency.  But  will  they  address  that?  Because  that  was  a  very  public,  very  nasty  split  and  that  only  broke  about  a  day  or  two  ago.",
+      "start": 658.0,
+      "end": 686.36,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 23,
+      "text": "Okay,  so  we'll  see.  We'll  follow  up  on  what's  going  on  with  that  with  Jeff  Bezos,  Amazon  and  Trump,  you  know,  are  they  budding  heads  right  now?  Seems  like  Musk  is  much  rather  be  friendly  with  the  president  where  it  seems  like  Jeff  Bezos  is  here  for  Jeff  Bezos.  And  that's  not  what  I  would  prefer  an  ACEO  of  a  company.  But  I  guess  I'd  prefer  the  CEO  puts  his  company  before  the  government.  Yeah,  the  interesting  thing  about  that  is  was  that  a  Amazon",
+      "start": 687.78,
+      "end": 717.7,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 24,
+      "text": "initiative  spearheaded  by  Andy  Jassy,  their  current  CEO,  because  of  course,  Bezos  is  the  company's  larger  shareholder,  but  no  longer  on  the  management  team.  So  I'm  wondering  if  that  was  something  that  was  put  forward  without  Bezos'  knowledge,  though  the  president  called  the  man  directly  as  he  was.  So  it'll  be  saying,  but  that'll  be  something  that  will  not  be  on  the  call.  We  will  never  know  that.  No,  no,  for  sure  we  won't.  But",
+      "start": 717.7,
+      "end": 747.28,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 25,
+      "text": "I  appreciate  you  pointing  that  out  about  the  CEO  situation.  I  do  apologize  on  that,  everyone.  So  guys,  let's  get  in  some  technical  analysis  on  Amazon.  Paul,  thank  you  so  much  for  your  help.  If  you  have  any  other  input  or  anything  on  Amazon  that  you  might  want  to  add.  Yeah.  Oh,  I  just  say  that  all  those  risks  that  you  mentioned  were  absolutely  spot  on,  of  course,  the  underlying  thing  behind  the  risks  on  the  car  side  is  the  tariffs.  And  also  on  the  demand  destruction  from  those  tariffs,",
+      "start": 747.28,
+      "end": 777.02,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 26,
+      "text": "if  we  have  a  recession  in  this  country,  of  course,  it's  going  to  hurt  the  e -commerce  business.  Of  course,  it's  going  to  hit  the  digital  advertising  business.  The  only  thing  that  interestingly  may  come  away  on  SCAVE  is  AWS  because  it  supports  the  AI  infrastructure  build  out.  But  those  are  some,  if  we  do  have  a  recession  in  this  country,  some  pretty  stiff  headwinds.  I  wouldn't  buy  the  stock  here.  I've  held  it  for  many  years.  I  wouldn't  even  buy  it  on  a  dip  here.  OK,  so  that's",
+      "start": 777.02,
+      "end": 806.96,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 27,
+      "text": "good  to  know.  So  what  are  final  thoughts?  Product  roadmap  and  innovations?  What  are  you  expecting?  Do  you  think  that  they're  going  to  announce  something  big?  Do  you  think  they're  just  going  to  remain  consistent?  I'm  not  expecting  anything  new,  particularly  in  these  key  areas  that  you've  mentioned.  I  do  want  to  hear  some  more  about  AWS  yesterday,  Azure,  for  Microsoft,  had  an  upside  surprise  and  actually  a  fairly  significant  one.  Where  do  we  come  on  with  AWS?  What",
+      "start": 806.96,
+      "end": 836.94,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 28,
+      "text": "are  they  seeing  with  their  own  AI  infrastructure  spending?  The  last  time  they  talked  about  it,  they're  going  to  spend  $100  billion  this  year.  Are  they  sticking  with  that?  We'll  see,  because  you  think  about  it.  If  they're  not  sticking  with  that,  you  could  see  Nvidia  go  down  tomorrow.  That's  a  good  point,  guys.  Don't  forget,  check  out  your  other  equities.  Don't  be  glued  to  just  one.  Large  caps,  they  tend  to  trade,  follow  each  other.  Amazon  announces  something  AI -related,  chip -related,  could  impact,  and  video  could",
+      "start": 836.94,
+      "end": 866.64,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 29,
+      "text": "impact  AMD,  could  impact  Microsoft.  All  right,  Kevin,  I'm  going  to  log  off.  Awesome.  What  do  you  go,  brother?  I  love  the  slides,  I  love  the  commentary,  and  dude,  I  love  the  time.  Thank  you,  man.  I  appreciate  it.  It  means  the  world  coming  from  you.  And  I  love  doing  these  earning  call  reports  with  you.  Now,  hopefully  next  week  we  got  some  more  coming.  Yep,  yep.  And  I'm  going  to  get  on  the  simultaneous  conference  calls  of  Apple  and  Amazon.",
+      "start": 866.64,
+      "end": 896.52,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 30,
+      "text": "I'll  see  you  later,  everybody.  Don't  have  your  head  go  spinning.  All  right.  Take  care,  Paul.  Guys,  make  sure  you  hit  that  like  button.  Show  Paul  some  love.  Always  appreciate  what  he  has  to  say  when  it  comes  to  large  cap  and  tech.  He  is  a  fantastic,  man,  fantastic  investor.  So  let's  break  down  the  stock,  guys.  Right  now  we're  looking  at  Amazon.  I  do  see  a  question  in  the  comments  that  did  they  go  over  Apple?  We  didn't  cover  Apple  because  right  now  we're  covering  Amazon  for  the  call.  I  do  know  that  they  both  reported  earnings  this  afternoon,  and  they",
+      "start": 896.86,
+      "end": 926.74,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 31,
+      "text": "both  have  their  earnings  call  both  at  5  p .m.  Eastern.  So  we  only  really  have  two  sets  of  years.  We  could  only  really  hear  one  at  a  time.  So  for  this,  guys,  we're  going  to  go  over  some  Amazon.  If  you  guys  want,  we  could  cover  Apple  stock  as  well.  If  you  want,  we'll  pull  it  up  right  now  just  to  double  check  where  we  are  pre -market  to  see  if  we  had  any  type  of  movement.  So  on  Apple,  it  looks  like  it's  remaining  range  bound.  Real  quickly,  we're  just  looking  at  the  daily  timeframe.  And  what  I  see  on  the  daily  is  I  see  failed  momentum.  So  Apple  tried  to  push  up  here  on",
+      "start": 926.74,
+      "end": 956.38,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 32,
+      "text": "April  24th  Thursday.  And  for  the  next  five  trading  days,  it  would  break  previous  day  high  and  close  green.  But  if  we're  looking  at  the  actual  price  movement  and  the  change  in  price,  it  really  only  moved  less  than  3 %  over  the  course  of  potentially  six  green  trading  days.  This  is  a  very  small  move  on  Apple.  It  tells  me  that  there's  a  lot  of  resistance  at  this  point  right  here,  which  is  then  confirmed  by  this  move  a  lower  as  we  see  our  pre -market  were",
+      "start": 956.38,
+      "end": 986.24,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 33,
+      "text": "at  208 .59  right  now.  So  let's  get  back  into  Amazon.  I  want  to  show  you  guys  some  possible  key  levels  and  what  I  might  be  looking  for  on  Amazon  going  forward.  So  right  now  we're  looking  at  Amazon  on  the  daily  timeframe  and  we're  looking  back  at  the  past.  Looks  like  this  is  the  past  64  days.  So  about  two  months.  So  I  see  that  looking  at  the  past  two  months,  we've  been  in  a  downtrend.  And  I  see  that  because  we're  creating  some  lower  highs,  lower  high,  lower  high,  and  we're  creating  lower  low.  So  whenever  we're  trading,",
+      "start": 986.24,
+      "end": 1015.98,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 34,
+      "text": "whether  we're  day  traders  or  investors,  we  want  to  be  able  to  read  a  stock  chart  and  understand  direction,  whether  it's  range  bound,  trending,  bearish  trend  or  bullish  trend.  So  right  now  we're  in  more  of  a  bearish  trend  on  Apple  as  we  are  in  the  market,  I'm  sorry,  Amazon,  as  we  are  in  the  market  as  a  whole.  So  I  do  have  some  key  levels  I  was  watching.  I  found  this  range  on  Amazon  from  back  here.  This  was  a  very  strong  area  of  interest.  This  is  between  190  and  195.  So  as  I  see,  we  marked  it  out  and  I  could  even",
+      "start": 1016.0,
+      "end": 1045.92,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 35,
+      "text": "drag  it  out  to  the  left.  And  something  I  note  is  every  time  prices  below  it,  we  use  it  as  resistance  and  every  time  prices  above  it,  we  use  it  as  support.  So  this  would  be  the  main  area  that  I'm  looking  for  on  Amazon  to  help  sort  of  gauge  if  we're  getting  back  into  a  bull  market  or  if  we  remain  range  bound  and  stay  bearish.  Now  we  didn't  really  get  much  of  a  real  tariff  relief.  We  did  have  on  April,  I  believe  it  was  eighth,  seventh,  I  apologize.  April  seventh,  Trump  announced  that  there  was  going  to  be  a  90  day  halt  on  tariffs  on  everywhere",
+      "start": 1045.92,
+      "end": 1075.68,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 36,
+      "text": "but  China.  And  the  market  gave  us  a  very  strong  reaction  to  that  Amazon  moved  up  13 %  that  day.  Since  then,  it  has  been  within  that  range  from  the  high  of  190  and  the  low  of  160.  So  right  now,  we're  in  about  a  $30  range  on  Amazon.  So  seeing  how  we  reacted  to  this  area  of  resistance  up  here,  we  hit  192  and  we  had  our  gap  down  because  now  we  are  answering  earnings.  So  here's  our  earnings  report.  So  our  earnings  came  in,  Amazon  gave",
+      "start": 1075.68,
+      "end": 1105.56,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 37,
+      "text": "us  a  double  beat.  And  even  though  it  was  a  double  beat,  the  market  gave  us  a  bearish  reaction.  Whereas  yesterday,  Amazon  did  not  have  earnings,  Microsoft  had  earnings,  Microsoft  had  a  double  beat  and  it  gave  us  a  bullish  reaction,  right?  So  it  doesn't  always  depend  on  if  they  have  a  double  beat,  if  they  miss,  March  gets  react  very  irrationally.  So  what  I  would  really  like  to  see  is  if  we  remain  below  this  190,  I  would  want  to  see  some  more  selling  pressure  on  Amazon  would  definitely  want  to  mark  out  some  pivot  lows  on",
+      "start": 1105.56,
+      "end": 1135.5,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 38,
+      "text": "the  daily  time  frame.  This  is  how  I  find  my  key  levels  in  possible  areas  to  either  target  or  look  to  enter  a  trade.  So  I'm  going  to  bring  up  my  horizontal  line  and  I'm  going  to  mark  out  this  pivot  right  here  because  if  I'm  looking  at  Amazon  right  here,  I  see  that  we  had  a  lower  high  and  we're  going  to  mark  it  out  for  you.  We  had  this  was  our  lower  low  right  down  here,  right?  So  we  created  a  lower  lows  on  our  way  down  until  we  finally  held  that  low  and  created  a  higher  low.  Then  what  happened,  we  created  another  higher  low  right",
+      "start": 1135.5,
+      "end": 1165.24,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 39,
+      "text": "here.  So  that  tells  me  that  buyers  are  trying  to  hold  price  up  higher  and  squeeze  until  we  could  break  through.  Yes,  absolutely,  Cam,  you  got  it.  Once  we're  done  with  our  analysis  on  Amazon,  we'll  do  a  quick  breakdown  on  Apple  as  well.  As  long  as  you  guys  hit  that  like  button  and  subscribe  and  follow  for  more.  And  join  me  guys  tomorrow  morning.  I'm  going  to  be  live  all  morning  here  on  Benzinga  from  eight  to  11  a .m.  Eastern.  We'll  go  over  some  charts,  we'll  figure  out  and  we'll  see  what's  going  on  with  these  large  caps.  How  would  they  open  in  the  New  York  session  at  930",
+      "start": 1165.24,
+      "end": 1194.92,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 40,
+      "text": "and  more?  So  I  look  forward  to  seeing  you  all  there.  So  I  see  these  higher  lows  are  forming,  but  I  also  see  on  the  other  end  that  lower  highs  have  been  forming  and  that's  a  bearish  sentiment.  So  because  I  now  have  a  bearish  sentiment  going  against  a  bullish  sentiment,  that  tells  me  prices  starting  to  squeeze,  there's  uncertainty  and  I  would  want  to  stay  out  of  this  trade  completely.  So  what  I  would  really  like  to  see  and  we  can  mark  out  now  this  next  high  because  we  marked  this  high  as  our  lower  high  and  we  see  that  we",
+      "start": 1194.92,
+      "end": 1224.7,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 41,
+      "text": "failed  to  break  it.  So  that  tells  me  that  there's  a  better  chance  that  we  get  some  type  of  break  down  here.  If  we  could  manage  the  break  below  that  178.  So  something  I'm  going  to  be  looking  for  on  Amazon  and  really  the  market  as  a  whole  is  a  break  down  in  continuation.  I  would  really  like  to  see  if  Amazon  could  maybe  head  towards  this  range  right  here,  this  bottom,  this  is  where  we  had  our  other  recent  higher  low.  This  is  around  the  169  level.  So  I  would  like  to  see  if  Amazon  could  maybe  break  that  179,  we  might  be  able",
+      "start": 1224.7,
+      "end": 1254.64,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 42,
+      "text": "to  find  a  possible  swing  trade  on  some  puts  towards  the  downside  of  170.  So  we'll  take  a  look,  we'll  just  see  where  we're  trading  at.  Right  now  guys,  if  we  go  down  to  an  hourly  timeframe,  we  could  see  our  after  hours,  we  had  a  very  strong  move  down  from  these  earnings  reports.  So  we  could  try  to  find  some  key  levels  and  something  I  would  really  like  to  look  for,  like  I  mentioned  before  on  the  daily  timeframe,  I  was  marking  out  some  pivots.  Well,  if  I'm  a  day  trader,  I  want  to  come  down  to  a  lower  timeframe  because  if  I'm  doing  my",
+      "start": 1254.64,
+      "end": 1284.58,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 43,
+      "text": "timeframe  analysis  on  the  daily,  that's  not  going  to  help  me  when  I'm  trading  on  the  five  minute  and  15  minute.  So  let's  take  a  quick  look  at  the  hourly,  see  if  we  could  find  our  recent  range.  And  just  like  that  guys  looking  at  an  hourly  and  zooming  out,  we're  able  to  find  our  range,  our  range  high,  around  this  190  still,  which  is  the  higher  timeframe  range,  then  our  range  low,  which  is  down  here,  and  this  is  now  a  lower  timeframe  range.  And  it  actually  lines  up  with  where  I  had  that  old  purple  area  of  interest  that  we  marked  out  on  the  daily  timeframe  from",
+      "start": 1284.58,
+      "end": 1314.24,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 44,
+      "text": "earlier.  So  again,  if  we're  trading  the  ranges,  we're  trading  support,  resistance,  supply  and  demand,  trend  trading.  If  we're  looking  for  a  trend,  guys,  markets  have  been  bearish  lately.  We  would  look  for  that  to  continue.  Let's  take  a  quick  look  at  the  ES  to  see  if  the  ES  is  holding  bullish  or  rejecting  bearish.  This  was  an  area  that  I  was  watching,  guys.  The  ES  is  the  S &P  500,  and  this  holds  the  top  500  stocks  in  the  New  York  Stock  Exchange.  Now,  it  is  a  very  heavily  influenced  by  things  like  Amazon  Apple",
+      "start": 1314.24,
+      "end": 1344.1,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 45,
+      "text": "Microsoft.  So  when  I'm  trading  Amazon  Apple  Microsoft,  things  like  that,  I  want  to  make  sure  that  I'm  trading  with  the  same  direction  of  the  overall  market.  So  something  I  see  today  is  the  ES  or  overall  market,  just  like  Apple,  at  very  weak  buying  momentum  behind  it,  up  until  we  hit  our  supply  zone.  Once  we  hit  that  supply  zone,  we  had  a  nice  rejection  to  it.  Now,  with  this  point,  my  thought  process  is,  okay,  well,  everybody  was  so  bearish  up  until  recently.  And  I  know  that  people",
+      "start": 1344.1,
+      "end": 1373.94,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 46,
+      "text": "sort  of  flipped  bullish  lately.  And  for  obvious  reasons,  we  broke  this  lower  high  right  here.  We're  trying  to  break  it  and  continue.  We  even  have  if  we  looked  at  Nvidia,  came  off  of  that  $90  low  down  here,  and  went  up  towards  this  broken  demand  around  $114,  a  crazy  move  up  on  Nvidia  from  that  low  30 %  move.  But  at  this  point,  even  on  Nvidia,  we're  in  the  middle  of  a  range.  We  could  be  finding  some  rejection.  So  let's  pull  up  Apple  guys,  do  some  quick  Apple  analysis,  and  then  make  sure  you  guys",
+      "start": 1373.94,
+      "end": 1403.84,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 47,
+      "text": "stick  around  for  the  Amazon  call.  Hit  that  like  button  if  you  appreciate  everything  we've  been  putting  through  for  you  guys,  and  make  sure  you  guys  tune  around  tomorrow  as  well  for  our  pre -market  playbook.  So  something  I  would  see  here  on  Apple  is,  I  see  same  situation.  I  see  the  Apple  chart  and  the  Amazon  chart  on  the  daily  timeframe,  they  really  resemble  themselves.  And  this  is  sort  of  what  I  was  saying  about  how  Amazon,  Apple,  Microsoft,  they  all  tend  to  sort  of  trade  directionally  together.  You'll  never  really  see  Apple",
+      "start": 1403.84,
+      "end": 1433.62,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 48,
+      "text": "making  all  time  highs  or  really  bullish,  and  Microsoft  selling  off  like  crazy.  Unless  there  was  some  type  of  major  company  news  impact,  we're  not  going  to  see  that  when  people  are  investing  in  big  tech,  they're  investing  in  big  tech.  It's  more  of  a  general  thesis  they  do  look  for  that  overall  trend.  So  something  I  do  note  here  on  Apple  is  I  see  this  pivot  high  from  this  daily  timeframe.  I  see  the  first  time  we  broke  it,  we  opened  above  it,  and  we  rejected  and  sold  off  from  there.  Then  the  next  time",
+      "start": 1433.62,
+      "end": 1463.34,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 49,
+      "text": "we  broke  this  next  pivot,  the  same  thing  happened,  we  broke  that  pivot,  and  now  what  did  we  get?  We  closed  right  at  it,  but  our  earnings  are  gapping  lower.  We're  now  below  208,  we're  at  207 .87  on  Apple  right  now,  guys,  major  drop.  We  could  take  a  look  at  our  time  frame  down  here,  and  something  I  see  guys  on  the  two -hour  timeframe  on  Apple  is  I  have  a  pretty  major  demand  zone  around  188 .86.  So  what  I  would  really  like  to  see,  and  we  could  delete  this  broken  supply  zone,",
+      "start": 1463.34,
+      "end": 1493.14,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 50,
+      "text": "and  we're  gonna  add  my  alert,  I  already  have  an  alert  set  right  here  for  Apple  crossing  at  that  189  demand  zone.  Amazon  earnings  call  starts  in  five  minutes,  guys.  Yes,  sir,  that  is  correct.  Amazon  earnings  call  and  T  minus  four  minutes,  make  sure  you  hit  that  like  button.  I  hope  you  guys  are  ready  for  the  call.  I'm  hoping  they  announced  something  regarding  some  of  their  products  roadmap,  whether  it's  the  AI  and  machine  learning,  whether  it's  the  Amazon  bedrock,  which  is  their  generative  AI  platform,  or  even  their  healthcare  push,  that  could  be  something  major  and",
+      "start": 1493.14,
+      "end": 1522.9,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 51,
+      "text": "really  profitable  for  Amazon  if  they  push  a  bit  harder  towards  the  pharmaceutical  industry.  And  same  with  the  atominous  vehicle,  something  to  keep  an  eye  on  with  Amazon.  So  real  quick  back  to  Apple,  we  got  that  rejection  from  this  is  our  range  high.  In  same  situation  with  support  and  resistance,  this  blue  zone  we  have  marked  here,  and  I'm  gonna  make  it  a  little  lighter  for  you  guys  to  see.  This  blue  zone  was  a  very  strong  area  of  support  until  we  broke  it  and  it  turned  into  resistance.",
+      "start": 1522.9,
+      "end": 1552.58,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 52,
+      "text": "Hopefully  the  earnings  call,  yeah  Tim,  hopefully  the  earnings  call  does  give  us  the  momentum  to  reverse  us  back  higher.  Now,  unfortunately,  I  am  a  little  concerned  that  we  hold  this  range  and  push  back  lower  markets  have  been  bearish  for  quite  a  few  months.  Now  we  are  even  in  some  type  of  correction  territory  on  the  markets  in  a  general,  the  ES,  the  NQ.  Once  they  break  below  10 %  off  of  those  all  time  highs,  we're  considered  in  a  correction  territory.  So  yes,  the  past  few  days,  even  the  past  couple  weeks  have",
+      "start": 1555.16,
+      "end": 1584.94,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 53,
+      "text": "had  some  green  days  and  some  continuously  green  in  a  row,  but  we've  really  failed  to  break  higher  and  fail  to  find  that  continuation.  I  do  think  we  might  feel  a  big  impact  if  we  don't  get  any  certain  concrete  news  on  what's  going  forward  with  tariffs.  How  long  does  it  go  down?  So  we'll  see,  we  have  the  Amazon  call  guys  in  two  minutes.  I  think  Apple  might  be  able,  I  don't  think  it's  gonna  drop  all  the  way.  Now  guys,  when  we're  doing  our  charting,  we  have  to  be  realistic  for  Apple  to  drop",
+      "start": 1584.94,
+      "end": 1614.76,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 54,
+      "text": "down  to  190.  That  would  be  a  $17  drop  from  where  we  would  open  right  here.  So  let's  look  at  the  stock.  Let's  look  at  the  chart  and  real  quick,  what  is  a  good  price  level  on  Amazon?  I'm  gonna  give  you  that  and  then  guys,  we're  gonna  wrap  it  up.  We  have  that  earnings  call  in  just  one  minute.  Amazon  is  at  a  major  crucial  level  right  here  between  near  that  180  key  cycle  level.  Guys,  I'd  be  careful  holding  any  tech  right  now.  If  anything,  now's  the  time  for  buying  and  holding  for  long  term  gains  because  we  don't  know  where  our  bottom",
+      "start": 1614.76,
+      "end": 1644.74,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 55,
+      "text": "is  just  yet.  Guys,  I'm  wrapping  up  the  live  stream  there.  Make  sure  you  guys  hit  that  like  button.  I'll  see  you  guys  in  the  morning  for  the  pre -market  playbook  stream.  Take  care  everybody.",
+      "start": 1644.74,
+      "end": 1652.76,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 56,
+      "text": "Thank  you  for  standing  by.  Good  day  everyone  and  welcome  to  the  Amazon .com  first  quarter,  2025  Financial  Result  Teleconference.  At  this  time,  all  participants  are  in  a  listen  only  mode.  After  the  presentation,  we  will  conduct  a  question  and  answer  session.  Today's  call  is  being  recorded.  And  for  opening  remarks,  I  will  be  turning  the  call  over  to  the  vice  president  of  investor  relations  Mr.  Dave  Files.  Thank  you  sir.  Please  go  ahead.  Hello  and  welcome  to  our  Q1",
+      "start": 1804.08,
+      "end": 1834.0,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 57,
+      "text": "2025  Financial  Results  Conference  call.  Joining  us  today  to  answer  your  questions  is  Andy  Jassy,  our  CEO  and  Brian  Nostoski,  our  CFO.  As  you  listen  to  today's  conference  call,  we  encourage  you  to  have  our  press  release  in  front  of  you,  which  includes  our  financial  results,  as  well  as  metrics  and  commentary  on  the  quarter.  Please  note,  unless  otherwise  stated,  all  comparisons  in  this  call  will  be  against  our  results  for  the  comparable  period  of  2024.  Our  comments  and  responses  to  your  questions  reflect  management  views  as  of  today  may  first  2025  only,  and  will",
+      "start": 1834.0,
+      "end": 1863.88,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 58,
+      "text": "include  forward -looking  statements.  Actual  results  may  differ  materially.  Additional  information  about  factors  that  could  potentially  impact  our  financial  results  is  included  in  today's  press  release  and  our  filings  with  the  SEC,  including  our  most  recent  annual  report  on  form  10K  and  subsequent  filings.  During  this  call,  we  may  discuss  certain  non -gap  financial  measures.  In  our  press  release,  slides  accompanying  this  webcast  and  our  filings  with  the  SEC,  each  of  which  is  posted  on  our  IR  website,  you  will  find  additional  disclosures  regarding  these  non -gap  measures,  including",
+      "start": 1863.88,
+      "end": 1893.22,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 59,
+      "text": "reconciliations  of  these  measures  with  comparable  gap  measures.  Our  guidance  incorporates  the  order  trends  that  we've  seen  today  and  what  we  believe  today  to  be  appropriate  assumptions.  Our  results  are  inherently  unpredictable  and  may  be  materially  affected  by  many  factors,  including  fluctuations  in  foreign  exchange  rates,  changes  in  global  economic  and  geopolitical  conditions,  tariff  and  trade  policies,  and  customer  demand  and  spending,  including  the  impact  of  recessionary  fears,  inflation,  interest  rates,  regional  labor  market  constraints,  world  events,  the  rate  of  growth  of  the  Internet,",
+      "start": 1893.22,
+      "end": 1922.66,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 60,
+      "text": "online  commerce,  cloud  services,  and  new  and  emerging  technologies,  and  the  various  factors  detailed  in  our  filings  with  the  SEC.  Our  guidance  assumes,  among  other  things,  that  we  don't  conclude  any  additional  business  acquisitions  for  structuring  our  legal  settlements.  It's  not  possible  to  accurately  predict  demand  for  our  goods  and  services  and  therefore  our  actual  results  could  differ  materially  from  our  guidance.  And  now  we'll  turn  the  call  over  to  Andy.  Thanks  Dave.  Today  we're  reporting  $155 .7  billion  in  revenue,  up  10 %  year -over -year  excluding  the  impact",
+      "start": 1923.08,
+      "end": 1953.02,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 61,
+      "text": "from  foreign  exchange  rates.  Operating  income  is  $18 .4  billion  of  20 %  year -over -year,  and  trailing  12 -month  free  cash  flow  is  $25 .9  billion.  We're  pleased  with  our  continued  business  progress,  but  more  importantly,  with  our  pace  of  innovation  and  additional  improvement  in  our  customer  experiences.  In  our  stores  business,  we  once  again  saw  strong  consumer  residents  and  our  continued  work  on  selection,  value,  and  shipping  speed.  Our  broad  selection  offers  customers'  choice  across  their",
+      "start": 1953.02,
+      "end": 1982.9,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 62,
+      "text": "shopping  journeys.  We  welcome  well -known  brands  such  as  RRRings,  Michael  Cours,  and  the  Ordinary,  as  well  as  a  new  shopping  experience  with  SACs,  that  offers  a  refined  luxury  assortment  of  fashion  and  beauty  items  from  brands  like  Dolce  and  Gabana,  Paul  Main,  Erdom,  Jumpa  Tistavale,  and  Jason  Blue  Collection.  As  always,  we're  working  to  keep  prices  low,  and  with  us  being  an  uncertain  moment  for  consumers,  it's  even  more  important  than  it  typically  is.",
+      "start": 1982.9,
+      "end": 2012.74,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 63,
+      "text": "In  Q1,  we  held  deal  events  worldwide  to  help  customers  save  over  $500  million  across  the  big  spring  sale  in  the  US  and  Canada,  spring  deal  days  in  Europe,  and  Robert -on -Eed  sale  events  in  Egypt,  Saudi  Arabia,  Turkey,  and  the  UAE.  Prime  members  will  have  more  opportunities  to  save  throughout  the  year,  including  at  our  11th  Prime  Day  event  in  July.  Over  the  past  few  years,  we've  made  significant  progress  in  making  our  fulfillment  network  more  efficient  and  cost -effective.  We've  shared  many  times",
+      "start": 2013.48,
+      "end": 2043.34,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 64,
+      "text": "that  an  important  turning  point  was  regionalizing  our  national  fulfillment  network  into  regional  hubs.  By  stocking  items  closer  to  where  customers  live,  we're  able  to  deliver  more  orders  faster,  often  in  fewer  packages,  and  at  lower  delivery  costs.  The  next  challenge  was  getting  as  many  items  as  possible  into  these  regional  nodes.  Our  inbound  network,  which  is  how  we  get  items  to  each  fulfillment  center,  hadn't  been  architected  to  leverage  this  new  regionalization  structure.  So  we  redesigned  it  and  just  rolled  out  a  new  inbound",
+      "start": 2043.34,
+      "end": 2072.88,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 65,
+      "text": "architecture  that  expands  the  share  of  products  that  we  can  place  in  each  fulfillment  center,  improving  delivery  speeds  and  lowering  our  costs  to  serve.  In  the  first  quarter,  we  once  again  set  new  delivery  speed  records  with  our  fastest  delivery  ever  for  Prime  members  around  the  world.  And  we  delivered  more  items  in  the  same  day  or  next  day  in  Q1  than  any  other  quarter  in  our  history.  Looking  ahead,  we'll  continue  to  refine  our  newly  redesigned  inbound  network,  build  out  our  same -day  delivery  site  to  add  additional  robotics  and",
+      "start": 2072.88,
+      "end": 2102.82,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 66,
+      "text": "automation  throughout  our  buildings.  You'll  also  see  us  expand  the  number  of  delivery  stations  that  we  have  in  rural  areas  of  the  U .S.  so  we  can  get  items  to  people  who  live  in  less  densely  populated  areas  much  more  quickly.  I  thought  I'd  share  a  few  thoughts  on  the  prospect  of  heightened  tariffs  on  our  stores  business.  Obviously,  none  of  us  knows  exactly  where  tariffs  will  settle  or  when.  We  haven't  seen  any  attenuation  of  demand  yet.  To  some  extent,  we've  seen  some  heightened  buying  in  certain  categories  that  may  indicate  stocking  up  in",
+      "start": 2102.82,
+      "end": 2132.6,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 67,
+      "text": "advance  of  any  potential  tariff  impact.  We've  also  not  seen  the  average  selling  price  of  retail  items  appreciably  go  up  yet.  Some  of  this  reflects  some  forward  buying  we  did  in  our  first  party  selling.  Some  of  that  reflects  some  advanced  inbounding  or  third -party  sellers  have  done.  But  a  fair  amount  of  this  is  that  most  sellers  just  haven't  changed  pricing  yet.  Again,  this  could  change  depending  on  where  tariffs  settle.  Amazon  is  not  uniquely  susceptible  to  tariffs.  As  it  relates  to  China,  retailers  who",
+      "start": 2132.6,
+      "end": 2162.38,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 68,
+      "text": "aren't  buying  directly  from  China  are  typically  buying  from  companies  who  themselves  are  buying  from  China,  marking  these  items  up,  rebranding,  and  selling  to  US  consumers.  These  retailers  are  buying  the  product  a  higher  price  than  Chinese  sellers  selling  directly  to  US  consumers  in  our  marketplace,  so  the  total  tariff  will  be  higher  for  these  retailers  than  for  China  direct  sellers.  It's  also  sometimes  easy  to  forget  what  Amazon  sells.  We're  not  mostly  selling  high -average  selling  price  items,  though  we  certainly  sell  a  bunch.  In  the  first",
+      "start": 2162.38,
+      "end": 2192.22,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 69,
+      "text": "quarter,  our  everyday  essentials  grew  more  than  twice  as  fast  as  the  rest  of  our  business,  and  represented  one  out  of  every  three  units  sold  in  the  US  on  Amazon.  Even  if  you  exclude  Whole  Foods  Market  and  Amazon  Fresh,  Amazon  is  one  of  the  largest  grocers  in  the  US,  with  over  $100  billion  in  growth  sales  last  year.  People  are  buying  a  lot  of  their  everyday  essentials  in  Amazon.  We  also  have  extremely  large  selection,  hundreds  and  millions  of  unique  skews,  which  means  we're  often  able  to  weather  challenge  and  conditions  better  than",
+      "start": 2192.22,
+      "end": 2222.14,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 70,
+      "text": "others.  When  there  are  periods  of  discontinuity,  substantial  unexpected  product  trends  emerge.  Think  about  the  pandemic,  when  items  like  masks  and  hand  sanitizer  became  big  sellers.  When  you  have  the  broadest  selection  like  we  do,  and  2  million  plus  global  sellers  like  we  do,  you're  better  positioned  to  help  customers  find  whatever  items  matter  to  them  at  lower  price  points  than  elsewhere.  Finally,  when  there  are  uncertain  environments,  customers  tend  to  choose  the  provider  they  trust  most,  given  our  really",
+      "start": 2222.14,
+      "end": 2251.94,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 71,
+      "text": "broad  selection  low  pricing  and  speedy  delivery.  We  have  emerged  from  these  uncertain  areas  with  more  relative  market  segments  share  than  we  started,  and  better  set  up  for  the  future.  I'm  optimistic  this  could  happen  again.  Moving  to  a  few  words  Amazon  adds,  we're  working  hard  to  be  the  best  place  for  brands  of  all  sizes  to  grow  their  business.  We  are  pleased  with  the  strong  growth  on  a  very  large  base  generating  $13 .9  billion  of  revenue  in  the  quarter  and  growing  19 %  year -over -year.  We're  seeing  strengths",
+      "start": 2251.94,
+      "end": 2281.88,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 72,
+      "text": "across  our  broad  portfolio  of  full -fonal  advertising  offerings  that  help  advertisers  reach  an  average  ad -supported  audience  of  more  than  275  million  in  the  US  alone.  This  includes  our  top  of  funnel  efforts  to  drive  brand  awareness,  the  bottom  of  funnel  offerings  where  we  measure  outcomes  at  the  point  of  conversion.  Amazon  adds  provides  brands  with  tools  to  reach  targeted  audiences  in  our  own  entertainment  properties  such  as  Prime  Video,  Twitch,  NIMDB,  in  live  sports  such  as  NFL,",
+      "start": 2281.88,
+      "end": 2311.34,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 73,
+      "text": "NBA,  and  NASCAR,  audio  content  such  as  Amazon  Music  and  Wondering,  and  of  course  in  our  store,  as  well  as  many  other  external  sites  such  as  Pinterest  and  BuzzFeed.  All  of  our  audience  and  measurement  capabilities  work  for  the  ads  we  deliver  across  premium  third -party  publishers  through  Amazon  DSP  and  our  secure  clean  rooms  provide  advertisers  the  ability  to  analyze  data,  produce  core  marketing  metrics,  and  understand  how  their  marketing  performs  across  various  channels.  We  continue  to  see  a  lot  of",
+      "start": 2311.64,
+      "end": 2341.24,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 74,
+      "text": "opportunity  to  further  expand  our  full  funnel  capabilities  for  brands.  AWS  grew  17 %  year -over -year  in  Q1,  and  now  sits  at  a  $117  billion  annualized  revenue  run  rate.  We  continue  to  help  organizations  of  all  sizes  accelerate  their  move  to  the  cloud,  helping  to  modernize  their  infrastructure,  lower  costs,  and  speed  up  innovation.  We  sign  new  AWS  agreements  with  companies  including  Adobe,  Uber,  NASDAQ,  Ericsson,  Fujitsu,  Cargill,",
+      "start": 2341.24,
+      "end": 2370.5,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 75,
+      "text": "Mitsubishi  Electric  Corporation,  General  Dynamics  Information  Technology,  GE  Vernova,  Uz  Allen  Hamilton,  Next -era  Energy,  Publisysapient,  Elastic,  NetSmart,  and  many  others.  It's  useful  to  remember  that  more  than  85 %  of  the  global  IT  spend  is  still  on  premises,  so  not  in  the  cloud  yet.  It  seems  pretty  straightforward  to  me  that  this  equation  will  flip  in  the  next  10  to  20  years.  Before  this  generation  of  AI,  we  thought  AWS  had  the  chance  to  ultimately",
+      "start": 2371.26,
+      "end": 2401.0,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 76,
+      "text": "be  a  multi -hundred -billion -dollar  revenue  run  rate  business.  We  now  think  it  could  be  even  larger.  If  you  believe  your  mission  is  to  make  customers  lives  easier  and  better  every  day,  and  you  believe  that  every  customer  experience  will  be  reinvented  with  AI,  you're  going  to  invest  very  aggressively  in  AI,  and  that's  what  we're  doing.  You  can  see  that  in  the  thousand -plus  AI  applications  we're  building  across  Amazon.  You  can  see  that  with  our  next  generation  of  Alexa,  named  Alexa  Plus.  You  can  see  that  in  how  we're  using  AI  in  our",
+      "start": 2401.0,
+      "end": 2430.86,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 77,
+      "text": "fulfillment  network,  robotics,  shopping,  prime  video,  and  advertising  experiences.  And  you  can  see  that  in  the  building  blocks,  AWS  is  constructing  for  external  and  internal  builders  to  build  their  own  AI  solutions.  We're  not  dabbling  here.  We're  very  intentionally  giving  builders  the  broadest  possible  capabilities  at  every  level  of  the  AI  stack,  cost  effectively  to  use  AI  expansively  across  their  businesses.  At  the  bottom  layer  for  those  building  models,  our  new  custom  AI  chip,",
+      "start": 2430.86,
+      "end": 2460.8,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 78,
+      "text": "Trainiim  2,  is  starting  to  lay  in  capacity  in  larger  quantities  with  significant  appeal  and  demand.  While  we  offer  customers  the  ability  to  do  AI  in  multiple  chip  providers,  and  will  for  as  long  as  I  can  proceed,  customers  doing  AI  at  any  significant  scale  realize  that  it  can  get  expensive  quickly.  So  the  30  to  40  percent  better  price  performance  that  Trainiim  2  offers  versus  other  GPU  based  instances  is  compelling.  For  AI  to  be  as  successful  as  we  believe  it  can  be,  the  price  of  inference  needs  to  come  down",
+      "start": 2460.9,
+      "end": 2490.66,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 79,
+      "text": "significantly.  We  consider  this  part  of  our  mission  and  responsibility  help  make  it  so.  At  the  middle  layer  for  those  wanting  to  leverage  frontier  models  to  build  gender  of  AI  apps,  Amazon  Betterock  is  our  fully  managed  service  that  offers  a  choice  of  high  performing  foundation  models  with  the  most  compelling  set  of  features  that  make  it  easy  to  build  high  quality  gender  of  AI  applications.  We  continue  to  iterate  quickly  on  Betterock,  adding  Anthropics  Club  3 .7,  Sonnet  Hybrid  Reasing  Model,  their  most  intelligent  model  to  date,",
+      "start": 2490.66,
+      "end": 2519.84,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 80,
+      "text": "and  Meta's  Goma  4  family  of  models.  We  were  also  the  first  cloud  service  provider  to  make  deep  seek  R1,  and  the  Stral  AI's  Tickstral  Large  Generally  Available  is  a  fully  managed  model.  And  of  course  we  offer  our  own  Amazon  Nova  State  of  the  Art  Foundation  models  in  Betterock  with  the  latest  Premiere  model  launching  yesterday.  They  deliver  frontier  intelligence  and  industry  leading  price  performance,  and  we  have  thousands  of  customers  already  using  them,  including  Slack,  Siemens,  Sumo  Logic,",
+      "start": 2520.42,
+      "end": 2549.92,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 81,
+      "text": "Coinbase,  Standool,  Glean,  and  Blue  Origin.  A  few  weeks  ago  we  released  Amazon  Nova  Sonic,  a  new  speech  to  speech  foundation  model  that  enables  developers  to  build  voice -based  AI  apps  that  are  highly  accurate,  expressive,  and  human -like.  Nova  Sonic  has  lower -word  error  rates  and  higher -wind  rates  over  other  comparable  models  for  speech  interactions.  The  technology  world  is  also  a  buzz  about  the  potential  of  agents.  To  date,  virtually  all  of  the  ancient  use  cases  have  been  of  the",
+      "start": 2550.46,
+      "end": 2580.24,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 82,
+      "text": "question -answer  variety.  Our  intention  is  for  agents  to  perform  wide -ranging,  complex,  multi -step  tasks,  like  organizing  a  trip  or  setting  the  lighting,  temperature,  and  music  ambience  in  your  house  for  dinner  guests,  or  handling  complex  IT  tasks  to  increase  business  productivity.  There  haven't  been  action -oriented  agents  like  this  until  Alexa  Plus,  but  the  technology  to  build  these  agents  is  still  quite  primitive  and  accurate  and  requires  constant  human  supervision.  We've  just  released  a",
+      "start": 2580.24,
+      "end": 2610.1,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 83,
+      "text": "research  preview  of  Amazon  Nova  Act,  a  new  AI  model  trained  to  perform  actions  within  a  web  browser,  and  enables  developers  to  break  down  complex  workflows  into  reliable,  atomic  commands  like  search  or  checkout  or  answer  questions  about  the  screen,  and  also  enables  them  to  add  more  detailed  instructions  to  these  commands  where  needed,  like,  don't  accept  the  insurance  upsell.  Nova  Act  aims  to  move  the  current  state -of -the -art  accuracy  on  multi -step  agentic  actions  from  30  to  60 %  to  90",
+      "start": 2610.1,
+      "end": 2639.76,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 84,
+      "text": "%  plus  percent  with  the  right  set  of  building  blocks  to  build  these  action -oriented  agents.  And  the  very  top  of  the  stack  are  the  applications.  This  task  order,  Amazon  Q,  the  most  capable  generative  AI -powered  assistant  for  accelerating  software  development  and  leveraging  your  own  data,  launched  a  lightning  fast,  new -agentic  coding  experience  within  the  command  line  interface  that  can  execute  complex  workflows  autonomously,  customers  of  governance.  We  also  made  generally  available  GitLab  Duo  with  Amazon  Q,  enabling",
+      "start": 2639.76,
+      "end": 2669.7,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 85,
+      "text": "AI  agents  to  assist  multi -step  tasks,  such  as  new  feature  development,  code -based  upgrades  for  Java  8  and  11,  while  also  offering  code  review  and  unit  testing  all  within  the  same  familiar  GitLab  platform.  Our  AI  business  has  a  multi -billion -dollar  annual  revenue  run  rate,  continues  to  grow  triple -digit  Euro -rear  percentages,  and  is  still  in  its  very  early  days.  While  there  is  good  reason  for  the  high  optimism  about  AI,  I  conclude  my  AWS  comments  with  a  reminder  that  there",
+      "start": 2669.7,
+      "end": 2699.54,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 86,
+      "text": "is  still  so  much  on -premises  infrastructure  yet  to  be  moved  to  the  cloud.  Infrastructure  modernization  is  much  less  sexy  to  talk  about  than  AI,  but  fundamental  to  any  company's  technology  and  invention  capabilities,  developer  productivity,  speed,  and  cost  structure.  If  our  company  is  to  realize  the  full  potential  of  AI,  they're  going  to  need  their  infrastructure  and  data  in  the  cloud.  I  want  to  briefly  mention  a  few  other  items.  As  I've  referenced  a  couple  times  in  Q1,  we  introduced  Alexa  Plus.",
+      "start": 2699.54,
+      "end": 2729.04,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 87,
+      "text": "Our  next -generation  Alexa  personal  assistant  is  meaningfully  smarter  and  more  capable  than  her  prior  self.  Can  both  answer  virtually  any  question  and  take  actions?  Is  free  with  prime  or  available  to  non -prime  customers  for  $19 .99  a  month?  We're  just  starting  to  roll  this  out  in  the  US  and  we'll  be  expanding  to  additional  countries  later  this  year.  People  are  really  liking  Alexa  Plus  this  month.  We're  excited  and  honored  to  be  part  of  the  joint  venture  that  will  be  creating  the  next  generation  of  the  esteemed  James  Bond  Film  franchise.",
+      "start": 2729.46,
+      "end": 2758.92,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 88,
+      "text": "We  recently  named  the  claim  producer  Amy  Pascal  and  David  Heyman  to  produce  the  next  James  Bond  movie.  Additionally,  just  a  couple  days  ago,  project  Kuiper  reached  a  significant  milestone  by  launching  our  first  satellites  into  orbit  with  more  being  launched  soon  and  we  expect  to  begin  offering  service  to  customers  later  this  year.  I'm  proud  of  what  our  teams  around  the  world  have  delivered.  We're  excited  about  what  we're  inventing  and  working  on  as  we  speak  and  with  that,  I'll  turn  it  over  to  Brian  for  a  financial",
+      "start": 2759.34,
+      "end": 2789.14,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 89,
+      "text": "update.  Thanks,  Andy.  I  will  begin  with  our  top  line  financial  result.  Well,  by  revenue  was  $155 .7  billion.  A  10 %  increase  year -to -year  excluding  the  impact  to  foreign  exchange.  It's  equates  to  a  $1 .4  billion  headwind  from  foreign  exchange  year -to -year  in  the  quarter.  Well,  by  operating  income  was  $18 .4  billion.  Approximately  $400  million  above  the  high  end  of  our  guidance  range.  These  results  include  one -time  charges  that",
+      "start": 2789.14,
+      "end": 2818.74,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 90,
+      "text": "impacted  North  America  and  international  operating  income  that  I  will  discuss  in  a  moment.  First,  let's  start  with  the  net  sales  results  for  these  segments.  In  the  North  America  segment,  first  quarter  revenue  was  $92 .9  billion  and  increased  of  8 %  year -to -year.  Our  international  segment  revenue  was  $33 .5  billion.  Also,  an  increase  of  8 %  year -to -year  excluding  the  impact  to  foreign  exchange.  Worldwide  paid  units  grew  8 %  year -to -year.  A",
+      "start": 2818.74,
+      "end": 2848.72,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 91,
+      "text": "priority  is  to  provide  value  to  our  customers  across  our  businesses.  In  the  first  quarter,  we  held  multiple  deal  events  around  the  world,  which  drove  strong  customer  engagement.  Subroad -based  strengths  across  our  key  business  inputs,  including  record  delivery  speeds  for  prime  members,  enabled  by  improved  inventory  placement.  Our  vast  selection  gives  customers  choice  across  various  price  points,  particularly  in  categories  like  grocery,  which  includes  everyday  essentials.  These  are  the",
+      "start": 2848.72,
+      "end": 2878.56,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 92,
+      "text": "items  that  people  purchase  most  frequently.  We  partner  with  millions  of  independent  sellers  from  around  the  world.  These  selling  partners  are  important  contributors  to  our  broad  selection.  And  Worldwide's  third -party  sell  unit,  next  with  61 %  in  Q1,  consistent  with  Q1  of  last  year.  Shifting  to  profitability,  North  America's  segment  operating  income  was  $5 .8  billion,  and  international  segment  operating  income  was  $1  billion.  With  operating  margins  of",
+      "start": 2878.56,
+      "end": 2908.36,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 93,
+      "text": "6 .3 %  in  North  America  and  3 %  internationally.  As  I  mentioned  earlier,  during  the  quarter  we  recorded  one -time  charges  related  to  some  historical  customer  terms,  as  not  yet  been  resolved,  and  some  costs  to  receive  inventory  that  was  pulled  forward  into  Q1  ahead  of  anticipated  tariffs.  Without  these  charges,  North  America  and  international  operating  margins  would  have  been  approximately  90  basis  points  and  70  basis",
+      "start": 2908.36,
+      "end": 2938.16,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 94,
+      "text": "points  higher,  for  operating  margins  of  7 .2 %  for  North  America  and  3 .7 %  for  international.  We  are  pleased  with  how  our  teams  continue  to  execute  and  deliver  for  customers.  In  Q1,  our  newly  rearchitected  inbound  network  through  a  productivity  in  our  fulfillment  and  transportation  network,  leading  to  better  inventory  placement  and  higher  units  per  package,  as  a  result,  lower  delivery  costs.  Beyond  Q1,  we  have  a  number  of  initiatives  underway  to",
+      "start": 2938.16,
+      "end": 2967.82,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 95,
+      "text": "continue  improving  our  cost  structure,  such  as  fine  tuning  our  inbound  network,  building  out  our  same -day  delivery  sites,  expanding  our  rural  delivery  network,  and  adding  robotics  and  automation  to  our  facilities.  Better  inventory  placement  remains  a  top  priority.  Better  placement  drives  more  in -stock  selection,  reduces  travel  distances,  and  speeds  up  delivery.  And  having  inventory  in  the  right  place  at  the  right  time  increases  the  likelihood  that  multiple",
+      "start": 2967.82,
+      "end": 2997.46,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 96,
+      "text": "items  can  be  combined  in  a  package,  which  helps  reduce  packaging  and  cost.  Although  progress  won't  always  be  linear,  we  have  a  good  plan  to  continue  to  drive  improvement  over  time.  15  to  advertising.  Advertising  remains  an  important  contributor  to  profitability  in  the  North  America  and  international  segments.  Advertising  revenue  to  a  19 %  year -over -year.  We're  pleased  with  the  accelerating  growth  on  an  increasingly  large  base.  We're  seeing  strong  adoption  across  our  full  funnel",
+      "start": 2997.46,
+      "end": 3027.4,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 97,
+      "text": "advertising  offering,  as  brands  appreciate  our  ability  to  connect  them  with  customers.  We'll  also  continue  to  invest  in  other  long -term  opportunities.  These  efforts  have  the  potential  to  be  important  to  customers  and  Amazon  in  the  future,  including  Kuiper,  where  we  had  our  first  launch  of  our  production  design  satellites  earlier  this  week,  and  we'll  be  launching  more  satellites  throughout  the  year.  We're  closely  monitoring  the  macro -economic  environment,  including  the  impact  of  tariffs.  We're  planning  for  various  outcomes,",
+      "start": 3027.4,
+      "end": 3057.3,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 98,
+      "text": "and  we've  taken  a  number  of  actions  to  protect  the  customer  experience.  We're  doing  everything  we  can  to  keep  our  prices  low  for  customers  in  a  way  that  makes  economic  sense.  Moving  next  to  our  AWS  segment,  revenue  was  $29 .3  billion  in  Q1,  and  increased  the  17 %  year -over -year.  AWS  now  is  an  annualized  revenue -run  rate  of  more  than  $117  billion.  During  the  first  quarter,  we  continue  to  see  growth  in  both  gender  to  AI  business  and  non -generative",
+      "start": 3057.7,
+      "end": 3087.5,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 99,
+      "text": "AI  offerings.  The  companies  turn  their  attention  to  newer  initiatives,  bring  more  workloads  to  the  cloud.  We  start  or  accelerate  existing  migrations  from  on -premises  to  the  cloud,  and  tap  into  the  power  of  gender  to  AI.  AWS  operating  income  was  $11 .5  billion,  and  reflects  our  continued  growth,  coupled  with  our  focus  on  driving  efficiencies  across  the  business.  As  we  said  before,  we  expect  AWS  operating  margins  to  fluctuate  over  time,",
+      "start": 3087.5,
+      "end": 3117.02,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 100,
+      "text": "driven  in  part  by  the  level  of  investments  we're  making  at  any  point  in  time.  Plan  to  bring  on  an  increasing  amount  of  capacity  in  the  back  half  of  the  year.  Now,  turning  to  our  cash  cap  back,  which  was  $24 .3  billion  in  Q1.  The  majority  of  this  spend  is  to  support  the  growing  need  for  technology  infrastructure.  Primarily  relates  to  AWS  as  we  invest  to  support  demand  for  our  AI  services,  and  increasingly  in  custom  silicon,  like  Tranium,  as  well",
+      "start": 3117.72,
+      "end": 3147.58,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 101,
+      "text": "as  tech  infrastructure  to  support  our  North  America  and  international  segments.  We're  also  investing  in  our  fulfillment  and  transportation  network  to  support  future  growth  and  improve  delivery  speeds  and  our  cost  structure.  This  investment  will  support  growth  for  many  years  to  come.  But  we  primarily  focus  our  comments  on  operating  income.  I'd  like  to  point  out  that  our  first  quarter  net  income  of  $17 .1  billion  includes  a  pre -tax  gain  of  $3 .3  billion,  included  in  non -operating  income,",
+      "start": 3147.58,
+      "end": 3177.1,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 102,
+      "text": "and  relate  to  our  investment  in  a  throp.  Activities  not  related  to  Amazon's  ongoing  operations,  but  rather  the  result  of  the  conversion  of  a  portion  of  our  convertible  notes  to  non -voting  preferred  stock.  Turning  to  Q2  guidance.  As  a  reminder,  a  guidance  considers  a  range  of  possibilities  and  takes  into  account  Q1  results,  trends  in  quarter -day  results,  and  expectations  around  the  macro  economic  environment.  Q2  net  sales  are  expected  to  be  between",
+      "start": 3177.9,
+      "end": 3207.48,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 103,
+      "text": "$159  billion  and  $164  billion.  We  estimate  the  year -rear  impact  of  changes  in  foreign  exchange  rates  based  on  current  rates,  which  we  expect  to  be  a  headwind  of  approximately  10  basis  points  in  the  quarter.  As  a  reminder,  global  currencies  can  fluctuate  during  the  quarter.  Q2  operating  income  is  expected  to  be  between  $13  billion  and  $17 .5  billion.  The  assessment  includes  the  impact  of  our  seasonal  step -up  in  stock -based  compensation  expense",
+      "start": 3207.48,
+      "end": 3237.3,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 104,
+      "text": "in  Q2,  driven  by  the  timing  of  our  annual  compensation  cycle.  The  external  environment  remains  complex.  And  as  we  have  done  throughout  our  history,  we  are  focused  on  the  inputs  that  we  can  control  to  protect  the  customer  experience.  We  will  work  hard  to  remain  the  place  customer's  trust  for  sharp  prices,  frauds  collection,  and  convenience.  We  will  remain  focused  on  driving  a  better  customer  experience,  and  we  still  believe  putting  customers  first  is  the  only  reliable  way  to  create  lasting  value  for  our  shareholders.",
+      "start": 3237.3,
+      "end": 3266.4,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 105,
+      "text": "With  that,  let's  move  on  to  your  questions.  Thank  you.  At  this  time,  we  will  now  open  the  call  up  for  questions.  We  ask  each  caller  to  please  limit  yourself  to  one  question.  If  you  would  like  to  ask  a  question,  please  press  star  one  on  your  keypad.  We  ask  that  when  you  pose  your  question,  you  pick  up  your  handsets  to  provide  optimum  sound  quality.  Once  again,  to  initiate  a  question,  please  press  star  then  one  on  your  touchtone  telephone  at  this  time.  Please  hold  what  we  pull  for",
+      "start": 3267.16,
+      "end": 3296.86,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 106,
+      "text": "questions.  And  the  first  question  comes  from  the  line  of  Ross  Sandler  with  Barclays.  Please  proceed  with  your  question.  Great.  I  think  I'm  going  to  leave  the  China  questions  to  others  and  focus  on  AWS  and  kind  of  AI.  So,  Andy,  it  seems  like  you've  been  bringing  on  a  lot  more",
+      "start": 3296.86,
+      "end": 3325.82,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 107,
+      "text": "P5  GPU  instances  since  February  from  what  it  looks  like  to  kind  of  support  all  these  new  AI  workloads.  So  how  would  you  characterize  in  the  first  quarter  and  maybe  here  in  the  second  quarter,  the  kind  of  supply  demand  imbalance  that  you  talked  about  before  around  AI  workloads?  And  when  do  you  think  that  AWS  will  be  in  a  position  to  kind  of  capture  enough  AI  revenue  to  drive  acceleration?  Is  that  something  that  could  happen  this  year?  Do  you",
+      "start": 3325.82,
+      "end": 3355.8,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 108,
+      "text": "see  that  more  like  next  year,  given  your  capacity  constraints?  Thank  you  very  much.  Thanks,  Ross.  I  would  say  that  we've  been  bringing  on  a  lot  of  P5s,  which  is  a  form  of  an  Nvidia  chip  instances,  as  well  as  landing  more  and  more  training  in  two  instances  as  fast  as  we  can.  And  I  would  tell  you  that  our  AI  business  right  now  is  a  multi",
+      "start": 3355.8,
+      "end": 3385.72,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 109,
+      "text": "-billion  dollar  annual  run  rate  business  that's  growing  triple  digit  percentages  year  over  year.  And  we  as  fast  as  we  actually  put  the  capacity  in,  it's  being  consumed.  So,  I  think  we  could  be  driving,  we  could  be  helping  more  customers  and  driving  more  revenue  for  the  business  if  we  had  more  capacity.  We  have  a  lot  more  training  in  two  instances  and  the  next  generation  of  Nvidia's  instances  landing  in  the  coming  months.",
+      "start": 3385.72,
+      "end": 3415.2,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 110,
+      "text": "I  expect  that  there  are  other  parts  of  the  supply  chain  that  are  a  little  bit  jammed  up  as  well,  motherboards  and  some  other  componentry.  And  some  of  that  is  just  because  there  is  so  much  demand  right  now.  But  I  do  believe  that  the  supply  chain  issues  and  the  capacity  issues  will  continue  to  get  better  as  the  year  proceeds.  And  the  next",
+      "start": 3415.2,
+      "end": 3444.94,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 111,
+      "text": "question  comes  from  the  line  of  Eric  Sheridan  with  Goldman  Sachs.  Please  proceed  with  your  question.  Thanks  so  much  for  taking  the  question.  Maybe  I  could  ask  a  two -parter.  First  in  terms  of  strategy,  you  know,  I  think  you  think  about  positioning  the  company  for  the  medium  term  with  given  all  the  levels  of  uncertainty  out  there  about  how  the  global  trade  environment  might  shift  in  the  coming  months.  What  do  you  see  as  the  key  strategic  priorities  that  allow  the  company  to  sort  of  be  able  to  capitalize  one  way  or  another",
+      "start": 3444.94,
+      "end": 3474.6,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 112,
+      "text": "depending  on  various  elements  of  outcome  and  how  do  you  prioritize  those  investments  in  the  months  ahead.  And  then  with  respect  to  the  one  quarter  forward  operating  income  guide,  is  there  anything  in  there  from  a  cost  side  that  we  should  be  thinking  about  as  purely  aligned  with  those  types  of  investments  against  the  trade  landscape  that  might  not  repeat  either  later  into  this  year  or  next  year.  Thanks  so  much.  Thanks  Eric.  You  know,  it's",
+      "start": 3474.6,
+      "end": 3502.5,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 113,
+      "text": "hard  to  tell  what's  going  to  happen  with  tariffs  right  now.  It's  hard  to  tell  where  they're  going  to  settle  and  when  they're  going  to  settle.  And  so  a  lot  of  what  we're  thinking  about  short  and  medium  term  actually  turns  out  to  be  what  we  think  about  long  term  to,  which  is  how  do  we  actually  have  the  broadest  possible  selection  for  customers  at  the  lowest  possible  prices.  And  there's  maybe  never  been  a  more  important  time",
+      "start": 3502.5,
+      "end": 3532.18,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 114,
+      "text": "in  recent  memory  that  then  you  know  trying  to  keep  prices  low,  which  we're  heads  down  pretty  maniacally  focused  on  and  then  get  things  to  people  quickly  and  take  care  of  customers.  And  that  that  is  the  heart  of  what  we're  doing  and  you  can  see  different  initiatives  that  we've  taken  within  those  priorities.  You  know,  we've  done  some  forward  buys  of  inventory  in  where  we're  the  first  party  seller.  Our  third  party  sellers  have  pulled  forward  a  number  of  items  so",
+      "start": 3532.18,
+      "end": 3562.1,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 115,
+      "text": "they  have  inventory  here  as  well.  And  those  are  all,  you  know,  we're  encouraging  that  because  we're  trying  to  keep  prices  as  low  as  possible  for  customers.  I  think  also  when  you  have  as  broad  selection  as  we  have,  we  have  much  broader  selection  than  other  retailers.  It  means  that  when  you've  got  this  continuity  like  we  may  potentially  have,  you're  better  able  to  help  customers  find  what  they  want  no  matter  what  those  trends  are.  And  I  mentioned  in  my  opening  comments  about  what  happened",
+      "start": 3562.1,
+      "end": 3592.02,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 116,
+      "text": "in  the  pandemic  and  you  can  bet  they're  going  to  be  things  that  we  don't  anticipate  the  customers  really  value  and  want  that  are  different.  And  it  could  be  a  simple,  by  the  way,  as  just  favoring  other  brands  that  maybe  people  didn't  know  about  before  but  where  they  have  a  more  favorable  price  equation  for  customers.  And  I  think  when  you've  also  got  another  thing  that  people  forget  is  that  when  you've  got  two  million  plus  sellers,  they're  not  all  going  to  take  the  same  strategy  if  they're",
+      "start": 3592.02,
+      "end": 3621.98,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 117,
+      "text": "ends  up  being  higher  tariffs.  I  mean,  they're  going  to  be  plenty  of  sellers  that  decide  to  pass  on  those  higher  costs  to  and  consumers,  but  they're  going  to,  you  know,  we  have  a  lot  of  sellers  in  less  different  countries  and  not  all  of  them  are  going  to  pursue  the  same  tech.  And  so  I  think  when  you've  got  larger  diversity  like  we  have,  we  have  a  better  chance  of  some  of  those  sellers  deciding  that  they're  going  to  capture  share  and  they're  not  going  to  pass  on  all  or  any  of  those  tariffs  to",
+      "start": 3621.98,
+      "end": 3651.78,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 118,
+      "text": "the  customers.  And  so  I  think  customers  are  going  to  have  a  better  chance  of  finding  variety  on  selection  and  on  lower  prices  when  they  come  here.  And  you  know,  the  last  thing  I  would  say  is  that  we  have  been  in  a  number  of  our  businesses,  but  just  I'd  say  over  the  last  six  years  or  so  we  have  been  diversifying  where  we  produce  things  over  a  long  period  of  time.  We  had  a,  I  would  say  a  meaningful  higher  concentration  of  where",
+      "start": 3651.78,
+      "end": 3681.74,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 119,
+      "text": "we  produce  components  for  AWS  or  devices  in  China.  Then  we  have  now  where  we've  diversified  meaningfully  over  that  time  and  we  just  thought  that  was  wise  to  do  so.  And  so  those  are  some  of  the  ways  that  we're  trying  to  make  sure  that  we  are  protecting  our  customers  over  the  short  medium  and  long  term,  but  it  turns  out  that  most  of  those  are  the  things  that  we  focus  most  on,  which  is  really  broad.  So  that's  the  election  for  ultimate  choice,  really  low  prices",
+      "start": 3681.74,
+      "end": 3710.88,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 120,
+      "text": "and  very  fast  delivery.  Eric,  I'll  take  your  question  on  the  guidance  and  especially  on  operating  income.  I  think  that  was  your  question  in  the  cost  that  might  be  Q2.  The  thing  I'd  point  to  again  is  what  I  mentioned  earlier,  the  stock  base  comp  always  steps  up  generally  Q2  versus  Q1  and  then  reset  the  rate  that  carries  through  the  next  four  quarters.  You  can  look  at  historic  trends  again,  idea  that  secondly,  we  do  have  some  additional  Kuiper  launch  costs  in  Q2.  You  saw  a  launch",
+      "start": 3710.88,
+      "end": 3740.82,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 121,
+      "text": "happen  this  week  and  a  reminder  that  we  expense  those  launch  costs  until  the  point  of  commercialization,  which  a  plan  is  to  have  that  later  in  here.  Thank  you.  And  the  next  question  comes  from  the  line  of  Justin  Post  with  Bank  of  America.  Please  proceed  with  your  question.  Great.  Thanks.  I'll  go  back  to  AWS.  I  know  in  the  past,  you  said  revenues  can  be  lumpy.  Can  you  explain  why  they",
+      "start": 3740.82,
+      "end": 3770.8,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 122,
+      "text": "might  fluctuate  up  and  down  if  it's  beyond  just  capacity.  And  you  see  the  competitors,  you  know,  was  pretty  good  growth  rates.  How  do  you  think  about  the  difference  there?  Obviously  your  dollar  growth  is  very  good.  But  how  do  you  think  about  the  difference  there  versus  some  of  your  competitors?  Thank  you.  Well,  you  know,  the  first  thing  I  would  say  is  when  we've  historically  said  that  revenue  can  be  lumpy,  this  was,  you  know,  we've  been  saying  this  well  before  what's  happened  with  AI  over  the  last  couple  of  years.  And  the  reason  for  that  is",
+      "start": 3770.8,
+      "end": 3800.72,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 123,
+      "text": "the  sales  cycle  for  particularly  for  enterprise.  It's  true  for  startups,  you  know,  what  you  really  want  is  you  want  to,  you  want  to  have  the  type  of  capabilities  where  startups  want  to  primarily  choose  to  run  on  the  market.  And  that's  true.  If  you  look  in  the  startup  space,  you  know,  the  vast  majority  successful  startups  over  the  last  10  to  15  years  have  run  on  top  of  AWS.  And  it's  unpredictable  when  those  startups  are  going  to",
+      "start": 3800.72,
+      "end": 3830.18,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 124,
+      "text": "find  product  market  fit  and  and  grow  substantially.  And  it's,  you  know,  it's  hard  for  them  to  predict  it  even  harder  for  us  to  predict.  And  the  same  thing  goes  on  the  enterprise  side  when  you  put  in  a  different  way  when  you,  when  the  sales  cycle  on  the  enterprise  side  is  that  you  spend  time  trying  to  convince  people  that  they  should  move  from  on  premises  to  the  cloud.  And  then  you  have  the  right  solution  for  them  and  then  you  pick  a  set  of  projects  that  you  get  experience  on.  And  sometimes  they  use  systems",
+      "start": 3830.18,
+      "end": 3860.08,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 125,
+      "text": "integrators,  sometimes  they  use  our  own  professional  services,  sometimes  they're  doing  it  themselves.  Then  there's  a  next  trosh  migrations  and  those  those  migrations  just  take  time.  And  some  companies  get  through  them  really  quickly  and  some  companies  take  longer  to  get  through  them.  And  what  happens  a  lot  of  times  too  is  that  they  get  excited  and  enthusiastic  about  the  cost  advantages  and  the  speed  of  innovation  advantages  they  get  moving  to  the  cloud.  And  what  was  supposed  to  be  a  smaller  next",
+      "start": 3860.08,
+      "end": 3889.96,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 126,
+      "text": "trosh  turns  into  a  much  larger  next  trosh  and  all  that  has  been  true  for  a  long  time.  And  it's  very  hard  for  us  to  predict  because  it  really  is  contingent  on  what  enterprises  how  they  want  to  sequence  it  and  resource  it.  Then  you  throw  in  AI,  which  has  its  own  very  fast  growth  cycle  in  particularly  in  certain  types  of  use  cases.  And  those  change,  I  mean  I'll  give  you  just  some  examples  in  the  in  the  early  days  of,",
+      "start": 3889.96,
+      "end": 3919.46,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 127,
+      "text": "you  know,  on  the  earliest  days  I  should  say  of  AI.  What  you've  seen  the  most  amount  of  has  been  initiatives  that  get  you  productivity  and  cost  avoidance.  And  we've  seen  that  some  so  many  of  our  AWS  customers  and  we're  doing  a  lot  of  it  ourselves  inside  of  Amazon  using  AI.  And  then  you've  also  seen  I  would  say  large  scale  training  with  a  lot  of  those  are  running  on  top  of  this  as  well.  And  as  you  know,  and  and  through  off  because  running  the  building  the  next  few  model  training  training",
+      "start": 3919.74,
+      "end": 3949.62,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 128,
+      "text": "models  on  top  of  it,  our  training  to  chip  on  AWS.  And  then  you've  seen  a  couple  really  big  chat  box.  And  then  what  you've  seen  just  in  the  last  few  months  is  really  kind  of  the  explosion  of  coding  agents.  And  if  you  just  look  at  the  growth  of  these  coding  agents  the  last  few  months,  these  are  companies  like  cursor  or  or  Excel  both  them  run  significantly  on  AWS.  But  just  look  at  the",
+      "start": 3949.62,
+      "end": 3979.42,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 129,
+      "text": "growth  of  that  over  the  last  few  months,  you  just  couldn't  have  predicted  that  sort  of  growth.  And  so  that's  why  it's  lumpy.  And  you  know,  sometimes  you'll  have,  you  know,  very  significant  increases  that  you  didn't  predict  and  you  couldn't  forecast.  And  then  you  know,  they'll  grow  at  a  good  rate,  but  maybe  not  the  same  rate  before  the  next  big  kind  of  explosive  growth.  And  I  would  tell  you  that  everything  I  just  mentioned  with  interesting  AI  is  that  we  still  haven't  gotten  to  all",
+      "start": 3979.42,
+      "end": 4009.2,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 130,
+      "text": "the  other  customer  experiences.  They're  going  to  be  reinvented  and  all  the  other  agents  they're  going  to  be  built.  They're  going  to  take,  you  know,  the  role  of  a  lot  of  different  functions  today.  And  you  know,  those  are,  there's  so  even  though  we  have  a  lot  of  combined  inference  in  those  areas,  I  would  say  we're  not  even  at  the  second  strike  of  the  first  batter  in  the  first  inning.  It  is  so  early  right  now.  And  then  I  would  just  say  on  the  how  to  think  about  relative  growth  rates,  you  always  have  to,  you  know,  the  year  over  your  growth  rate  is",
+      "start": 4009.2,
+      "end": 4039.16,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 131,
+      "text": "really  only  a  function  of  the  percentage  growth  on  the  base  with  which  you  are  operating  from.  And  we  just  have  a  very,  you  know,  a  meaningfully  larger  base  on  the  technology  infrastructure  side  than  others.  And  so  when,  you  know,  it's  still,  you  know,  think  about  17 %  your  growth  on  a  $117  billion  revenue  run  rate.  It's  a  pretty  significant  growth.  And  as  I  said,  I  think  we  could  be  doing  more  more  if  we  had  more  capacity.  And  I  expect  that  to,  you  know,  the  capacity  to",
+      "start": 4039.16,
+      "end": 4068.56,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 132,
+      "text": "ease  in  the  coming  months.  Thank  you.  Our  next  question  comes  from  the  line  of  Doug  and  miss  with  JP  Morgan.  Please  proceed  with  your  question.  Thanks  for  paying  the  questions.  One  for  Brian  one  for  Andy.  Brian  just  maybe  to  follow  up  on  AWS,  but  more  on  the  margin  side.  We've  seen  a  lot  of  fluctuation  over  the  last  couple  of  years  and  now  hitting  almost  40%.  Maybe  you  can  just  talk  about  what's  driving  the  out",
+      "start": 4068.56,
+      "end": 4098.46,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 133,
+      "text": "performance  and  then  how  we  should  think  about  normalized  margins  going  forward.  And  then  Andy,  your  comments  on  Alexa  about  moving  to  more  complex  tasks.  Can  you  talk  about  that  more  and  just,  you  know,  with  Alexa,  the  products  have  been  around  for  a  long  time.  They've  had  different  use  cases.  How  do  you  get  users  to  shift  their  behavior  more  with  Alexa?  Thanks.  Thanks  Doug.  I'll  take  your  first  question.  You  know,  we  did  a  strong  quarter  in  AWS",
+      "start": 4098.46,
+      "end": 4127.78,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 134,
+      "text": "as  you  mentioned  the  margin  performance.  I  would  tribute  it  to  the  strong  growth  that  we're  seeing  coupled  with  the  impact  of  some  continued  investment.  We're  making  an  innovation  and  technology.  Give  us  some  examples.  So  we  invest  in  software  and  process  improvements  and  it  ends  up  optimizing  our  server  capacity,  which  helps  our  infrastructure  cost.  Been  developing  more  efficient  network  using  our  low  cost  custom  networking  gear.  We're  working  to  maximize  the  power  usage  in  our  existing",
+      "start": 4127.78,
+      "end": 4157.68,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 135,
+      "text": "data  centers,  which  both  lowers  our  cost  and  also  reclaims  power  for  other  newer  workloads.  And  we're  also  seeing  the  impact  of  advancing  custom  so  kind  of  like  Graviton,  right?  Lower  cost  and  only  for  us,  but  also  for  our  customers  that  better  price  performance  for  them.  But  you're  right.  margins  are,  you  know,  impacted  by  a  lot  of  things,  including  our  level  of  investment,  competitive  pricing,  the  mix  of  generative  AI  services  as  they're  ramping  up.  We'll",
+      "start": 4157.68,
+      "end": 4187.54,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 136,
+      "text": "continue  to  evolve  over  the  years  to  come.  So  we  do  have  a  lot  of  investment  in  infrastructure  going  on  and  plan  for  the  second  half  of  the  year.  So  that  will,  you  know,  we'll  start  to  see  the  impact  of  that.  But  we're  happy  with  the  performance  of  the  team  with  generating  cost  savings  and  to  big  focus  as  well  as  expanding  the  services  and  features  for  customers.  The  looks  of  question.  We're  really  excited  about  Alexa  plus  and,  you  know,",
+      "start": 4187.54,
+      "end": 4217.22,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 137,
+      "text": "as  I  mentioned  earlier,  it  is.  She's  much  more  intelligent,  much  more  capable  and  able  to  take  real  action  and  you  know,  today,  most  of  the  agents  that  have  been  out  there  have  really  just  been  able  to  answer  questions,  which  when  it  came  out  was  very  remarkable.  But  it's,  you  know,  I  think  the  future  of  agents  is  not  just  being  intelligent,  but  also  being  able  to  take  action.  And  that's  actually  it  requires  a  great  model,",
+      "start": 4217.32,
+      "end": 4247.16,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 138,
+      "text": "but  it  also  requires  the  ability  to  sync  that  model  and  to  align  that  model  with  being  able  to  take  the  right  action  and  execute  and  implement  the  right  APIs.  Or  you  can  have  very  sub  optimal  results.  And  so  we  work  hard  on  that  and  Alexa  plus.  We've  been  rolling,  we  started  rolling  out  over  that  class  several  weeks.  It's  with  now  over  100 ,000  users,  you  know,  with  more  rolling  out  in  the  coming  months  and  so  far  the  response  from  our  customers  has  been  very,  very  positive  people  are  excited  about  it.",
+      "start": 4247.16,
+      "end": 4276.94,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 139,
+      "text": "I  think  that,  you  know,  it  does  a  lot  more  things  than  what  Alexa  did  before.  And  to  say,  you  know,  we're  very  fortunate  in  that  we  have  an  over  a  half  billion  devices  out  there  and  people's  homes  and  offices  and  cars.  So  we  have  a  lot  of  distribution  already,  but  there  will  be  to  some  degree,  there  will  be  a  little  bit  of  rewiring  for  people  on  what  they  can  do  because  you  get  used  to  pattern.  Even",
+      "start": 4276.94,
+      "end": 4306.8,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 140,
+      "text": "the  simple  thing  of  not  having  to  speak  Alexa  speak  anymore,  where  we're  all  used  to  saying  Alexa  before  we  want  every  action  to  happen.  And  what  you  find  is  you  really  only  have  to  do  it  the  first  time  and  then  really  the  conversation  is  ongoing  where  you  don't  have  to  say  Alexa  anymore.  And  I've  been  lucky  enough  to  have,  you  know,  the  alpha  and  the  beta  that  I've  been  playing  with  for  several  months  and  it  took  me  a  little  bit  of  time  to  realize  I  didn't  have  to  keep  saying  Alexa  and  it's  very  free  and  what  you  don't  have  to  do  that.  And  then  I  think  it's  just  experience  in  trying  things.  So",
+      "start": 4306.8,
+      "end": 4336.54,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 141,
+      "text": "you  can  do  things  like  you  have  guests  coming  over  on  a  Saturday  night  for  dinner  and  you  can  say,  you  know,  Alexa,  please  open  the  shades.  Put  the  lights  on  in  the  driveway  and  on  the  porch,  increase  the  temperature  of  five  degrees  and  pick  music  that  would  be  great  for  dinner  that's  not  and  she  just  doesn't.  And  like  when  you  have  those  types  of  experiences,  it  makes  you  want  to  do  more  of  it.  You  know,  when  I",
+      "start": 4336.54,
+      "end": 4366.52,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 142,
+      "text": "was  in  New  York,  when  we  were  announcing,  I  asked  her  what  were  the,  you  know,  we  did  the  event  way  downtown.  I  asked  her  what  was  what  was  created  Italian  restaurants  or  pizza  restaurants  gave  me  a  list  and  she  asked  me  if  she  wanted  me  to  make  a  reservation.  And  I  said,  yes,  and  she  made  the  reservation  confirm  the  time.  I  like  that.  When  you  get  into  those  types  of  routines,  you  have  those  types  of  experience.  They're  very,  very  useful  is  really  like  having  a  great  personal  system  which  most  people  in  the  world",
+      "start": 4366.52,
+      "end": 4396.24,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 143,
+      "text": "don't  have.  And  so  I  think  that  the  more  and  more  that  people  get  used  to  it,  they  will  realize  what  she  can  do.  And  we're  not  going  to  be  standing  still.  We  have  a  lot  more  functionality  that  we  plan  to  add  in  coming  months  to.  Thank  you.  Our  next  question  comes  from  a  lot  of  Brian  at  NOAC  with  Morgan  Stanley.  Please  proceed  with  your  question.  Thanks  for  taking  my  questions.  Hey,  Andy  and  Brian.  So  I  have  one  for  each  of  you  guys.  So  Andy,",
+      "start": 4396.24,
+      "end": 4425.98,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 144,
+      "text": "you  have  a  very  complicated  retail  business  with  a  lot  of  moving  pieces  to  it.  I  imagine  you  have  a  lot  of  good  data  on  what  you  expect  demand  to  be  over  the  course  of  the  year  and  the  holidays  and  things.  As  you  kind  of  step  back  and  analyze  the  business  and  the  tariff  uncertainty,  can  you  just  sort  of  walk  us  through  the  one  or  two  key  areas  operationally  that  you're  most  focused  on  just  to  ensure  that  that  the  prime  day  Thanksgiving  and  the  holidays  go  smoothly  as  they  possibly",
+      "start": 4426.22,
+      "end": 4456.12,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 145,
+      "text": "can.  And  then  secondly,  Brian,  just  to  kind  of  go  back  to  Eric's  earlier  question,  as  we  think  about  the  two  key  bit  guide,  are  there  any  one  time  costs  or  sort  of  tariff  related  costs  in  there  similar  to  that  billion  dollars  that  you  called  out  in  the  first  quarter?  Thanks.  And  thanks,  Brian.  On  the  retail  question,  you  know,  I  would  say  that  the,  you  know,  the  areas  that  maybe",
+      "start": 4456.12,
+      "end": 4485.88,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 146,
+      "text": "we're  most  focused  on  to  make  sure  we  are  not  just  a  great  prime  day,  but  you  know,  prime  day  is  just  one  event  as  you  know,  and  so  is  peak.  We're  trying  to  be  great  all  year  long  for  customers,  you  know,  the  obvious  ones  are  making  sure  that  we  help  our  sellers,  however  we  can,  because  there's  uncertainty  for  our  sellers  as  well.  So  we're  trying  to  make  sure  we've  got  a  great  experience.  We're  trying  to  make  sure  that  we  have  the  right",
+      "start": 4485.88,
+      "end": 4515.6,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 147,
+      "text": "diversity  of  sellers  and  low  prices  for  our  customers.  I  think  all  that  you  have  to  also  be  very  thoughtful  around  how  much  inventory  you  bring  into  your  fulfillment  nodes  at  any  one  time,  because  you  can  imagine  scenarios  where,  you  know,  either  on  your  own  when  you're  the  first  party  sour  or  lots  of  third  parties  want  to  get  as  much  inventory  and  as  early  as  possible,  you  know,  trying  to  beat  a  deadline  on  what  may",
+      "start": 4515.6,
+      "end": 4545.58,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 148,
+      "text": "happen.  And  if  you  end  up  with  too  much  inventory  in  your  fulfillment  network,  it  really  slows  down  your  productivity  and  your  ability  to  get  things  out  as  quickly  as  you  want  for  customers  at  the  cost  structure  you  want.  So  we're  being  able  to  manage  that  thoughtfully  we've  learned  that  over  the  years,  and  I  think  the  team  is  doing  a  really  good  job  of  balancing  that  right  now.  And  Brian,  on  your  question  about  Q2,  I  guess  I'd  just  reiterate  what  I  said  earlier,  you  know,  we've  stock  based  comp  step  up,  which  I  think  you  can  see  the  normal",
+      "start": 4545.58,
+      "end": 4575.3,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 149,
+      "text": "pattern  for  that,  if  you  look  at  our  history,  we  have  additional  Kuiper  expenses,  specifically  us  about  tariffs.  We  do  have  tariffs,  so  we'll  be  paying  on  retail  purchases  based  on  current  tariffs.  It's  not  large  in  Q2,  it's  had  done  a  lot  of  pre  buying  of  inventory  in  Q1,  as  I  mentioned  earlier.  But  you  know,  just  generally,  I  think  with  the  uncertainty,  we've  added  a  bit  to  the  range  that  we've  given  you,  we  generally  have  a  wide  range,",
+      "start": 4575.3,
+      "end": 4605.28,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 150,
+      "text": "but  just  the  general  uncertainty  that  we're  seeing  and  uncertainty  of  consumer  demand  and  all  the  everything  else  is  causing  us  to  increase  the  range  is  a  bit.  So  we'll  see,  we've  filled  an  informed  view  of  Q2  right  now.  As  Andy  mentioned  earlier,  we  saw  actually  some  strength  in  April  based  on  what  could  end  up  being  some  pre  buys  of  a  number  of  things,  but  an  advertising  has  been  strong.  So  we  think  there's  a  lot  of  positive  trends,  but  you  know,",
+      "start": 4605.42,
+      "end": 4635.12,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 151,
+      "text": "certainly  uncertainty  right  now  for  the  quarter.  Thank  you  and  our  final  question  will  come  from  the  line  of  Brent  Phil  with  Jeffries,  please  proceed  with  your  question.  Thanks  on  AWS  and  here's  if  you  could  give  us  the  backlog  number  and  Andy,  your  point  about  many  of  these  core  workloads  still  yet  to  come  to",
+      "start": 4635.48,
+      "end": 4665.24,
+      "speaker": "Speaker A"
+    },
+    {
+      "chunk_index": 152,
+      "text": "cloud.  Can  you  just  update  us  and  what  you're  seeing,  are  you  seeing  enterprise  strength  back  or  you  seen  some  confusion  with  AI,  clouding  that  transition  and  the  timing  of  that,  just  give  us  a  perspective  on  what  you're  seeing  on  that  migration.  Thank  you.  Hey,  this  is  Dave.  I'll  just  jump  in  on  the  backlog  and  turn  over  to  Andy  the  backlog  is  $189  billion  for  Q1.  That's  up  about  20 %  year  over  year.  And  the  way  the  average  remaining  life  on",
+      "start": 4665.24,
+      "end": 4695.2,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 153,
+      "text": "that  is  4 .1  years.  On  the  AWS  question  Brent  around  what  we're  seeing  on  the  workloads  they  haven't  moved.  You  know,  what  I  would  say  the  way  I  would  characterize  it  is  that  we  were  on  a  very  aggressive  march  that  was  methodical,  but  almost  metronomic  before  the  pandemic  of",
+      "start": 4695.2,
+      "end": 4724.48,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 154,
+      "text": "enterprises  deciding.  And  that  they  wanted  to  move  off  their  on  premises  infrastructure  because  the  speed  of  innovation,  the  developer  productivity  and  the  cost  advantages  of  the  cloud.  And  then  when  you  got  into  the  pandemic  and  the  economy  looked  uncertain  in  the  second  half  of  that  couple  of  few  years,  you  had  everybody  trying  to  cost  optimize  and  including  us  by  the  way.  And",
+      "start": 4724.48,
+      "end": 4752.38,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 155,
+      "text": "then,  you  know,  as  we  started  to  emerge  from  that  trend,  you  saw  a  genera  of  AI  explode  and  everybody  wanted  to  try  to  find  a  way  to  have  a  workload  or  set  a  workload  there  because  people  saw  the  potential  and  it  was  also  something  that  was  generating  a  lot  of  interest  publicly.  And  so  what  we've  seen  now  over  the  last  call  it  16  to  18  months  or  so",
+      "start": 4752.38,
+      "end": 4782.02,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 156,
+      "text": "is  that  enterprises  realize  they  need  to  do  both  and  they  want  to  do  AI.  They  have  all  sorts  of  pilots  at  this  point  on  AI,  many  of  which  will  be  successful,  others  of  which  will  not  be  successful.  The  ones  that  are  successful  will  scale,  but  they  also  have  a  lot  more  initiatives  that  they  haven't,  you  know,  but  they  still  haven't  gotten  to  on  the  AI  side  either  because  they're  building  that  skill  set  or  they're  picking  a",
+      "start": 4782.02,
+      "end": 4811.86,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 157,
+      "text": "first  set  to  get  experience  with  or  as  they're  waiting  to  see  the  cost  of  inference  continue  to  go  down,  which  it  will.  I  mean,  you  will  not  get  the  expansiveness  that  we  all  know  is  coming  in  AI  until  we  keep  getting  the  cost  of  inference  down,  even  though  it's  growing  like  crazy  right  now.  But  at  the  same  time,  I  would  say  that  we  see  an  increased  resurgence  and  understanding  for  enterprises  that  they  are",
+      "start": 4811.86,
+      "end": 4841.38,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 158,
+      "text": "dropping  the  low -hanging  fruit  if  they  don't  move  their  infrastructure  to  the  cloud.  They  just,  you  know,  for  all  the  reasons  I  mentioned  earlier,  so  you  start  to  see  those  plans  pick  up  again.  As  I  mentioned  earlier  to  one  of  the  questions,  you  don't  decide  that  you're  going  to  transform  your  infrastructure  from  on  premises  of  the  cloud  and  see  it  happen  in  three  months.  You  know,  that  is  typically  a  multi -year  process  that  some  companies  do  it  fast,  some  companies  do  it  slower,  but  they  do  it  in  trotches  and  they  do  it  thoughtfully  because  they  can't",
+      "start": 4841.38,
+      "end": 4871.36,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 159,
+      "text": "afford  for  their  applications.  That's  the  work  is  they're  making  their  transition  and  we're  having  meaningful  success  in  those  conversations  and  in  companies  choosing  to  transform  their  infrastructure  on  top  of  AWS.  And  I  think  that  you  know,  you'll  see  that  moving  forward  too.  Thank  you  for  your  time  joining  us  today  and  for  your  questions.  A  replay  will  be  available  on  our  investor  relations  website  for  at  least  three  months.  We  appreciate  your  interest  in  Amazon  and  we  look  forward  to  talking  with  you  again  next  quarter.",
+      "start": 4871.36,
+      "end": 4900.72,
+      "speaker": "Speaker B"
+    },
+    {
+      "chunk_index": 160,
+      "text": "And  ladies  and  gentlemen,  that  does  conclude  today's  teleconference.  You  may  disconnect  your  lines  at  this  time.  Thank  you.",
+      "start": 4904.16,
+      "end": 4909.2,
+      "speaker": "Speaker B"
+    }
+  ]
+}

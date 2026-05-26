@@ -1,0 +1,7 @@
+.env
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+data/qdrant_storage/
+data/embedding_cache.json
