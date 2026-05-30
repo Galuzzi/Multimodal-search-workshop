@@ -4,39 +4,166 @@
   "window": "2025-04-23 \u2192 2025-04-30",
   "articles": [
     {
-      "title": "Tariffs Continue to Condition Markets as Companies React to Corporate Accounts",
-      "summary": "The current earnings season is being impacted by commercial tariffs implemented by the US and the financial reports of large corporations. According to Generali Investments, 'we cannot yet estimate the damage that tariffs will cause to global growth.' In contrast, the German government's announcement of a new fiscal plan and a defense investment package has boosted European markets, particularly in Frankfurt. However, the situation is different in the US, where the first three months were marked by high instability due to the application of tariffs, raising concerns that the US economy may enter recession. The data indicates a negative growth of 0.3% in the US economy during the first quarter, with a 6% increase in earnings per share, which is lower than the numbers achieved in the fourth quarter of 2024 and a disappointment compared to the initial growth expectation of 11%.",
-      "source": "Sapo - Portugal Online!",
-      "url": "https://jornaleconomico.sapo.pt/noticias/tarifas-continuam-a-condicionar-a-medida-que-mercados-reagem-as-contas-empresariais/",
-      "published_at": "2025-04-30 17:02:39+00:00"
+      "title": "Tech Giants Face Earnings Pressure Amid Trade Tensions (AAPL)",
+      "summary": "Major tech companies, including Microsoft, Apple, Meta Platforms, and Amazon, are set to release their quarterly earnings amidst escalating trade tensions. Analysts expect a 15% average profit growth for these companies by 2025, but any earnings miss could lead to further sell-offs. Investors will scrutinize spending plans, particularly Microsoft's decision to halt some data center projects, and Apple's vulnerability to tariffs. However, Apple's increased demand from consumers purchasing ahead of price hikes might offset its tariff risks. Amazon's e-commerce and advertising segments face tariff risks, but its high-margin web services could cushion impacts. Executives are unlikely to provide reliable forecasts due to economic uncertainties, but tech giants' strong market positions and balance sheets might help them withstand downturns, making them attractive to bargain hunters if trade tensions ease.",
+      "sentiment": 0,
+      "entities": {
+        "Person": [
+          "Executives"
+        ],
+        "Organization": [
+          "Meta Platforms",
+          "Amazon",
+          "tech giants",
+          "Apple",
+          "Microsoft"
+        ],
+        "Politics": [
+          "trade tensions",
+          "tariffs",
+          "tariff"
+        ],
+        "Product": [
+          "e-commerce"
+        ],
+        "Technology": [
+          "web services"
+        ]
+      },
+      "language": "en",
+      "bias": null,
+      "reporting_voice": "Explanatory",
+      "source": "GuruFocus",
+      "authors": [],
+      "content_type": null,
+      "url": "https://www.gurufocus.com/news/2806764/tech-giants-face-earnings-pressure-amid-trade-tensions-aapl",
+      "image_url": "https://static.gurufocus.com/logos/0C00000ADA.png?20",
+      "image_description": null,
+      "published_at": "2025-04-27 16:32:20+00:00"
     },
     {
-      "title": "Trump's Trade War Uncertainty: US Stocks Rise Amid Tariff Concerns",
-      "summary": "The US stock market closed high on Tuesday, with the S&P 500 index and the Dow Jones Industrial Average rising for the sixth consecutive day. US President Trump signed an executive order to avoid additional tariffs on the automotive industry, and US Commerce Secretary Lighthizer revealed that a trade agreement has been reached with a certain country, which has boosted investor confidence in the trade war. The Dow Jones Industrial Average rose 300.03 points, or 0.8%, to 40,527.62; the S&P 500 index rose 32.08 points, or 0.6%, to 5,560.83; and the Nasdaq Composite Index rose 95.19 points, or 0.6%, to 17,461.32. Despite the S&P 500 index rising 8% in the past six days, it still shows the largest decline in the first 100 days of a new president's term since 1973, under President Nixon. US Treasury yields fell, with the 10-year Treasury yield falling to 4.171%, down from 4.21% on Monday. US Treasury Secretary Mnuchin predicted that China may lose 1 million jobs due to tariffs, but also hinted that trade agreements have been made with Japan and India. Trump signed an executive order on Tuesday before the close, providing a tax credit of up to 15% of the domestic value of assembled vehicles. This tax credit can be used to offset the value of imported parts, giving automakers time to transfer their supply chain back to the US. Automakers responded little to this news. General Motors (GM) fell 0.6%, the company withdrew its 2025 profit guidance and suspended a $40 billion stock buyback plan due to tariff impacts. The US trade deficit in goods expanded to a record high in March, with companies importing heavily before Trump's tariffs took effect. The Conference Board reported that the US Consumer Confidence Index fell to its lowest level since May 2020, while job openings showed a relatively stable labor market. Raymond James investment strategist Larry Adam said, 'We've passed the biggest uncertainty of tariffs, but I think we're getting closer to the peak of economic uncertainty.' Amazon (AMZN) fell initially, but later narrowed its decline after the White House press secretary called the company's plan to show the impact of tariffs on product prices 'hostile'; Amazon later denied plans to display the tariff costs, and its stock price subsequently narrowed its decline, closing down 0.2%. UPS (UPS) fell 0.4%, the company expects to lay off 200,000 people and close some facilities this year. Honeywell (HON) reported a 5.4% increase in adjusted earnings, and its stock price surged 5.4% at close. Sherwin-Williams (SHW) also reported a 4.8% increase in earnings, which boosted the Dow Jones Industrial Average. Coca-Cola (KO) reported revenue and earnings that exceeded expectations, and its stock price rose 0.8%. More economic data will be released this week, including the government's employment report on Friday, as well as Apple and Microsoft's earnings reports. Investors remain concerned about the impact of tariffs.",
-      "source": "UDN",
-      "url": "https://udn.com/news/story/6813/8707566",
-      "published_at": "2025-04-29 23:07:22+00:00"
+      "title": "Apple (AAPL) Faces Price Target Cut Amid Tariff Concerns | AAPL",
+      "summary": "Raymond James has reduced its price target for Apple (AAPL) from $250 to $230 due to concerns over tariffs. The firm believes that Apple may increase product prices in the U.S., potentially leading to reduced demand and decreased earnings. Currently, Apple can meet about half of U.S. iPhone demand with manufacturing outside of China, but it's uncertain whether imports from countries like India will benefit from tariff exemptions. According to 44 analysts, the average one-year price target for Apple is $236.26, with a potential upside of 11.86% from the current price of $211.21. The consensus recommendation from 50 brokerage firms is 'Outperform' with an average rating of 2.1, indicating a strong buy. GuruFocus estimates the fair value of Apple in one year to be $205.84, suggesting a downside of 2.54% from the current price.",
+      "sentiment": -1,
+      "entities": {
+        "Organization": [
+          "Apple",
+          "AAPL",
+          "Raymond James",
+          "GuruFocus"
+        ],
+        "Money": [
+          "$250",
+          "$230",
+          "$205.84",
+          "$236.26",
+          "$211.21"
+        ],
+        "Law": [
+          "tariffs"
+        ],
+        "Product": [
+          "iPhone"
+        ]
+      },
+      "language": "en",
+      "bias": null,
+      "reporting_voice": "Analytical",
+      "source": "GuruFocus",
+      "authors": [],
+      "content_type": null,
+      "url": "https://www.gurufocus.com/news/2812916/apple-aapl-faces-price-target-cut-amid-tariff-concerns-aapl-stock-news",
+      "image_url": "https://static.gurufocus.com/logos/0C00000ADA.png?20",
+      "image_description": null,
+      "published_at": "2025-04-29 20:31:13+00:00"
     },
     {
-      "title": "US PMI Data Tonight: Will it Reveal a Recession?",
-      "summary": "As the tariff storm disrupts the US economy, concerns about economic slowdown have been weighing on the market. Tonight's PMI data may reveal whether the US is in a recession or not, and weak data will further hit US stocks and the US dollar. According to Bloomberg's survey, the Markit PMI index for April is expected to drop to 52.2, lower than the 53.5 in March. The initial value of the manufacturing PMI is expected to fall to 49, back into the contraction zone. The input price index in the US manufacturing PMI is particularly worth watching, as it rose to its fastest pace in nearly two years in March, reflecting increased pressure on business costs. Analysts predict that under the pressure of tariffs, the April data will continue to rise. Additionally, a decline in new orders may indicate a broad economic contraction, and the employment sub-index will reflect the willingness of enterprises to recruit. In the midst of market turmoil and tariff uncertainty, the performance of today's PMI data is particularly important. A series of weak PMI data will increase the risk of further declines in US stocks and the US dollar, exacerbating negative sentiment in the market. Analysts say that if the PMI is more pessimistic than expected, US stocks will face even greater selling pressure. If market attention to PMI indices decreases, they will likely focus on the ISM index to be released in early May. In the current context where the independence of the Federal Reserve is under threat, weak PMI and ISM manufacturing data will put more pressure on the US dollar. When the US PMI performs worse than other developed countries' PMI (as is the case now), it usually leads to a weakening of the US dollar.",
-      "source": "\u4e1c\u65b9\u8d22\u5bcc\u7f51",
-      "url": "https://finance.eastmoney.com/a/202504233386063125.html",
-      "published_at": "2025-04-23 12:20:58+00:00"
+      "title": "Tariffs will likely raise much less money than White House projects, economists say | The Great Southern Herald",
+      "summary": "Economists expect the Trump administration's tariff policy to generate significantly less revenue than the White House projects. According to White House trade adviser Peter Navarro, tariffs would raise about $US600 billion ($950.3b) a year and $US6 trillion ($9.5t) over a decade. However, economists such as Mark Zandi, chief economist at Moody's, and Ernie Tedeschi, director of economics at the Yale Budget Lab, estimate that the total revenue would be less than half of Navarro's projection, ranging from $US100b to $US200b ($316.7b) a year. The economists argue that the revenue estimate must account for the many economic impacts of tariffs, including reduced economic activity, lower demand, and retaliation from other countries. They also point out that a 20 per cent broad tariff would raise about $US250b ($396b) a year, while a 50 per cent across-the-board tariff would raise about $US780b ($1.2t) per year. However, even this higher estimate does not account for lower US economic growth due to retaliation or the negative growth effects from the tariffs themselves. The economists warn that tariffs would have a negative impact on the US economy, leading to a recession and undermining the fiscal situation. They also note that the tariffs will likely have a short life span and may be undone easily by a future president. The revenue from tariffs will be crucial in offsetting the cost of passing a package of tax cuts, and economists warn that if tariffs don't cover the full cost, Republican lawmakers would have to find cuts elsewhere or increase the nation's debt. 'There's zero probability these tariffs will last for 10 years,' Zandi said. 'If they last until next year I'd be very surprised.' ",
+      "sentiment": -1,
+      "entities": {
+        "Person": [
+          "Navarro",
+          "Mark Zandi",
+          "Ernie Tedeschi",
+          "Peter Navarro"
+        ],
+        "Organization": [
+          "Trump administration",
+          "Yale Budget Lab",
+          "White House",
+          "Moody's"
+        ],
+        "Event": [
+          "recession"
+        ],
+        "Money": [
+          "$1.2t",
+          "$US200b",
+          "$396b",
+          "$9.5t",
+          "$US250b",
+          "$950.3b",
+          "$316.7b",
+          "$US6 trillion",
+          "$US780b",
+          "$US600 billion",
+          "$US100b"
+        ]
+      },
+      "language": "en",
+      "bias": null,
+      "reporting_voice": "Analytical",
+      "source": "gsherald.com.au",
+      "authors": [
+        {
+          "email": null,
+          "name": "Greg Iacurci",
+          "url": null
+        }
+      ],
+      "content_type": null,
+      "url": "https://www.gsherald.com.au/business/cnbc/tariffs-will-likely-raise-much-less-money-than-white-house-projects-economists-say-c-18244933",
+      "image_url": "https://images.thewest.com.au/publication/C-18244933/fa21459146a86521b9c17c385690c68af40ae07a-16x9-x1071y230w4545h2557.jpg?imwidth=1200",
+      "image_description": null,
+      "published_at": "2025-04-29 05:18:15+00:00"
     },
     {
-      "title": "Tariff turmoil prompts cloudy forecasts from U.S. companies for year ahead: report",
-      "summary": "The latest round of financial results and forecasts for U.S. companies is uncertain due to the impact of tariffs and a shift in U.S. policy, reported The Associated Press. The U.S. economy shrank in the first quarter, and consumer spending has increased, possibly to get ahead of tariffs. Companies are pulling back on hiring, and roughly half of the S&P 500 companies have reported their quarterly financial results, focusing on adjusting to tariffs and changing consumer behavior. The situation remains unpredictable due to President Donald Trump's on-again-off-again policy, making it difficult for companies to plan ahead and investors to seek stability. According to the report, 'stunted consumer spending and weaker employment could further hurt the U.S. economy,' and 'the situation remains unpredictable and that is problematic for companies trying to plan ahead and investors looking for stability.'",
-      "source": "The Star ",
-      "url": "https://www.thestar.com.my/news/world/2025/05/01/tariff-turmoil-prompts-cloudy-forecasts-from-us-companies-for-year-ahead-report",
-      "published_at": "2025-04-30 20:19:43+00:00"
-    },
-    {
-      "title": "United States Tariffs & Trade and Tax Hourly Rate Report 2025: Legal Challenges to Trump's Tariffs Highlight Need for Comprehensive Pricing Insights - ResearchAndMarkets.com",
-      "summary": "The Valeo 2021-2025 Tariffs & Trade and Tax Hourly Rate Report provides detailed hourly rates of attorneys and support staff at the largest US law firms. The report highlights the growing demand for tariff and trade law and tax specialists, with hourly rates expected to rise faster than other commercial litigation practices. The Valeo Legal Pricing Platform uses AI to collect and analyze publicly disclosed hourly rates from over 2,900 law firms, representing over 20,000 companies in 63 countries. The report provides actionable data to clients, including large law firms, corporations, and consulting firms, to make informed decisions. According to the report, the data has been used and cited in several hundred United States federal and state court cases, including the Supreme Court of the United States. 'The data has been used and cited in several hundred United States federal and state court cases,' said the report. 'We provide actionable and monetizable data to our client community,' added the report. 'All hourly rates, hours and fees for each individual attorney are cited as to the source,' the report stated. 'For example, the citation for a court filing includes case name, case number, court, case filing date, filing number, filing description, attorney and support staff listed by full name, client name, hourly rate of each timekeeper, hours billed, total hours and the time period in which the work was performed.' ",
-      "source": "Business Wire",
-      "url": "https://www.businesswire.com/news/home/20250424428145/en/United-States-Tariffs-Trade-and-Tax-Hourly-Rate-Report-2025-Legal-Challenges-to-Trumps-Tariffs-Highlight-Need-for-Comprehensive-Pricing-Insights---ResearchAndMarkets.com",
-      "published_at": "2025-04-24 14:19:00+00:00"
+      "title": "Jim Cramer Says Washington Doesn't 'Care' About Apple (AAPL) $500 Billion Investment, Services Jobs",
+      "summary": "Despite market optimism after President Trump's indication of possible talks with China, Wall Street analysts are warning about recession risks due to tariffs and declining consumer sentiment. Adam Parker, CEO of Trivariate Research, believes that earnings reports will show an economic slowdown, stating, 'You know there's a difference between a growth scare and an actual growth slowdown... I think in this case it is a growth slowdown.' Jim Cramer, on CNBC, expressed concerns about Apple Inc.'s (AAPL) $500 billion investment and services jobs, saying that the government doesn't 'care' about the company's contributions, despite creating 'millions' of services jobs and investing heavily in the US. The company is impacted by President Trump's tariffs.",
+      "sentiment": -1,
+      "entities": {
+        "Person": [
+          "President Trump",
+          "Jim Cramer",
+          "Adam Parker"
+        ],
+        "Organization": [
+          "government",
+          "AAPL",
+          "Apple Inc.",
+          "Trivariate Research"
+        ],
+        "Location": [
+          "Wall Street"
+        ],
+        "Money": [
+          "$500 billion"
+        ],
+        "Law": [
+          "tariffs"
+        ]
+      },
+      "language": "en",
+      "bias": null,
+      "reporting_voice": "Analytical",
+      "source": "Yahoo! Finance",
+      "authors": [],
+      "content_type": null,
+      "url": "https://finance.yahoo.com/news/jim-cramer-says-washington-doesn-204835372.html",
+      "image_url": "https://media.zenfs.com/en/insidermonkey.com/dc5a2bcb6b4c16a43cb5b4ba98feb139",
+      "image_description": null,
+      "published_at": "2025-04-28 20:48:35+00:00"
     }
   ]
 }

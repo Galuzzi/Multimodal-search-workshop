@@ -92,19 +92,33 @@ def fetch_asknews(ticker: str, date: str) -> dict[str, Any]:
         end_timestamp=end_ts,
         time_filter="pub_date",
         historical=True,
-        method="nl",
+        method="both",
         return_type="dicts",
-        categories=["Finance", "Business", "World"],
+        categories=["Finance", "Business", "Politics", "Technology", "World"],
     )
+
+    entity_types = ["Person", "Organization", "Location", "Event", "Money", "Law",
+                    "Politics", "Product", "Technology", "Science"]
 
     articles: list[dict[str, Any]] = []
     for item in response.as_dicts:
+        raw_entities = getattr(item, "entities", None)
+        entities = {k: v for k, v in raw_entities.model_dump().items() if k in entity_types and v} if raw_entities else {}
         articles.append(
             {
                 "title": getattr(item, "eng_title", None) or getattr(item, "title", ""),
                 "summary": getattr(item, "summary", ""),
+                "sentiment": getattr(item, "sentiment", ""),
+                "entities": entities,
+                "language": getattr(item, "language", ""),
+                "bias": getattr(item, "bias", ""),
+                "reporting_voice": getattr(item, "reporting_voice", ""),
                 "source": getattr(item, "source_id", ""),
+                "authors": [a.model_dump() for a in (getattr(item, "authors", None) or [])],
+                "content_type": getattr(item, "content_type", ""),
                 "url": str(getattr(item, "article_url", "") or ""),
+                "image_url": str(getattr(item, "image_url", "") or ""),
+                "image_description": getattr(item, "image_description", ""),
                 "published_at": str(getattr(item, "pub_date", "")),
             }
         )

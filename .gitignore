@@ -5,3 +5,26 @@ __pycache__/
 .DS_Store
 data/qdrant_storage/
 data/embedding_cache.json
+
+
+
+# Environments
+*.env*
+.venv
+env/
+venv/
+myenv/
+ENV/
+env.bak/
+venv.bak/
+.vscode/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# pyenv
+.python-version
+
+*.sh
