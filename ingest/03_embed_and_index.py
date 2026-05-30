@@ -18,11 +18,13 @@ import hashlib
 import json
 import os
 import sys
+import time
 import uuid
 from pathlib import Path
 from typing import Any, Optional
 
 from dotenv import load_dotenv
+from tqdm import tqdm
 
 load_dotenv()
 
@@ -60,19 +62,34 @@ def embed_text(text: str, cache: dict[str, list[float]]) -> list[float]:
     if key in cache:
         return cache[key]
 
-    try:
-        from google import genai  # type: ignore
+    from google import genai  # type: ignore
 
-        api_key = os.environ.get("GEMINI_API_KEY", "")
-        if not api_key:
-            raise EnvironmentError("GEMINI_API_KEY is not set")
-        client = genai.Client(api_key=api_key)
-        result = client.models.embed_content(model=EMBEDDING_MODEL, contents=text)
-        vec: list[float] = list(result.embeddings[0].values)
-        cache[key] = vec
-        return vec
-    except Exception as exc:
-        raise RuntimeError(f"Embedding failed: {exc}") from exc
+    api_key = os.environ.get("GEMINI_API_KEY", "")
+    if not api_key:
+        raise RuntimeError("GEMINI_API_KEY is not set")
+    client = genai.Client(api_key=api_key)
+
+    max_retries = 5
+    for attempt in range(max_retries):
+        try:
+            result = client.models.embed_content(model=EMBEDDING_MODEL, contents=text)
+            vec: list[float] = list(result.embeddings[0].values)
+            cache[key] = vec
+            return vec
+        except Exception as exc:
+            if "429" in str(exc) and attempt < max_retries - 1:
+                wait = 60 * (attempt + 1)
+                for sec in range(wait, 0, -1):
+                    print(
+                        f"\r    [rate limit] retrying in {sec}s "
+                        f"({attempt + 1}/{max_retries})...",
+                        end="", flush=True,
+                    )
+                    time.sleep(1)
+                print("\r" + " " * 60 + "\r", end="", flush=True)
+            else:
+                raise RuntimeError(f"Embedding failed: {exc}") from exc
+    raise RuntimeError("Embedding failed after max retries")
 
 
 # ---------------------------------------------------------------------------
@@ -97,6 +114,7 @@ def ensure_collection(client: Any) -> None:
         ("ticker", PayloadSchemaType.KEYWORD),
         ("date",   PayloadSchemaType.KEYWORD),
         ("year",   PayloadSchemaType.INTEGER),
+        ("speaker",   PayloadSchemaType.KEYWORD),
     ]:
         try:
             client.create_payload_index(COLLECTION_NAME, field, schema)
@@ -144,7 +162,7 @@ def process_transcript(
     batch: list[PointStruct] = []
     total = 0
 
-    for chunk in chunks:
+    for chunk in tqdm(chunks, desc=f"  {ticker}", unit="chunk"):
         text = chunk.get("text", "").strip()
         if not text:
             continue
@@ -156,7 +174,7 @@ def process_transcript(
         try:
             vector = embed_text(text, cache)
         except RuntimeError as exc:
-            print(f"    [error] chunk {chunk['chunk_index']}: {exc}")
+            tqdm.write(f"    [error] chunk {chunk['chunk_index']}: {exc}")
             continue
 
         payload: dict[str, Any] = {
@@ -229,8 +247,7 @@ def main() -> None:
         n = process_transcript(transcript_path, client, cache, point_map)
         print(f"  Upserted {n} points")
         grand_total += n
-
-    _save_cache(cache)
+        _save_cache(cache)
     POINT_MAP_FILE.write_text(json.dumps(point_map, indent=2))
 
     print(f"\nTotal points upserted: {grand_total}")
