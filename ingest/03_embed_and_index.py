@@ -1,20 +1,32 @@
 """
-Step 3: Embed transcript chunks and upsert them into Qdrant.
+Step 3: Embed transcript chunks (text + audio) and upsert into Qdrant.
 
-For each transcript JSON in data/transcripts/:
-  - Embeds each chunk with Gemini text-embedding-004 (vector size 768)
-  - Uses a local cache (data/embedding_cache.json) keyed by sha256(text) to
-    avoid re-computing embeddings for unchanged chunks
-  - Creates the Qdrant collection "earnings_calls" (cosine distance) if it
-    doesn't already exist
-  - Upserts points with UUID IDs and the full payload schema
-  - Saves a point_id → audio_offset mapping to data/transcripts/point_map.json
+For each chunk in each transcript JSON in data/transcripts/:
+  - Slices the 30-second audio segment from data/audio/{audio_file} and
+    saves it to data/audio_clips/{point_id}.mp3 (so the MCP server can
+    serve it later without re-slicing)
+  - Embeds the transcript text with Gemini gemini-embedding-2 (3072-dim)
+  - Embeds the audio clip with the SAME multimodal model — text and audio
+    share the embedding space, so a text query can rank audio neighbours
+    and vice versa
+  - Caches both vectors in data/embedding_cache_v2.json keyed by
+    sha256(modality:content) to avoid recomputing on re-runs
+  - (Re)creates the Qdrant collection 'earnings_calls' with named vectors
+        text  → 3072-dim, cosine
+        audio → 3072-dim, cosine
+  - Upserts each chunk as a single point carrying BOTH named vectors
+
+At search time the MCP server embeds the user's text query with the same
+model and searches using='text'. To do audio→audio retrieval, search
+using='audio'. Cross-modal retrieval works because the two named vectors
+sit in the same shared space.
 
 Usage:
     python ingest/03_embed_and_index.py
 """
 
 import hashlib
+import io
 import json
 import os
 import sys
@@ -28,21 +40,37 @@ from tqdm import tqdm
 
 load_dotenv()
 
+# Ensure ffmpeg is on PATH (uses static binary if system ffmpeg is absent)
+import shutil as _shutil
+if not _shutil.which("ffmpeg"):
+    try:
+        import static_ffmpeg  # type: ignore
+        static_ffmpeg.add_paths()
+    except ImportError:
+        pass
+
 TRANSCRIPTS_DIR = Path("./data/transcripts")
-CACHE_FILE = Path("./data/embedding_cache.json")
+AUDIO_DIR = Path(os.getenv("AUDIO_DIR", "./data/audio"))
+CLIPS_DIR = Path(os.getenv("CLIPS_DIR", "./data/audio_clips"))
+CACHE_FILE = Path("./data/embedding_cache_v2.json")
 POINT_MAP_FILE = TRANSCRIPTS_DIR / "point_map.json"
 
 QDRANT_URL: Optional[str] = os.getenv("QDRANT_URL") or None
 QDRANT_API_KEY: Optional[str] = os.getenv("QDRANT_API_KEY") or None
 QDRANT_PATH: Optional[str] = os.getenv("QDRANT_PATH") or None
 COLLECTION_NAME = os.getenv("COLLECTION_NAME", "earnings_calls")
+
 VECTOR_SIZE = 3072
-EMBEDDING_MODEL = "models/gemini-embedding-001"
-BATCH_SIZE = 20
+EMBEDDING_MODEL = "models/gemini-embedding-2"
+# Smaller batch because each point now carries two 3072-dim vectors
+# (~50 KB per point serialised), and the qdrant-client default write
+# timeout (5s) is too tight for the larger payload.
+BATCH_SIZE = 10
+QDRANT_TIMEOUT_S = 60
 
 
 # ---------------------------------------------------------------------------
-# Embedding helpers
+# Embedding cache
 # ---------------------------------------------------------------------------
 
 def _load_cache() -> dict[str, list[float]]:
@@ -56,25 +84,34 @@ def _save_cache(cache: dict[str, list[float]]) -> None:
     CACHE_FILE.write_text(json.dumps(cache))
 
 
-def embed_text(text: str, cache: dict[str, list[float]]) -> list[float]:
-    """Return the embedding for *text*, using cache when available."""
-    key = hashlib.sha256(text.encode()).hexdigest()
-    if key in cache:
-        return cache[key]
+# ---------------------------------------------------------------------------
+# Gemini multimodal embeddings
+# ---------------------------------------------------------------------------
 
-    from google import genai  # type: ignore
+_GEMINI_CLIENT: Any = None
 
-    api_key = os.environ.get("GEMINI_API_KEY", "")
-    if not api_key:
-        raise RuntimeError("GEMINI_API_KEY is not set")
-    client = genai.Client(api_key=api_key)
 
+def _client() -> Any:
+    global _GEMINI_CLIENT
+    if _GEMINI_CLIENT is None:
+        from google import genai  # type: ignore
+        api_key = os.environ.get("GEMINI_API_KEY", "")
+        if not api_key:
+            raise RuntimeError("GEMINI_API_KEY is not set")
+        _GEMINI_CLIENT = genai.Client(api_key=api_key)
+    return _GEMINI_CLIENT
+
+
+def _embed(contents: Any, cache_key: str, cache: dict[str, list[float]]) -> list[float]:
+    if cache_key in cache:
+        return cache[cache_key]
+    client = _client()
     max_retries = 5
     for attempt in range(max_retries):
         try:
-            result = client.models.embed_content(model=EMBEDDING_MODEL, contents=text)
+            result = client.models.embed_content(model=EMBEDDING_MODEL, contents=contents)
             vec: list[float] = list(result.embeddings[0].values)
-            cache[key] = vec
+            cache[cache_key] = vec
             return vec
         except Exception as exc:
             if "429" in str(exc) and attempt < max_retries - 1:
@@ -92,29 +129,76 @@ def embed_text(text: str, cache: dict[str, list[float]]) -> list[float]:
     raise RuntimeError("Embedding failed after max retries")
 
 
+def embed_text(text: str, cache: dict[str, list[float]]) -> list[float]:
+    key = "text:" + hashlib.sha256(text.encode()).hexdigest()
+    return _embed(text, key, cache)
+
+
+def embed_audio(audio_bytes: bytes, cache: dict[str, list[float]]) -> list[float]:
+    from google.genai import types  # type: ignore
+    key = "audio:" + hashlib.sha256(audio_bytes).hexdigest()
+    if key in cache:
+        return cache[key]
+    part = types.Part.from_bytes(data=audio_bytes, mime_type="audio/mp3")
+    return _embed([part], key, cache)
+
+
+# ---------------------------------------------------------------------------
+# Audio slicing (cached per source file)
+# ---------------------------------------------------------------------------
+
+_FULL_AUDIO_CACHE: dict[str, Any] = {}
+
+
+def _load_full_audio(path: Path) -> Any:
+    from pydub import AudioSegment  # type: ignore
+    key = str(path)
+    if key not in _FULL_AUDIO_CACHE:
+        _FULL_AUDIO_CACHE[key] = AudioSegment.from_file(str(path))
+    return _FULL_AUDIO_CACHE[key]
+
+
+def slice_audio_bytes(full_audio_path: Path, start_s: float, end_s: float) -> bytes:
+    """Slice [start_s, end_s] out of *full_audio_path* and return mp3 bytes."""
+    audio = _load_full_audio(full_audio_path)
+    clip = audio[int(start_s * 1000) : int(end_s * 1000)]
+    buf = io.BytesIO()
+    clip.export(buf, format="mp3")
+    return buf.getvalue()
+
+
 # ---------------------------------------------------------------------------
 # Qdrant helpers
 # ---------------------------------------------------------------------------
 
 def ensure_collection(client: Any) -> None:
-    """Create the collection and payload indexes if they don't already exist."""
+    """Create or recreate the collection with named vectors {text, audio}."""
     from qdrant_client.models import Distance, PayloadSchemaType, VectorParams  # type: ignore
 
+    desired = {
+        "text": VectorParams(size=VECTOR_SIZE, distance=Distance.COSINE),
+        "audio": VectorParams(size=VECTOR_SIZE, distance=Distance.COSINE),
+    }
+
     existing = {c.name for c in client.get_collections().collections}
-    if COLLECTION_NAME not in existing:
-        client.create_collection(
-            collection_name=COLLECTION_NAME,
-            vectors_config=VectorParams(size=VECTOR_SIZE, distance=Distance.COSINE),
-        )
-        print(f"  Created collection '{COLLECTION_NAME}'")
+    if COLLECTION_NAME in existing:
+        info = client.get_collection(COLLECTION_NAME)
+        existing_vectors = info.config.params.vectors
+        if not isinstance(existing_vectors, dict) or set(existing_vectors) != set(desired):
+            print(f"  Schema mismatch — recreating collection '{COLLECTION_NAME}'")
+            client.delete_collection(COLLECTION_NAME)
+            client.create_collection(collection_name=COLLECTION_NAME, vectors_config=desired)
+        else:
+            print(f"  Collection '{COLLECTION_NAME}' already exists (named: text, audio)")
     else:
-        print(f"  Collection '{COLLECTION_NAME}' already exists")
+        client.create_collection(collection_name=COLLECTION_NAME, vectors_config=desired)
+        print(f"  Created collection '{COLLECTION_NAME}' (named: text, audio)")
 
     for field, schema in [
         ("ticker", PayloadSchemaType.KEYWORD),
-        ("date",   PayloadSchemaType.KEYWORD),
-        ("year",   PayloadSchemaType.INTEGER),
-        ("speaker",   PayloadSchemaType.KEYWORD),
+        ("date", PayloadSchemaType.KEYWORD),
+        ("year", PayloadSchemaType.INTEGER),
+        ("speaker", PayloadSchemaType.KEYWORD),
     ]:
         try:
             client.create_payload_index(COLLECTION_NAME, field, schema)
@@ -122,15 +206,8 @@ def ensure_collection(client: Any) -> None:
             pass  # index already exists
 
 
-def upsert_batch(
-    client: Any,
-    points: list[Any],
-) -> None:
-    client.upsert(collection_name=COLLECTION_NAME, points=points)
-
-
 # ---------------------------------------------------------------------------
-# Main ingestion
+# Per-transcript processing
 # ---------------------------------------------------------------------------
 
 def process_transcript(
@@ -139,10 +216,6 @@ def process_transcript(
     cache: dict[str, list[float]],
     point_map: dict[str, Any],
 ) -> int:
-    """
-    Embed and index all chunks in a single transcript file.
-    Returns the number of points upserted.
-    """
     from qdrant_client.models import PointStruct  # type: ignore
 
     data = json.loads(transcript_path.read_text())
@@ -159,6 +232,12 @@ def process_transcript(
     audio_file = data.get("audio_file", "")
     youtube_id = data.get("youtube_id", "")
 
+    full_audio_path = AUDIO_DIR / audio_file
+    if not full_audio_path.exists():
+        print(f"  [error] audio file missing: {full_audio_path}; skipping")
+        return 0
+
+    CLIPS_DIR.mkdir(parents=True, exist_ok=True)
     batch: list[PointStruct] = []
     total = 0
 
@@ -167,12 +246,22 @@ def process_transcript(
         if not text:
             continue
 
-        # Deterministic ID: re-running is idempotent
         stable_key = f"{ticker}_{quarter}_{year}_{chunk['chunk_index']}"
         point_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, stable_key))
 
+        start_s = float(chunk.get("start", 0.0))
+        end_s = float(chunk.get("end", start_s))
+
+        clip_path = CLIPS_DIR / f"{point_id}.mp3"
+        if clip_path.exists():
+            audio_bytes = clip_path.read_bytes()
+        else:
+            audio_bytes = slice_audio_bytes(full_audio_path, start_s, end_s)
+            clip_path.write_bytes(audio_bytes)
+
         try:
-            vector = embed_text(text, cache)
+            text_vec = embed_text(text, cache)
+            audio_vec = embed_audio(audio_bytes, cache)
         except RuntimeError as exc:
             tqdm.write(f"    [error] chunk {chunk['chunk_index']}: {exc}")
             continue
@@ -185,31 +274,43 @@ def process_transcript(
             "chunk_index": chunk["chunk_index"],
             "chunk_text": text,
             "speaker": chunk.get("speaker", "unknown"),
-            "start_time": chunk.get("start", 0.0),
-            "end_time": chunk.get("end", 0.0),
+            "start_time": start_s,
+            "end_time": end_s,
             "audio_file": audio_file,
             "youtube_id": youtube_id,
             "date": date,
         }
 
-        batch.append(PointStruct(id=point_id, vector=vector, payload=payload))
+        batch.append(
+            PointStruct(
+                id=point_id,
+                vector={"text": text_vec, "audio": audio_vec},
+                payload=payload,
+            )
+        )
         point_map[point_id] = {
             "audio_file": audio_file,
-            "start_time": chunk.get("start", 0.0),
-            "end_time": chunk.get("end", 0.0),
+            "start_time": start_s,
+            "end_time": end_s,
         }
 
         if len(batch) >= BATCH_SIZE:
-            upsert_batch(client, batch)
+            client.upsert(collection_name=COLLECTION_NAME, points=batch)
             total += len(batch)
             batch = []
+            _save_cache(cache)
 
     if batch:
-        upsert_batch(client, batch)
+        client.upsert(collection_name=COLLECTION_NAME, points=batch)
         total += len(batch)
+    _save_cache(cache)
 
     return total
 
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
 
 def main() -> None:
     try:
@@ -218,18 +319,19 @@ def main() -> None:
         print("ERROR: qdrant-client is not installed.  Run: pip install qdrant-client")
         sys.exit(1)
 
-    transcript_files = list(TRANSCRIPTS_DIR.glob("*.json"))
-    # Exclude the point map file itself
-    transcript_files = [f for f in transcript_files if f.name != "point_map.json"]
-
+    transcript_files = [
+        f for f in TRANSCRIPTS_DIR.glob("*.json") if f.name != "point_map.json"
+    ]
     if not transcript_files:
         print(f"No transcript JSONs found in {TRANSCRIPTS_DIR.resolve()}")
-        print("Run 02_transcribe.py first.")
+        print("Run 02_transcribe.py (and ideally 02b_diarize.py) first.")
         sys.exit(0)
 
     if QDRANT_URL:
         print(f"Connecting to Qdrant at {QDRANT_URL} ...")
-        client = QdrantClient(url=QDRANT_URL, api_key=QDRANT_API_KEY)
+        client = QdrantClient(
+            url=QDRANT_URL, api_key=QDRANT_API_KEY, timeout=QDRANT_TIMEOUT_S
+        )
     else:
         path = QDRANT_PATH or "./data/qdrant_storage"
         print(f"Using local Qdrant at {path} ...")
@@ -245,14 +347,15 @@ def main() -> None:
     for transcript_path in sorted(transcript_files):
         print(f"\nProcessing {transcript_path.name} ...")
         n = process_transcript(transcript_path, client, cache, point_map)
-        print(f"  Upserted {n} points")
+        print(f"  Upserted {n} points (text + audio vectors each)")
         grand_total += n
-        _save_cache(cache)
+
     POINT_MAP_FILE.write_text(json.dumps(point_map, indent=2))
 
     print(f"\nTotal points upserted: {grand_total}")
-    print(f"Embedding cache saved: {CACHE_FILE.resolve()}")
-    print(f"Point map saved:       {POINT_MAP_FILE.resolve()}")
+    print(f"Embedding cache:        {CACHE_FILE.resolve()}")
+    print(f"Point map:              {POINT_MAP_FILE.resolve()}")
+    print(f"Audio clips:            {CLIPS_DIR.resolve()}")
     print("\nDone.  Next step: python ingest/04_cache_asknews.py")
 
 

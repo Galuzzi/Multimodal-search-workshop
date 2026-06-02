@@ -70,7 +70,8 @@ def search_earnings(
     """
     # TODO Step 1: Embed the query text into a vector.
     #   Use the embed_query() function imported above.
-    #   It returns a list[float] of length 768.
+    #   It returns a list[float] of length 3072 from Gemini Embedding 2
+    #   (multimodal — text and audio share this vector space).
     #
     #   query_vector = embed_query(query)
 
@@ -90,11 +91,15 @@ def search_earnings(
     #   Wrap conditions in Filter(must=[...]) if you have any.
 
     # TODO Step 3: Run the vector search.
-    #   Use client.query_points():
+    #   The collection stores TWO named vectors per chunk — `text` and
+    #   `audio` — both produced by gemini-embedding-2 in the same shared
+    #   space. Pass `using="text"` so Qdrant searches against the text
+    #   vector. Swap to `using="audio"` for audio→audio retrieval later.
     #
     #   results = client.query_points(
     #       collection_name=COLLECTION_NAME,
     #       query=query_vector,
+    #       using="text",
     #       query_filter=qdrant_filter,   # None if no filter
     #       limit=5,
     #       with_payload=True,
@@ -255,7 +260,10 @@ def recommend_similar(point_id: str) -> list[dict[str, Any]]:
     #
     # qdrant-client ≥1.9 removed recommend() — use query_points() instead:
     #
-    # Step 1: Fetch the seed point's stored vector
+    # Step 1: Fetch the seed point's stored vectors.
+    #   For named-vector collections, with_vectors=True returns a dict:
+    #       pts[0].vector == {"text": [...], "audio": [...]}
+    #
     #   pts = client.retrieve(
     #       collection_name=COLLECTION_NAME,
     #       ids=[point_id],
@@ -263,13 +271,15 @@ def recommend_similar(point_id: str) -> list[dict[str, Any]]:
     #   )
     #   if not pts:
     #       return [{"error": f"Point {point_id} not found"}]
+    #   seed_text = pts[0].vector["text"]   # use text-side for topical sim
     #
     # Step 2: Search for nearest neighbours, excluding the seed point itself
     #   from qdrant_client.models import Filter, HasIdCondition
     #
     #   results = client.query_points(
     #       collection_name=COLLECTION_NAME,
-    #       query=pts[0].vector,
+    #       query=seed_text,
+    #       using="text",
     #       query_filter=Filter(must_not=[HasIdCondition(has_id=[point_id])]),
     #       limit=5,
     #       with_payload=True,

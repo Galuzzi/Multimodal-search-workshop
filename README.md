@@ -11,7 +11,7 @@ in the news when management spoke.
 ```
 ┌─────────────────────────── INGESTION PIPELINE (pre-built, run once) ───────────────────────────┐
 │                                                                                                  │
-│  YouTube ──► yt-dlp ──► MP3 files ──► Whisper ──► JSON chunks ──► Gemini Embeddings ──► Qdrant │
+│  YouTube ──► yt-dlp ──► MP3 ──► Whisper + pyannote ──► JSON chunks ──► Gemini Embedding 2 ──► Qdrant │
 │                                                          │                                       │
 │                                              AskNews API (historical)                            │
 │                                                          │                                       │
@@ -20,7 +20,8 @@ in the news when management spoke.
 
                           ┌─────────────────────────────────────────────────────┐
                           │            Qdrant Cloud (vector database)           │
-                          │  collection: earnings_calls  (577 points, 3072-dim) │
+                          │  collection: earnings_calls                         │
+                          │  named vectors: text, audio  (both 3072-dim cosine) │
                           │  payload: ticker · date · speaker · timestamps · …  │
                           └──────────────────────┬──────────────────────────────┘
                                                  │
@@ -43,9 +44,11 @@ in the news when management spoke.
 
 **Data flow for a query:**
 1. User types a natural-language question
-2. MCP server embeds it with Gemini (`models/gemini-embedding-001`, 3072 dims)
-3. Qdrant returns the top-5 most similar transcript chunks
-4. Server fetches a base64-encoded audio clip for each chunk (pre-sliced or sliced on demand)
+2. MCP server embeds it with Gemini Embedding 2 (`models/gemini-embedding-2`, 3072 dims, multimodal)
+3. Qdrant searches the `text` named vector (`using="text"`) for top-5 matches.
+   Audio→audio search is also possible via `using="audio"` since both
+   modalities share the same embedding space.
+4. Server fetches a base64-encoded audio clip for each chunk (pre-sliced by the ingest pipeline)
 5. Server loads historically-bounded AskNews articles (from ±7 days around the call date)
 6. Claude (or the web UI) presents chunks, playable audio, and world context together
 
@@ -56,10 +59,10 @@ in the news when management spoke.
 | Component | Who builds it | Notes |
 |---|---|---|
 | Ingestion pipeline (`ingest/01–04`) | Pre-built | Run once to populate the DB |
-| Qdrant collection | Pre-built via pipeline | 577 points across AAPL, AMZN, NVDA, TSLA |
+| Qdrant collection | Pre-built via pipeline | 577 points across AAPL, AMZN, NVDA, TSLA — each carries named vectors `text` (3072-dim) and `audio` (3072-dim) |
 | AskNews cache (`data/asknews_cache/`) | Pre-built via pipeline | Historical news per ticker+date |
-| Audio clips (`data/audio_clips/`) | Pre-built via pipeline | 30-second MP3 slices per point |
-| `mcp_server/embeddings.py` | Pre-built | Gemini embed + disk cache fallback |
+| Audio clips (`data/audio_clips/`) | Pre-built via pipeline | 30-second MP3 slices per point, also fed into the audio embedding |
+| `mcp_server/embeddings.py` | Pre-built | Gemini Embedding 2 text-side embed + disk cache fallback |
 | `mcp_server/server.py` — **`search_earnings`** | **You build** | Exercise 1 — core vector search |
 | `mcp_server/server.py` — **`get_audio_clip`** | **You build** | Exercise 2 — retrieve + encode audio |
 | `mcp_server/server.py` — **`get_news_context`** | **You build** | Exercise 3 — read AskNews cache |
@@ -87,6 +90,7 @@ in the news when management spoke.
 | `GEMINI_API_KEY` | [aistudio.google.com](https://aistudio.google.com) — free tier |
 | `QDRANT_URL` + `QDRANT_API_KEY` | Qdrant Cloud cluster (pre-provisioned for workshop) |
 | `ASKNEWS_API_KEY` | [asknews.app](https://asknews.app) — optional; cache works offline |
+| `HF_TOKEN` | Only for step 02b (diarization). Accept terms at [pyannote/speaker-diarization-3.1](https://huggingface.co/pyannote/speaker-diarization-3.1), [pyannote/segmentation-3.0](https://huggingface.co/pyannote/segmentation-3.0), and [pyannote/speaker-diarization-community-1](https://huggingface.co/pyannote/speaker-diarization-community-1). |
 | ffmpeg | Bundled via `static-ffmpeg` — no system install needed |
 
 ---
@@ -108,6 +112,7 @@ nano .env   # set GEMINI_API_KEY, QDRANT_URL, QDRANT_API_KEY
 # 4. (Instructor only) Run the ingestion pipeline
 python ingest/01_download_audio.py       # download earnings calls from YouTube
 python ingest/02_transcribe.py           # Whisper transcription → 30s chunks
+python ingest/02b_diarize.py             # pyannote diarization + Gemini speaker ID
 python ingest/03_embed_and_index.py      # Gemini embeddings → Qdrant Cloud
 python ingest/04_cache_asknews.py        # pre-fetch historical news (optional)
 
@@ -143,8 +148,10 @@ BerlinWorkshop/
 ├── ingest/
 │   ├── 01_download_audio.py     ← yt-dlp → MP3
 │   ├── 02_transcribe.py         ← OpenAI Whisper → word-timestamped chunks
-│   ├── 03_embed_and_index.py    ← Gemini embed (3072-dim) → Qdrant upsert
-│   └── 04_cache_asknews.py      ← historical AskNews → JSON cache
+│   ├── 02b_diarize.py           ← pyannote diarization + Gemini speaker ID
+│   ├── 03_embed_and_index.py    ← Gemini Embedding 2 (text + audio) → Qdrant upsert
+│   ├── 04_cache_asknews.py      ← historical AskNews → JSON cache
+│   └── 04b_update_speakers.py   ← payload-only refresh of `speaker` after re-diarize
 ├── mcp_server/
 │   ├── server.py                ← SKELETON — participants complete this
 │   ├── server_solution.py       ← full working solution (instructor reference)
@@ -161,12 +168,16 @@ BerlinWorkshop/
 
 ## Qdrant Payload Schema
 
-Each point represents a ~30-second transcript chunk:
+Each point represents a ~30-second transcript chunk and carries TWO
+named vectors in the same multimodal space produced by Gemini Embedding 2:
 
 ```json
 {
   "id": "<uuid v5, stable per chunk>",
-  "vector": [3072 floats],
+  "vector": {
+    "text":  [3072 floats],   // gemini-embedding-2 over chunk_text
+    "audio": [3072 floats]    // gemini-embedding-2 over the audio clip
+  },
   "payload": {
     "ticker":      "TSLA",
     "company":     "Tesla Inc.",
@@ -183,6 +194,10 @@ Each point represents a ~30-second transcript chunk:
   }
 }
 ```
+
+Queries must specify which named vector to search (`using="text"` or
+`using="audio"`). Because both vectors live in the same shared space, a
+text query can rank against `audio` and vice versa.
 
 **Payload indexes** (required for filtered search):
 
@@ -232,7 +247,9 @@ python cli/setup_mcp.py install
 
 **Embedding errors:**
 - Check `GEMINI_API_KEY` in `.env`
-- The `data/embedding_cache.json` provides offline fallback once populated
+- The `data/embedding_cache_v2.json` provides offline fallback once populated.
+  Old caches from the text-only `gemini-embedding-001` pipeline live in
+  `data/embedding_cache.json` and are not reused (different vector space)
 
 **Qdrant connection errors:**
 - Check `QDRANT_URL` and `QDRANT_API_KEY` in `.env`

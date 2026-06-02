@@ -99,10 +99,13 @@ def search_earnings(
 
         qdrant_filter = Filter(must=conditions) if conditions else None
 
-        # Step 3: Run the vector search
+        # Step 3: Run the vector search against the `text` named vector.
+        # The collection stores two named vectors per chunk (text + audio)
+        # in the same multimodal space, so we must pick which one to query.
         results = client.query_points(
             collection_name=COLLECTION_NAME,
             query=query_vector,
+            using="text",
             query_filter=qdrant_filter,
             limit=5,
             with_payload=True,
@@ -339,8 +342,10 @@ def recommend_similar(point_id: str) -> list[dict[str, Any]]:
         List of up to 5 similar chunks.
     """
     try:
-        # Fetch the seed point's vector, then do a nearest-neighbour search
-        # excluding the seed point itself (qdrant-client ≥1.9 dropped recommend()).
+        # Fetch the seed point's vectors. For named-vector collections
+        # `retrieve(..., with_vectors=True)` returns pts[0].vector as a dict
+        # like {"text": [...], "audio": [...]}. Use the text vector for
+        # cross-call topical similarity.
         pts = client.retrieve(
             collection_name=COLLECTION_NAME,
             ids=[point_id],
@@ -349,9 +354,15 @@ def recommend_similar(point_id: str) -> list[dict[str, Any]]:
         if not pts:
             return [{"error": f"Point {point_id} not found"}]
 
+        seed_vectors = pts[0].vector
+        seed_text = (
+            seed_vectors["text"] if isinstance(seed_vectors, dict) else seed_vectors
+        )
+
         results = client.query_points(
             collection_name=COLLECTION_NAME,
-            query=pts[0].vector,
+            query=seed_text,
+            using="text",
             query_filter=Filter(must_not=[HasIdCondition(has_id=[point_id])]),
             limit=5,
             with_payload=True,

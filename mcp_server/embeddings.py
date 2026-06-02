@@ -4,6 +4,12 @@ Embedding helper with local cache fallback.
 Used by both the ingestion pipeline and the MCP server so that the server
 can answer queries without a live Gemini API key as long as the query text
 was already cached during ingestion.
+
+Model: gemini-embedding-2 (multimodal — text and audio share a 3072-dim
+space). The ingestion pipeline embeds each chunk twice (text + audio) and
+stores them as named vectors {text, audio}. At query time the server
+embeds the user's text question with the same model and searches against
+the `text` named vector (using='text').
 """
 
 import hashlib
@@ -12,26 +18,30 @@ import os
 from pathlib import Path
 from typing import Optional
 
-CACHE_FILE = Path(__file__).parent.parent / "data" / "embedding_cache.json"
+CACHE_FILE = Path(__file__).parent.parent / "data" / "embedding_cache_v2.json"
 
 
-EMBEDDING_MODEL = "models/gemini-embedding-001"
+EMBEDDING_MODEL = "models/gemini-embedding-2"
 
 
 def embed_query(text: str, api_key: Optional[str] = None) -> list[float]:
     """
-    Embed *text* using Gemini gemini-embedding-001 (3072 dimensions).
+    Embed *text* using Gemini gemini-embedding-2 (3072 dimensions).
+
+    The returned vector lives in the same shared multimodal space as the
+    audio embeddings produced by the ingestion pipeline, so this single
+    text vector can be searched against either the `text` or `audio`
+    named vector in Qdrant.
 
     Falls back to the local embedding cache if the API is unavailable or
-    the key is not set.  Raises RuntimeError if both fail.
+    the key is not set. Raises RuntimeError if both fail.
     """
-    cache_key = hashlib.sha256(text.encode()).hexdigest()
+    cache_key = "text:" + hashlib.sha256(text.encode()).hexdigest()
     cache = _load_cache()
 
     if cache_key in cache:
         return cache[cache_key]
 
-    # Try live Gemini call
     try:
         from google import genai  # type: ignore
 
@@ -41,7 +51,6 @@ def embed_query(text: str, api_key: Optional[str] = None) -> list[float]:
         client = genai.Client(api_key=resolved_key)
         result = client.models.embed_content(model=EMBEDDING_MODEL, contents=text)
         vec: list[float] = list(result.embeddings[0].values)
-        # Persist to cache for future offline use
         cache[cache_key] = vec
         _save_cache(cache)
         return vec
