@@ -1,19 +1,19 @@
 """
 Step 4b: Refresh the `speaker` payload field on already-indexed Qdrant points.
 
-Use this after re-running ingest/02b_diarize.py to overwrite the placeholder
+Use this after re-running ingest/benzinga_youtube/02b_diarize.py to overwrite the placeholder
 "Speaker A/B" labels in transcript JSONs without re-embedding 577 chunks.
 
 For each transcript JSON in data/transcripts/, the script:
   - Computes each chunk's deterministic point_id (must match the formula
-    used by ingest/03_embed_and_index.py)
+    used by ingest/benzinga_youtube/03_embed_and_index.py)
   - Groups point_ids by their (now-resolved) speaker name
   - Calls qdrant client.set_payload once per (speaker name) group to patch
     only the `speaker` field — vectors and other payload fields are
     untouched
 
 Usage:
-    python ingest/04b_update_speakers.py
+    python ingest/benzinga_youtube/04b_update_speakers.py
 """
 
 import json

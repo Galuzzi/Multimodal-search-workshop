@@ -266,7 +266,7 @@ def get_news_context(point_id: str) -> dict[str, Any]:
                 "articles": [],
                 "note": (
                     "No AskNews cache found and credentials not set. "
-                    "Run ingest/04_cache_asknews.py to pre-populate the cache."
+                    "Run ingest/04_build_asknews_context.py to pre-populate the cache."
                 ),
             }
 

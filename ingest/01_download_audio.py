@@ -5,7 +5,7 @@ Downloads each configured earnings call as an mp3 file and saves a metadata
 sidecar JSON alongside it.  Requires yt-dlp to be installed.
 
 Usage:
-    python ingest/01_download_audio.py
+    python3 ingest/01_download_audio.py
 """
 
 import json
@@ -39,30 +39,30 @@ EARNINGS_CALLS: list[dict[str, Any]] = [
         "year": 2025,
         "date": "2025-04-30",
     },
-    {
-        "url": "https://www.youtube.com/watch?v=tad_DWtWpoU",
-        "ticker": "AMZN",
-        "company": "Amazon.com Inc.",
-        "quarter": "Q1",
-        "year": 2025,
-        "date": "2025-05-01",
-    },
-    {
-        "url": "https://www.youtube.com/watch?v=hnPLczgEcR8",
-        "ticker": "WMT",
-        "company": "Walmart Inc.",
-        "quarter": "Q1FY26",
-        "year": 2025,
-        "date": "2025-05-15",
-    },
-    {
-        "url": "https://www.youtube.com/watch?v=vs4cfyyMWhQ",
-        "ticker": "TSLA",
-        "company": "Tesla Inc.",
-        "quarter": "Q1",
-        "year": 2025,
-        "date": "2025-04-22",
-    },
+    # {
+    #     "url": "https://www.youtube.com/watch?v=tad_DWtWpoU",
+    #     "ticker": "AMZN",
+    #     "company": "Amazon.com Inc.",
+    #     "quarter": "Q1",
+    #     "year": 2025,
+    #     "date": "2025-05-01",
+    # },
+    # {
+    #     "url": "https://www.youtube.com/watch?v=hnPLczgEcR8",
+    #     "ticker": "WMT",
+    #     "company": "Walmart Inc.",
+    #     "quarter": "Q1FY26",
+    #     "year": 2025,
+    #     "date": "2025-05-15",
+    # },
+    # {
+    #     "url": "https://www.youtube.com/watch?v=vs4cfyyMWhQ",
+    #     "ticker": "TSLA",
+    #     "company": "Tesla Inc.",
+    #     "quarter": "Q1",
+    #     "year": 2025,
+    #     "date": "2025-04-22",
+    # },
 ]
 
 AUDIO_DIR = Path(os.getenv("AUDIO_DIR", "./data/audio"))
@@ -150,9 +150,10 @@ def main() -> None:
         try:
             download_audio(call, AUDIO_DIR)
         except Exception as exc:
-            print(f"  [error] {call['ticker']} {call['quarter']} {call['year']}: {exc}")
+            print(
+                f"  [error] {call['ticker']} {call['quarter']} {call['year']}: {exc}")
 
-    print("\nDone.  Next step: python ingest/02_transcribe.py")
+    print("\nDone.  Next step: python3 ingest/02_transcribe.py")
 
 
 if __name__ == "__main__":

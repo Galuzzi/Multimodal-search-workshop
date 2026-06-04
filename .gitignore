@@ -28,3 +28,7 @@ dmypy.json
 .python-version
 
 *.sh
+
+*_basic/
+scraps/
+data/

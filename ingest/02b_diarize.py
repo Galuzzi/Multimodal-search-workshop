@@ -28,9 +28,10 @@ Requires:
   GEMINI_API_KEY  for the multimodal speaker-ID call
 
 Usage:
-    python ingest/02b_diarize.py
+    python3 ingest/02b_diarize.py
 """
 
+import shutil as _shutil
 import json
 import os
 import re
@@ -44,7 +45,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Ensure ffmpeg is on PATH (uses static binary if system ffmpeg is absent)
-import shutil as _shutil
 if not _shutil.which("ffmpeg"):
     try:
         import static_ffmpeg  # type: ignore
@@ -205,7 +205,7 @@ def extract_sample(
             break
         remaining = SAMPLE_DURATION_S - total_s
         take_s = min(e - s, remaining)
-        combined += audio[int(s * 1000) : int((s + take_s) * 1000)]
+        combined += audio[int(s * 1000): int((s + take_s) * 1000)]
         total_s += take_s
 
     if total_s < MIN_SAMPLE_DURATION_S:
@@ -382,7 +382,7 @@ def main() -> None:
             print(f"  [error] {transcript_path.name}: {exc}")
         print()
 
-    print("Done.  Next step: python ingest/03_embed_and_index.py")
+    print("Done.  Next step: python3 ingest/03_embed_and_index.py")
 
 
 if __name__ == "__main__":

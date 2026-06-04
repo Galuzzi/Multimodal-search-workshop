@@ -9,7 +9,7 @@ Requires:
     - requests package
 
 Usage:
-    python ingest/00_fetch_benzinga.py
+    python3 ingest/01b_fetch_benzinga.py
 """
 
 import json
@@ -26,12 +26,12 @@ load_dotenv()
 # ---------------------------------------------------------------------------
 # Configuration
 # ---------------------------------------------------------------------------
-N_EARNINGS_CALLS = 10  # Number of calls with audio to collect
+N_EARNINGS_CALLS = 3  # Number of calls with audio to collect
 PAGE_SIZE = 50  # Results per API page
 
 BASE_URL = "https://api.benzinga.com/api/v1/transcripts"
-AUDIO_DIR = Path("./data/benzinga_audio")
-TRANSCRIPT_DIR = Path("./data/benzinga_transcripts")
+AUDIO_DIR = Path(os.getenv("AUDIO_DIR", "./data/audio"))
+TRANSCRIPT_DIR = Path(os.getenv("TRANSCRIPT_DIR", "./data/transcripts"))
 
 
 def get_api_key() -> str:
@@ -125,7 +125,7 @@ def process_call(token: str, call: dict[str, Any]) -> bool:
     year = call.get("year", "")
     call_title = call.get("call_title", "")
 
-    filename_stem = f"{symbol.lower()}_{period.lower()}_{year}"
+    filename_stem = f"{symbol.replace('/', '-').lower()}_{period.lower()}_{year}"
 
     print(f"\n  {symbol} {period} {year} — {call_title[:60]}")
 
@@ -146,22 +146,30 @@ def process_call(token: str, call: dict[str, Any]) -> bool:
     audio_path = AUDIO_DIR / f"{filename_stem}.mp3"
     download_audio_file(audio_url, audio_path)
 
-    # Audio sidecar: everything except transcripts
-    audio_meta = {k: v for k, v in call_data.items() if k not in ["transcripts", "summary",
-                                                                  "participants", "securities",
-                                                                  "assets"]}
-    audio_meta["audio_file"] = f"{filename_stem}.mp3"
+    # Audio sidecar
+    audio_meta = {
+        "ticker": symbol,
+        "company": call.get("company", ""),
+        "quarter": call.get("period", ""),
+        "year": year,
+        "date": call.get("created_at", ""),
+        "youtube_id": call.get("youtube_url", ""),
+        "title": call.get("call_title", ""),
+        "duration": call.get("duration", 0),
+        "audio_file": f"{filename_stem}.mp3",
+    }
+
     sidecar_path = AUDIO_DIR / f"{filename_stem}.json"
     sidecar_path.write_text(json.dumps(audio_meta, indent=2, default=str))
 
-    # Transcript file: everything except recordings
-    transcript_meta = {k: v for k, v in call_data.items() if k != "recordings"}
+    # Transcript file
+    transcript_meta = {k: v for k, v in call_data.items()}
     transcript_meta["audio_file"] = f"{filename_stem}.mp3"
     transcript_path = TRANSCRIPT_DIR / f"{filename_stem}.json"
     transcript_path.write_text(json.dumps(
-        transcript_meta, indent=2, default=str))
+        {"api_response": transcript_meta}, indent=2, default=str))
 
-    print(f"    Audio ready for transcription pipeline")
+    print("    Audio ready for transcription pipeline")
     return True
 
 

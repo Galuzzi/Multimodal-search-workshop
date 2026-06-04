@@ -103,28 +103,30 @@ cd BerlinWorkshop
 
 # 2. Install dependencies
 uv venv --python 3.12 && source .venv/bin/activate
-pip install -r requirements.txt          # or: uv pip install -r requirements.txt
+python -m ensurepip && python -m pip install -r requirements.txt  # or: uv pip install -r requirements.txt
 
 # 3. Copy env template and fill in your API keys
 cp .env.example .env
 nano .env   # set GEMINI_API_KEY, QDRANT_URL, QDRANT_API_KEY
 
 # 4. (Instructor only) Run the ingestion pipeline
-python ingest/01_download_audio.py       # download earnings calls from YouTube
-python ingest/02_transcribe.py           # Whisper transcription → 30s chunks
-python ingest/02b_diarize.py             # pyannote diarization + Gemini speaker ID
-python ingest/03_embed_and_index.py      # Gemini embeddings → Qdrant Cloud
-python ingest/04_cache_asknews.py        # pre-fetch historical news (optional)
+python3 ingest/01_download_audio.py   # download earnings calls from YouTube
+python3 ingest/01b_fetch_benzinga.py   # fetch transcripts and audio from Benzinga API
+python3 ingest/02_transcribe_and_diarize.py # Whisper transcription → 30s chunks + pyannote diarization + Gemini speaker ID
+python3 ingest/02_transcribe.py       # Whisper transcription → 30s chunks
+python3 ingest/02b_diarize.py         # pyannote diarization + Gemini speaker ID
+python3 ingest/03_embed_and_index.py  # Gemini embeddings → Qdrant Cloud
+python3 ingest/04_build_asknews_context.py                # pre-fetch historical news (optional)
 
 # 5. Register the MCP server with Claude Desktop
-python cli/setup_mcp.py install
-python cli/setup_mcp.py status           # verify
+python3 cli/setup_mcp.py install
+python3 cli/setup_mcp.py status           # verify
 
 # 6. Open the exercises and start building
 open workshop/exercises.md
 
 # 7. Run the web demo to verify your implementation
-python app.py                            # http://localhost:8000
+python3 app.py                            # http://localhost:8000
 ```
 
 ---
@@ -133,35 +135,37 @@ python app.py                            # http://localhost:8000
 
 ```
 BerlinWorkshop/
-├── README.md                    ← you are here
+├── README.md                         ← you are here
 ├── requirements.txt
 ├── setup.sh
-├── .env.example                 ← copy to .env and fill in keys
-├── app.py                       ← FastAPI web demo (pre-built)
-├── demo.py                      ← CLI demo with rich tables
+├── .env.example                      ← copy to .env and fill in keys
+├── app.py                            ← FastAPI web demo (pre-built)
+├── demo.py                           ← CLI demo with rich tables
 ├── data/
-│   ├── audio/                   ← downloaded .mp3 files (AAPL, AMZN, NVDA, TSLA)
-│   ├── transcripts/             ← Whisper JSON chunks
-│   ├── audio_clips/             ← pre-sliced clips keyed by Qdrant point_id
-│   ├── asknews_cache/           ← {TICKER}_{DATE}.json, one per earnings call
-│   └── embedding_cache.json     ← offline embedding fallback (sha256 keyed)
+│   ├── audio/                        ← downloaded .mp3 files (AAPL, AMZN, NVDA, TSLA)
+│   ├── transcripts/                  ← Whisper JSON chunks
+│   ├── audio_clips/                  ← pre-sliced clips keyed by Qdrant point_id
+│   ├── asknews_cache/                ← {TICKER}_{DATE}.json, one per earnings call
+│   └── embedding_cache.json          ← offline embedding fallback (sha256 keyed)
 ├── ingest/
-│   ├── 01_download_audio.py     ← yt-dlp → MP3
-│   ├── 02_transcribe.py         ← OpenAI Whisper → word-timestamped chunks
-│   ├── 02b_diarize.py           ← pyannote diarization + Gemini speaker ID
-│   ├── 03_embed_and_index.py    ← Gemini Embedding 2 (text + audio) → Qdrant upsert
-│   ├── 04_cache_asknews.py      ← historical AskNews → JSON cache
-│   └── 04b_update_speakers.py   ← payload-only refresh of `speaker` after re-diarize
+│   ├── 01_download_audio.py          ← yt-dlp → MP3
+│   ├── 01b_fetch_benzinga.py         ← api → MP3 + transcript
+│   ├── 02_transcribe_and_diarize.py  ← OpenAI Whisper → word-timestamped chunks
+│   ├── 02_transcribe.py              ← OpenAI Whisper → word-timestamped chunks
+│   ├── 02b_diarize.py                ← pyannote diarization + Gemini speaker ID
+│   ├── 03_embed_and_index.py         ← Gemini Embedding 2 (text + audio) → Qdrant upsert
+│   ├── 04_cache_asknews.py           ← AskNews context → JSON cache
+│   └── 04b_update_speakers.py        ← payload-only refresh of `speaker` after re-diarize
 ├── mcp_server/
-│   ├── server.py                ← SKELETON — participants complete this
-│   ├── server_solution.py       ← full working solution (instructor reference)
-│   └── embeddings.py            ← embed_query() with disk cache fallback
+│   ├── server.py                     ← SKELETON — participants complete this
+│   ├── server_solution.py            ← full working solution (instructor reference)
+│   └── embeddings.py                 ← embed_query() with disk cache fallback
 ├── browser_agent/
-│   └── sec_scraper.py           ← Playwright + SEC EDGAR (bonus exercise)
+│   └── sec_scraper.py                ← Playwright + SEC EDGAR (bonus exercise)
 ├── cli/
-│   └── setup_mcp.py             ← installs server into Claude Desktop config
+│   └── setup_mcp.py                  ← installs server into Claude Desktop config
 └── workshop/
-    └── exercises.md             ← step-by-step workshop guide
+    └── exercises.md                  ← step-by-step workshop guide
 ```
 
 ---
@@ -260,4 +264,4 @@ python cli/setup_mcp.py install
 - If empty, `pydub` will slice on demand from `data/audio/` (needs `static-ffmpeg` installed)
 
 **Whisper takes too long (if re-transcribing):**
-- Edit `ingest/02_transcribe.py` and change `"base"` to `"tiny"` for speed
+- Edit `ingest/benzinga_youtube/02_transcribe.py` and change `"base"` to `"tiny"` for speed

@@ -22,9 +22,10 @@ using='audio'. Cross-modal retrieval works because the two named vectors
 sit in the same shared space.
 
 Usage:
-    python ingest/03_embed_and_index.py
+    python3 ingest/03_embed_and_index.py
 """
 
+import shutil as _shutil
 import hashlib
 import io
 import json
@@ -41,7 +42,6 @@ from tqdm import tqdm
 load_dotenv()
 
 # Ensure ffmpeg is on PATH (uses static binary if system ffmpeg is absent)
-import shutil as _shutil
 if not _shutil.which("ffmpeg"):
     try:
         import static_ffmpeg  # type: ignore
@@ -109,7 +109,8 @@ def _embed(contents: Any, cache_key: str, cache: dict[str, list[float]]) -> list
     max_retries = 5
     for attempt in range(max_retries):
         try:
-            result = client.models.embed_content(model=EMBEDDING_MODEL, contents=contents)
+            result = client.models.embed_content(
+                model=EMBEDDING_MODEL, contents=contents)
             vec: list[float] = list(result.embeddings[0].values)
             cache[cache_key] = vec
             return vec
@@ -161,7 +162,7 @@ def _load_full_audio(path: Path) -> Any:
 def slice_audio_bytes(full_audio_path: Path, start_s: float, end_s: float) -> bytes:
     """Slice [start_s, end_s] out of *full_audio_path* and return mp3 bytes."""
     audio = _load_full_audio(full_audio_path)
-    clip = audio[int(start_s * 1000) : int(end_s * 1000)]
+    clip = audio[int(start_s * 1000): int(end_s * 1000)]
     buf = io.BytesIO()
     clip.export(buf, format="mp3")
     return buf.getvalue()
@@ -185,13 +186,17 @@ def ensure_collection(client: Any) -> None:
         info = client.get_collection(COLLECTION_NAME)
         existing_vectors = info.config.params.vectors
         if not isinstance(existing_vectors, dict) or set(existing_vectors) != set(desired):
-            print(f"  Schema mismatch — recreating collection '{COLLECTION_NAME}'")
+            print(
+                f"  Schema mismatch — recreating collection '{COLLECTION_NAME}'")
             client.delete_collection(COLLECTION_NAME)
-            client.create_collection(collection_name=COLLECTION_NAME, vectors_config=desired)
+            client.create_collection(
+                collection_name=COLLECTION_NAME, vectors_config=desired)
         else:
-            print(f"  Collection '{COLLECTION_NAME}' already exists (named: text, audio)")
+            print(
+                f"  Collection '{COLLECTION_NAME}' already exists (named: text, audio)")
     else:
-        client.create_collection(collection_name=COLLECTION_NAME, vectors_config=desired)
+        client.create_collection(
+            collection_name=COLLECTION_NAME, vectors_config=desired)
         print(f"  Created collection '{COLLECTION_NAME}' (named: text, audio)")
 
     for field, schema in [
@@ -356,7 +361,7 @@ def main() -> None:
     print(f"Embedding cache:        {CACHE_FILE.resolve()}")
     print(f"Point map:              {POINT_MAP_FILE.resolve()}")
     print(f"Audio clips:            {CLIPS_DIR.resolve()}")
-    print("\nDone.  Next step: python ingest/04_cache_asknews.py")
+    print("\nDone.  Next step: python ingest/04_build_asknews_context.py")
 
 
 if __name__ == "__main__":

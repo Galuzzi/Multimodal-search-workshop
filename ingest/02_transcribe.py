@@ -31,9 +31,10 @@ Output format:
   }
 
 Usage:
-    python ingest/02_transcribe.py
+    python3 ingest/02_transcribe.py
 """
 
+import shutil as _shutil
 import json
 import os
 import sys
@@ -45,7 +46,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Ensure ffmpeg is on PATH (uses static binary if system ffmpeg is absent)
-import shutil as _shutil
 if not _shutil.which("ffmpeg"):
     try:
         import static_ffmpeg  # type: ignore
@@ -205,7 +205,7 @@ def main() -> None:
         except Exception as exc:
             print(f"  [error] {mp3_path.name}: {exc}")
 
-    print("\nDone.  Next step: python ingest/03_embed_and_index.py")
+    print("\nDone.  Next step: python3 ingest/03_embed_and_index.py")
 
 
 if __name__ == "__main__":

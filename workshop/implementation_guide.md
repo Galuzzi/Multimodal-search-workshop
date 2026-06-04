@@ -14,7 +14,7 @@ to write, explains *why*, tells you how to test it, and lists common mistakes.
 
 The collection you query was populated by the ingestion pipeline. The
 **showcased data source is the Benzinga Earnings Call Transcripts API**
-(`ingest/00_fetch_benzinga.py`), which delivers, per completed call:
+(`ingest/01b_fetch_benzinga.py`), which delivers, per completed call:
 
 - the **transcript** (timestamped text segments), and
 - a direct **audio MP3** (the API also offers an HLS `.m3u8` stream; the fetcher

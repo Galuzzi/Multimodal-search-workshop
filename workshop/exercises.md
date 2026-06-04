@@ -55,7 +55,7 @@ python ingest/02_transcribe.py
 python ingest/03_embed_and_index.py
 
 # Pre-fetch AskNews context (requires credentials)
-python ingest/04_cache_asknews.py
+python ingest/04_build_asknews_context.py
 ```
 
 After running, check that Qdrant has data:
