@@ -248,7 +248,7 @@ def get_news_context(point_id: str) -> dict[str, Any]:
         payload = points[0].payload
         ticker: str = payload.get("ticker", "")
         date: str = payload.get("date", "")      # "YYYY-MM-DD"
-        chunk_text: str = payload.get("chunk_text", "")
+        speaker: str = payload.get("speaker", "")
 
         # Step 2: Check disk cache
         cache_path = ASKNEWS_CACHE_DIR / f"{ticker}_{date}.json"
@@ -278,34 +278,84 @@ def get_news_context(point_id: str) -> dict[str, Any]:
             sdk = AskNewsSDK(client_id=asknews_id, client_secret=asknews_secret)
 
         call_dt = datetime.strptime(date, "%Y-%m-%d").replace(tzinfo=timezone.utc)
+        is_recent = abs((datetime.now(timezone.utc) - call_dt).total_seconds()) <= 48 * 3600
+
         start_ts = int((call_dt - timedelta(days=7)).timestamp())
         end_ts   = int((call_dt + timedelta(days=1)).timestamp())
 
-        # Use the chunk text as the query so the news matches the specific topic
-        query = f"{ticker} {chunk_text[:120]}" if chunk_text else f"{ticker} earnings {date}"
+        # Ticker-based keyword search (matches 04_build_asknews_context.py)
+        ticker_keywords = ["earnings", "tariffs", "economy"]
+        ticker_query = " ".join([ticker] + ticker_keywords)
 
-        response = sdk.news.search_news(
-            query=query,
+        ticker_response = sdk.news.search_news(
+            query=ticker_query,
             n_articles=5,
-            start_timestamp=start_ts,
-            end_timestamp=end_ts,
+            start_timestamp=start_ts if not is_recent else None,
+            end_timestamp=end_ts if not is_recent else None,
             time_filter="pub_date",
-            historical=True,
-            method="nl",
+            historical=not is_recent,
+            method="kw",
             return_type="dicts",
-            categories=["Finance", "Business", "World"],
+            categories=["Finance", "Business", "Politics", "Technology", "World"],
         )
 
-        articles = [
-            {
-                "title": getattr(item, "eng_title", None) or getattr(item, "title", ""),
-                "summary": getattr(item, "summary", ""),
-                "source": getattr(item, "source_id", ""),
-                "url": str(getattr(item, "article_url", "") or ""),
-                "published_at": str(getattr(item, "pub_date", "")),
-            }
-            for item in response.as_dicts
+        responses: list = []
+        responses.extend(getattr(ticker_response, "as_dicts", []))
+
+        # Speaker-based search for named speakers
+        speaker_keywords = ["earnings", "tariffs", "economy"]
+        if "speaker" not in speaker.lower() and speaker.lower() not in ["operator", "analyst"]:
+            speaker_query = " ".join([speaker] + speaker_keywords)
+            speaker_response = sdk.news.search_news(
+                query=speaker_query,
+                string_guarantee=[speaker],
+                n_articles=5,
+                start_timestamp=start_ts if not is_recent else None,
+                end_timestamp=end_ts if not is_recent else None,
+                time_filter="pub_date",
+                historical=not is_recent,
+                method="kw",
+                return_type="dicts",
+                categories=["Finance", "Business", "Politics", "Technology", "World"],
+            )
+            responses.extend(getattr(speaker_response, "as_dicts", []))
+
+        entity_types = [
+            "Person", "Organization", "Location", "Event", "Money",
+            "Law", "Politics", "Product", "Technology", "Science",
         ]
+
+        articles: list[dict[str, Any]] = []
+        seen_article_ids: set[str] = set()
+        for item in responses:
+            if item.article_id in seen_article_ids:
+                continue
+
+            raw_entities = getattr(item, "entities", None)
+            entities = {
+                k: v for k, v in raw_entities.model_dump().items()
+                if k in entity_types and v
+            } if raw_entities else {}
+
+            articles.append(
+                {
+                    "title": getattr(item, "eng_title", None) or getattr(item, "title", ""),
+                    "summary": getattr(item, "summary", ""),
+                    "sentiment": getattr(item, "sentiment", ""),
+                    "entities": entities,
+                    "language": getattr(item, "language", ""),
+                    "bias": getattr(item, "bias", ""),
+                    "reporting_voice": getattr(item, "reporting_voice", ""),
+                    "source": getattr(item, "source_id", ""),
+                    "authors": [a.model_dump() for a in (getattr(item, "authors", None) or [])],
+                    "content_type": getattr(item, "content_type", ""),
+                    "url": str(getattr(item, "article_url", "") or ""),
+                    "image_url": str(getattr(item, "image_url", "") or ""),
+                    "image_description": getattr(item, "image_description", ""),
+                    "published_at": str(getattr(item, "pub_date", "")),
+                }
+            )
+            seen_article_ids.add(item.article_id)
 
         result = {
             "ticker": ticker,
