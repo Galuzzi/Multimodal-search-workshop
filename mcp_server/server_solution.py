@@ -222,16 +222,14 @@ def get_audio_clip(point_id: str) -> dict[str, Any]:
 @mcp.tool()
 def get_news_context(point_id: str) -> dict[str, Any]:
     """
-    Return AskNews articles published around the time of the earnings call chunk.
-
-    Searches a ±7-day window centred on the call date so the news reflects
-    what was actually happening in the world when management spoke, not today.
+    Return news articles, tweets, and web context relevant to the specific 
+    earnings call chunk identified by point_id.
 
     Args:
         point_id: UUID of the Qdrant point returned by search_earnings.
 
     Returns:
-        Dict with ticker, date, window, and articles list.
+        Dict with ticker, date, window, and articles list, deepnews analysis
     """
     try:
         from datetime import datetime, timedelta, timezone  # noqa: PLC0415
@@ -247,120 +245,153 @@ def get_news_context(point_id: str) -> dict[str, Any]:
 
         payload = points[0].payload
         ticker: str = payload.get("ticker", "")
+        company: str = payload.get("company", "")
+        quarter: str = payload.get("quarter", "")
+        year: int = payload.get("year", 0)
         date: str = payload.get("date", "")      # "YYYY-MM-DD"
         speaker: str = payload.get("speaker", "")
+        chunk_text: str = payload.get("chunk_text", "")
 
         # Step 2: Check disk cache
-        cache_path = ASKNEWS_CACHE_DIR / f"{ticker}_{date}.json"
+        cache_path = ASKNEWS_CACHE_DIR / f"{ticker}_{date}_{point_id}.json"
         if cache_path.exists():
             return json.loads(cache_path.read_text())
 
-        # Step 3: Live AskNews call bounded to ±7 days around the call date
+        # Step 3: Live AskNews deep research call
         asknews_key = os.getenv("ASKNEWS_API_KEY", "")
-        asknews_id = os.getenv("ASKNEWS_CLIENT_ID", "")
-        asknews_secret = os.getenv("ASKNEWS_CLIENT_SECRET", "")
-        if not asknews_key and not (asknews_id and asknews_secret):
+        if not asknews_key:
             return {
                 "ticker": ticker,
                 "date": date,
                 "articles": [],
                 "note": (
-                    "No AskNews cache found and credentials not set. "
+                    "No AskNews cache found and ASKNEWS_API_KEY not set. "
                     "Run ingest/04_build_asknews_context.py to pre-populate the cache."
                 ),
             }
 
         from asknews_sdk import AskNewsSDK  # type: ignore
-
-        if asknews_key:
-            sdk = AskNewsSDK(api_key=asknews_key)
-        else:
-            sdk = AskNewsSDK(client_id=asknews_id, client_secret=asknews_secret)
-
-        call_dt = datetime.strptime(date, "%Y-%m-%d").replace(tzinfo=timezone.utc)
-        is_recent = abs((datetime.now(timezone.utc) - call_dt).total_seconds()) <= 48 * 3600
-
-        start_ts = int((call_dt - timedelta(days=7)).timestamp())
-        end_ts   = int((call_dt + timedelta(days=1)).timestamp())
-
-        # Ticker-based keyword search (matches 04_build_asknews_context.py)
-        ticker_keywords = ["earnings", "tariffs", "economy"]
-        ticker_query = " ".join([ticker] + ticker_keywords)
-
-        ticker_response = sdk.news.search_news(
-            query=ticker_query,
-            n_articles=5,
-            start_timestamp=start_ts if not is_recent else None,
-            end_timestamp=end_ts if not is_recent else None,
-            time_filter="pub_date",
-            historical=not is_recent,
-            method="kw",
-            return_type="dicts",
-            categories=["Finance", "Business", "Politics", "Technology", "World"],
+        from asknews_sdk.dto.deepnews import (  # type: ignore
+            AnthropicTextDelta,
+            ContentBlockDeltaEvent,
+            CreateDeepNewsResponseStreamChunkV2,
+            CreateDeepNewsResponseStreamSource,
+            CreateDeepNewsResponseStreamSourcesNewsSource,
+            CreateDeepNewsResponseStreamSourcesWebSource,
         )
 
-        responses: list = []
-        responses.extend(getattr(ticker_response, "as_dicts", []))
+        ask = AskNewsSDK(api_key=asknews_key)
 
-        # Speaker-based search for named speakers
-        speaker_keywords = ["earnings", "tariffs", "economy"]
-        if "speaker" not in speaker.lower() and speaker.lower() not in ["operator", "analyst"]:
-            speaker_query = " ".join([speaker] + speaker_keywords)
-            speaker_response = sdk.news.search_news(
-                query=speaker_query,
-                string_guarantee=[speaker],
-                n_articles=5,
-                start_timestamp=start_ts if not is_recent else None,
-                end_timestamp=end_ts if not is_recent else None,
-                time_filter="pub_date",
-                historical=not is_recent,
-                method="kw",
-                return_type="dicts",
-                categories=["Finance", "Business", "Politics", "Technology", "World"],
-            )
-            responses.extend(getattr(speaker_response, "as_dicts", []))
+        call_dt = datetime.strptime(date, "%Y-%m-%d").replace(tzinfo=timezone.utc)
 
-        entity_types = [
+        query = (
+            f"Find news, tweets, and web context relevant to this specific moment from the "
+            f"{company} ({ticker}) {quarter} {year} earnings call on {date}.\n\n"
+            f"The speaker is {speaker}, and they said:\n\"{chunk_text}\"\n\n"
+            f"Search for news/tweets ±7 days around {call_dt.date()} that explains the macro events, "
+            f"market conditions, or company-specific news that provides context for what "
+            f"{speaker} was discussing. Also search for any relevant background in the news, google, wikipedia, and twitter from the "
+            f"prior couple of months."
+        )
+
+        response = ask.chat.get_deep_news(
+            messages=[{"role": "user", "content": query}],
+            search_depth=1,
+            max_depth=6,
+            sources=["asknews", "google", "x", "wiki"],
+            stream=True,
+            return_sources=True,
+            model="claude-sonnet-4-6",
+            engine="v2.0",
+            only_cited_sources=True,
+        )
+
+        entity_types = {
             "Person", "Organization", "Location", "Event", "Money",
             "Law", "Politics", "Product", "Technology", "Science",
-        ]
+        }
 
+        full_text_parts: list[str] = []
         articles: list[dict[str, Any]] = []
         seen_article_ids: set[str] = set()
-        for item in responses:
-            if item.article_id in seen_article_ids:
+        for message in response:
+            if isinstance(message, CreateDeepNewsResponseStreamChunkV2):
+                event = message.choices[0].delta
+                if isinstance(event, ContentBlockDeltaEvent) and isinstance(event.delta, AnthropicTextDelta):
+                    full_text_parts.append(event.delta.text)
                 continue
 
-            raw_entities = getattr(item, "entities", None)
-            entities = {
-                k: v for k, v in raw_entities.model_dump().items()
-                if k in entity_types and v
-            } if raw_entities else {}
+            if not isinstance(message, CreateDeepNewsResponseStreamSource):
+                continue
 
-            articles.append(
-                {
-                    "title": getattr(item, "eng_title", None) or getattr(item, "title", ""),
-                    "summary": getattr(item, "summary", ""),
-                    "sentiment": getattr(item, "sentiment", ""),
-                    "entities": entities,
-                    "language": getattr(item, "language", ""),
-                    "bias": getattr(item, "bias", ""),
-                    "reporting_voice": getattr(item, "reporting_voice", ""),
-                    "source": getattr(item, "source_id", ""),
-                    "authors": [a.model_dump() for a in (getattr(item, "authors", None) or [])],
-                    "content_type": getattr(item, "content_type", ""),
-                    "url": str(getattr(item, "article_url", "") or ""),
-                    "image_url": str(getattr(item, "image_url", "") or ""),
-                    "image_description": getattr(item, "image_description", ""),
-                    "published_at": str(getattr(item, "pub_date", "")),
+            if isinstance(message.source, CreateDeepNewsResponseStreamSourcesNewsSource):
+                # data is SearchResponseDictItem (extends Article)
+                item = message.source.data
+                article_id = str(item.article_id)
+                if article_id in seen_article_ids:
+                    continue
+                entities = {
+                    k: v for k, v in item.entities.model_dump().items()
+                    if k in entity_types and v
                 }
-            )
-            seen_article_ids.add(item.article_id)
+                articles.append(
+                    {
+                        "title": item.eng_title or item.title,
+                        "summary": item.summary,
+                        "sentiment": item.sentiment,
+                        "entities": entities,
+                        "language": item.language,
+                        "bias": item.bias,
+                        "reporting_voice": item.reporting_voice,
+                        "source": item.source_id,
+                        "authors": [a.model_dump() for a in (item.authors or [])],
+                        "content_type": item.content_type,
+                        "url": str(item.article_url),
+                        "image_url": str(item.image_url or ""),
+                        "image_description": item.image_description or "",
+                        "published_at": str(item.pub_date),
+                    }
+                )
+                seen_article_ids.add(article_id)
+
+            elif isinstance(message.source, CreateDeepNewsResponseStreamSourcesWebSource):
+                # data is WebSearchResult: title, url, source, published, key_points, raw_text
+                item = message.source.data
+                article_id = str(item.url)
+                if article_id in seen_article_ids:
+                    continue
+                articles.append(
+                    {
+                        "title": item.title,
+                        "summary": " ".join(item.key_points) if item.key_points else item.raw_text,
+                        "sentiment": None,
+                        "entities": {},
+                        "language": "",
+                        "bias": None,
+                        "reporting_voice": "",
+                        "source": item.source,
+                        "authors": [],
+                        "content_type": "web",
+                        "url": str(item.url),
+                        "image_url": "",
+                        "image_description": "",
+                        "published_at": item.published,
+                    }
+                )
+                seen_article_ids.add(article_id)
+
+        full_text = "".join(full_text_parts)
+        tag_open = "<final_answer>"
+        tag_close = "</final_answer>"
+        start = full_text.find(tag_open)
+        end = full_text.find(tag_close)
+        analysis = full_text[start + len(tag_open):end].strip() if start != -1 and end != -1 else full_text.strip()
 
         result = {
             "ticker": ticker,
             "date": date,
             "window": f"{(call_dt - timedelta(days=7)).date()} → {call_dt.date()}",
+            "analysis": analysis,
             "articles": articles,
         }
 
