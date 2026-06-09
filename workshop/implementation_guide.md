@@ -377,7 +377,7 @@ If there's no cache file and no AskNews credentials, return an empty-but-valid
 result rather than crashing:
 
 ```python
-    if not os.getenv("ASKNEWS_CLIENT_ID"):
+    if not os.getenv("ASKNEWS_API_KEY"):
         return {
             "ticker": ticker,
             "date": date,
@@ -386,11 +386,11 @@ result rather than crashing:
         }
 ```
 
-> **Stretch (live call):** with `ASKNEWS_CLIENT_ID` / `ASKNEWS_CLIENT_SECRET` set,
+> **Stretch (live call):** with `ASKNEWS_API_KEY` set,
 > you can call the live API and bound it to ±7 days around `date` so results are
 > *historical*, then write the result to `cache_path` for next time. See
-> `server_solution.py` lines 273–321 for the exact `sdk.news.search_news(...)`
-> call (`historical=True`, `start_timestamp`/`end_timestamp`). Optional.
+> `server_solution.py` lines 273–321 for the exact `ask.chat.get_deep_news(...)`
+> call
 
 Wrap in `try/except`. Delete the placeholder.
 
