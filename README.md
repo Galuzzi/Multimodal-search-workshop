@@ -13,7 +13,7 @@ in the news when management spoke.
 │                                                                                                  │
 │  YouTube ──► yt-dlp ──► MP3 ──► Whisper + pyannote ──► JSON chunks ──► Gemini Embedding 2 ──► Qdrant │
 │                                                          │                                       │
-│                                              AskNews API (historical)                            │
+│                                              AskNews API                            │
 │                                                          │                                       │
 │                                              data/asknews_cache/*.json                           │
 └──────────────────────────────────────────────────────────────────────────────────────────────────┘
@@ -38,7 +38,7 @@ in the news when management spoke.
               │     Claude Desktop /       │    │    Web Demo  app.py          │
               │     Claude Code (CLI)      │    │    http://localhost:8000      │
               │  "Which CEOs mentioned     │    │  search box + audio players  │
-              │   tariffs in Q1 2025?"     │    │  + historical news cards     │
+              │   tariffs in Q1 2025?"     │    │  + news cards     │
               └────────────────────────────┘    └──────────────────────────────┘
 ```
 
@@ -49,7 +49,7 @@ in the news when management spoke.
    Audio→audio search is also possible via `using="audio"` since both
    modalities share the same embedding space.
 4. Server fetches a base64-encoded audio clip for each chunk (pre-sliced by the ingest pipeline)
-5. Server loads historically-bounded AskNews articles (from ±7 days around the call date)
+5. Server loads [AskNews](https://asknews.app) articles (from ±7 days around the call date)
 6. Claude (or the web UI) presents chunks, playable audio, and world context together
 
 ---
@@ -60,7 +60,7 @@ in the news when management spoke.
 |---|---|---|
 | Ingestion pipeline (`ingest/01–04`) | Pre-built | Run once to populate the DB |
 | Qdrant collection | Pre-built via pipeline | 577 points across AAPL, AMZN, NVDA, TSLA — each carries named vectors `text` (3072-dim) and `audio` (3072-dim) |
-| AskNews cache (`data/asknews_cache/`) | Pre-built via pipeline | Historical news per ticker+date |
+| AskNews cache (`data/asknews_cache/`) | Pre-built via pipeline | News per ticker+date |
 | Audio clips (`data/audio_clips/`) | Pre-built via pipeline | 30-second MP3 slices per point, also fed into the audio embedding |
 | `mcp_server/embeddings.py` | Pre-built | Gemini Embedding 2 text-side embed + disk cache fallback |
 | `mcp_server/server.py` — **`search_earnings`** | **You build** | Exercise 1 — core vector search |
@@ -116,7 +116,7 @@ python3 ingest/02_transcribe_and_diarize.py # Whisper transcription → 30s chun
 python3 ingest/02_transcribe.py       # Whisper transcription → 30s chunks
 python3 ingest/02b_diarize.py         # pyannote diarization + Gemini speaker ID
 python3 ingest/03_embed_and_index.py  # Gemini embeddings → Qdrant Cloud
-python3 ingest/04_build_asknews_context.py                # pre-fetch historical news (optional)
+python3 ingest/04_build_asknews_context.py                # pre-fetch news (optional)
 
 # 5. Register the MCP server with Claude Desktop
 python3 cli/setup_mcp.py install
