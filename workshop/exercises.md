@@ -12,7 +12,7 @@ audio clips.
 - `git clone` of this repository
 - API keys ready (see `.env.example`):
   - **GEMINI_API_KEY** — [Google AI Studio](https://aistudio.google.com)
-  - **ASKNEWS_CLIENT_ID / ASKNEWS_CLIENT_SECRET** — [AskNews](https://asknews.app) *(optional)*
+  - **ASKNEWS_API_KEY** — [AskNews](https://my.asknews.app/en/settings/api-credentials) *(optional)*
   - **QDRANT_URL** — defaults to `http://localhost:6333` (run Qdrant locally with Docker)
 
 Start a local Qdrant instance:
