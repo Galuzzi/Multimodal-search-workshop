@@ -96,7 +96,8 @@ def fetch_deep_news_context(
     call_dt = datetime.strptime(date, "%Y-%m-%d").replace(tzinfo=timezone.utc)
 
     query = (
-        f"Find news, tweets, and web context relevant to this specific moment from the "
+        f"Use the search_news, search_x_twitter, search_wikipedia, and search_google tools to "
+        f"search for information relevant to this specific moment from the "
         f"{company} ({ticker}) {quarter} {year} earnings call on {date}.\n\n"
         f"The speaker is {speaker}, and they said:\n\"{chunk_text}\"\n\n"
         f"Search for news/tweets ±7 days around {call_dt.date()} that explains the macro events, "

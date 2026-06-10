@@ -285,13 +285,14 @@ def get_news_context(point_id: str) -> dict[str, Any]:
         call_dt = datetime.strptime(date, "%Y-%m-%d").replace(tzinfo=timezone.utc)
 
         query = (
-            f"Find news, tweets, and web context relevant to this specific moment from the "
+            f"Use the search_news, search_x_twitter, search_wikipedia, and search_google tools to "
+            f"search for information relevant to this specific moment from the "
             f"{company} ({ticker}) {quarter} {year} earnings call on {date}.\n\n"
             f"The speaker is {speaker}, and they said:\n\"{chunk_text}\"\n\n"
             f"Search for news/tweets ±7 days around {call_dt.date()} that explains the macro events, "
             f"market conditions, or company-specific news that provides context for what "
-            f"{speaker} was discussing. Also search for any relevant background in the news, google, wikipedia, and twitter from the "
-            f"prior couple of months."
+            f"{speaker} was discussing. Also search for any relevant background in the news, "
+            f"google, wikipedia, and twitter from the prior couple of months."
         )
 
         response = ask.chat.get_deep_news(
