@@ -49,7 +49,7 @@ in the news when management spoke.
    Audio→audio search is also possible via `using="audio"` since both
    modalities share the same embedding space.
 4. Server fetches a base64-encoded audio clip for each chunk (pre-sliced by the ingest pipeline)
-5. Server loads [AskNews](https://asknews.app) articles (from ±7 days around the call date)
+5. Server uses [AskNews](https://asknews.app) [DeepNews](https://docs.asknews.app/en/deepnews) to find all relevant articles, tweets, google search results, and wikipedia pages from the last 5 years and up to the last 5 minutes.
 6. Claude (or the web UI) presents chunks, playable audio, and world context together
 
 ---
@@ -60,7 +60,7 @@ in the news when management spoke.
 |---|---|---|
 | Ingestion pipeline (`ingest/01–04`) | Pre-built | Run once to populate the DB |
 | Qdrant collection | Pre-built via pipeline | 577 points across AAPL, AMZN, NVDA, TSLA — each carries named vectors `text` (3072-dim) and `audio` (3072-dim) |
-| AskNews cache (`data/asknews_cache/`) | Pre-built via pipeline | News per ticker+date |
+| AskNews cache (`data/asknews_cache/`) | Pre-built via pipeline | News, tweetes, and more for ticker+date+speaker per transcription chunk |
 | Audio clips (`data/audio_clips/`) | Pre-built via pipeline | 30-second MP3 slices per point, also fed into the audio embedding |
 | `mcp_server/embeddings.py` | Pre-built | Gemini Embedding 2 text-side embed + disk cache fallback |
 | `mcp_server/server.py` — **`search_earnings`** | **You build** | Exercise 1 — core vector search |
@@ -145,7 +145,7 @@ BerlinWorkshop/
 │   ├── audio/                        ← downloaded .mp3 files (AAPL, AMZN, NVDA, TSLA)
 │   ├── transcripts/                  ← Whisper JSON chunks
 │   ├── audio_clips/                  ← pre-sliced clips keyed by Qdrant point_id
-│   ├── asknews_cache/                ← {TICKER}_{DATE}.json, one per earnings call
+│   ├── asknews_cache/                ← {TICKER}_{DATE}_{POINT_ID}.json, one per transcription chunk for each earnings call
 │   └── embedding_cache.json          ← offline embedding fallback (sha256 keyed)
 ├── ingest/
 │   ├── 01_download_audio.py          ← yt-dlp → MP3
