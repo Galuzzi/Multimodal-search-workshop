@@ -273,17 +273,15 @@ def _audio_block(point_id: str) -> str:
 
 
 def _render_results(query: str, ticker: str | None = None) -> str:
-    # results = search_earnings(query=query, ticker=ticker)
-    #if not results or "error" in results[0]:
-    #    msg = results[0].get("error", "No results") if results else "No results"
-    #    return f'<p class="empty">{msg}</p>'
-
-    results = [{"point_id": "056a96dc-922d-59b7-b6bf-acc4aeebe589"}]
+     results = search_earnings(query=query, ticker=ticker)
+    if not results or "error" in results[0]:
+        msg = results[0].get("error", "No results") if results else "No results"
+        return f'<p class="empty">{msg}</p>'
 
     cards = []
     for r in results:
         pid    = r["point_id"]
-        #audio  = _audio_block(pid)
+        audio  = _audio_block(pid)
         news   = _news_block(pid)
         ticker = r.get("ticker", "?")
         card = (
@@ -295,7 +293,7 @@ def _render_results(query: str, ticker: str | None = None) -> str:
             f'<span class="score">score {r.get("score",0):.3f}</span>'
             f'</div>'
             f'<div class="quote">{r.get("chunk_text","").replace("  "," ")}</div>'
-           # f'{audio}'
+            f'{audio}'
             f'{news}'
             f'</div>'
         )
