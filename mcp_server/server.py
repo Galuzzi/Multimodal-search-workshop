@@ -573,6 +573,81 @@ def recommend_similar(point_id: str) -> list[dict[str, Any]]:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Tool 5: transcribe_audio  (voice prompt / uploaded conversation → text)
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+@mcp.tool()
+def transcribe_audio(audio_path: str, diarize: bool = True) -> dict[str, Any]:
+    """
+    Transcribe a spoken audio file into text with Gemini, so a voice prompt or
+    an uploaded conversation can be searched or fact-checked against the
+    earnings-call corpus.
+
+    Typical fact-check flow: transcribe_audio(recording) → pull out the factual
+    claims → search_earnings(claim) for each → compare claim vs. retrieved
+    evidence → cite the real moment with get_audio_clip / get_news_context.
+
+    Args:
+        audio_path: Path to a local audio file (mp3/wav/m4a/…). Keep it short
+                    (a few minutes); inline audio is capped near 18 MB.
+        diarize:    When True, ask Gemini to label distinct speakers.
+
+    Returns:
+        Dict with keys: path, format, transcript. On error {"error": "..."}.
+    """
+    try:
+        clip = Path(audio_path).expanduser()
+        if not clip.exists():
+            return {"error": f"Audio file not found: {audio_path}"}
+
+        audio_bytes = clip.read_bytes()
+        if len(audio_bytes) > 18_000_000:
+            return {
+                "error": (
+                    f"Audio is {len(audio_bytes) // 1_000_000} MB; inline transcription "
+                    "is capped near 18 MB. Use a shorter clip (longer recordings need "
+                    "the Gemini Files API)."
+                )
+            }
+
+        mime_map = {
+            ".mp3": "audio/mpeg", ".wav": "audio/wav", ".m4a": "audio/mp4",
+            ".ogg": "audio/ogg", ".flac": "audio/flac", ".aac": "audio/aac",
+        }
+        mime = mime_map.get(clip.suffix.lower(), "audio/mpeg")
+
+        from google import genai
+        from google.genai import types
+
+        gclient = genai.Client(api_key=os.getenv("GEMINI_API_KEY", ""))
+        instruction = (
+            "Transcribe this audio verbatim. "
+            + (
+                "Label each distinct speaker as 'Speaker 1:', 'Speaker 2:', etc. "
+                if diarize
+                else ""
+            )
+            + "Return only the transcript text, with no preamble or commentary."
+        )
+        resp = gclient.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=[
+                types.Part.from_bytes(data=audio_bytes, mime_type=mime),
+                instruction,
+            ],
+        )
+        return {
+            "path": str(clip),
+            "format": clip.suffix.lstrip(".").lower(),
+            "transcript": (resp.text or "").strip(),
+        }
+
+    except Exception as exc:
+        return {"error": str(exc)}
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Entry point
 # ─────────────────────────────────────────────────────────────────────────────
 
