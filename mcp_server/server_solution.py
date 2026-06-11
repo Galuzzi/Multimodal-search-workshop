@@ -28,11 +28,33 @@ if not shutil.which("ffmpeg"):
     except ImportError:
         pass
 
+from datetime import datetime, timezone
+
 from mcp.server.fastmcp import FastMCP
 from qdrant_client import QdrantClient
-from qdrant_client.models import FieldCondition, Filter, HasIdCondition, MatchValue, Range
+from qdrant_client.models import (
+    DatetimeExpression,
+    DatetimeKeyExpression,
+    DatetimeRange,
+    DecayParamsExpression,
+    ExpDecayExpression,
+    FieldCondition,
+    Filter,
+    FormulaQuery,
+    HasIdCondition,
+    MatchValue,
+    MultExpression,
+    Prefetch,
+    Range,
+    SumExpression,
+)
 
 from mcp_server.embeddings import embed_query
+
+# Recency boost: weight applied to the decay term, and the half-life
+# (in days) at which an older call's recency bonus drops to half.
+RECENCY_BOOST_WEIGHT = 0.3
+RECENCY_HALF_LIFE_DAYS = 180
 
 # ── Configuration ─────────────────────────────────────────────────────────────
 QDRANT_URL: Optional[str] = os.getenv("QDRANT_URL") or None
@@ -62,14 +84,17 @@ def search_earnings(
     query: str,
     ticker: Optional[str] = None,
     date_range: Optional[str] = None,
+    boost_recency: bool = False,
 ) -> list[dict[str, Any]]:
     """
     Semantic search over earnings call transcripts stored in Qdrant.
 
     Args:
-        query:      Natural-language question, e.g. "data center demand outlook"
-        ticker:     Optional stock ticker to restrict results, e.g. "NVDA"
-        date_range: Optional ISO date range "YYYY-MM-DD:YYYY-MM-DD"
+        query:         Natural-language question, e.g. "data center demand outlook"
+        ticker:        Optional stock ticker to restrict results, e.g. "NVDA"
+        date_range:    Optional ISO date range "YYYY-MM-DD:YYYY-MM-DD"
+        boost_recency: When True, rerank by combining semantic similarity with a
+                       time-decay bonus so more recent calls surface higher.
 
     Returns:
         List of matching transcript chunks with metadata and relevance scores.
@@ -78,7 +103,9 @@ def search_earnings(
         # Step 1: Embed the query
         query_vector = embed_query(query)
 
-        # Step 2: Build Qdrant filter
+        # Step 2: Build Qdrant filter.
+        # `date` is a DATETIME-indexed field, so use DatetimeRange (NOT the
+        # numeric Range) — it accepts ISO date strings like "2025-01-01".
         conditions: list[FieldCondition] = []
 
         if ticker:
@@ -93,7 +120,7 @@ def search_earnings(
                 conditions.append(
                     FieldCondition(
                         key="date",
-                        range=Range(gte=start_date, lte=end_date),
+                        range=DatetimeRange(gte=start_date, lte=end_date),
                     )
                 )
 
@@ -102,14 +129,53 @@ def search_earnings(
         # Step 3: Run the vector search against the `text` named vector.
         # The collection stores two named vectors per chunk (text + audio)
         # in the same multimodal space, so we must pick which one to query.
-        results = client.query_points(
-            collection_name=COLLECTION_NAME,
-            query=query_vector,
-            using="text",
-            query_filter=qdrant_filter,
-            limit=5,
-            with_payload=True,
-        )
+        if boost_recency:
+            # Recency boosting via the Query API formula:
+            #   final = $score + WEIGHT * exp_decay(now - call_date)
+            # Prefetch pulls a wider candidate pool by pure similarity, then
+            # the formula reranks them. The decay reads the DATETIME `date`
+            # field; midpoint=0.5 means the bonus halves at one half-life.
+            now_iso = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+            results = client.query_points(
+                collection_name=COLLECTION_NAME,
+                prefetch=Prefetch(
+                    query=query_vector,
+                    using="text",
+                    filter=qdrant_filter,
+                    limit=30,
+                ),
+                query=FormulaQuery(
+                    formula=SumExpression(
+                        sum=[
+                            "$score",
+                            MultExpression(
+                                mult=[
+                                    RECENCY_BOOST_WEIGHT,
+                                    ExpDecayExpression(
+                                        exp_decay=DecayParamsExpression(
+                                            x=DatetimeKeyExpression(datetime_key="date"),
+                                            target=DatetimeExpression(datetime=now_iso),
+                                            scale=RECENCY_HALF_LIFE_DAYS * 86400,
+                                            midpoint=0.5,
+                                        )
+                                    ),
+                                ]
+                            ),
+                        ]
+                    )
+                ),
+                limit=5,
+                with_payload=True,
+            )
+        else:
+            results = client.query_points(
+                collection_name=COLLECTION_NAME,
+                query=query_vector,
+                using="text",
+                query_filter=qdrant_filter,
+                limit=5,
+                with_payload=True,
+            )
 
         # Step 4: Format results
         return [

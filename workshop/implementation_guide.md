@@ -108,8 +108,12 @@ At the **top** of `server.py`, next to the existing imports, add the Qdrant
 filter models:
 
 ```python
-from qdrant_client.models import FieldCondition, Filter, MatchValue, Range
+from qdrant_client.models import FieldCondition, Filter, MatchValue, DatetimeRange
 ```
+
+> We import `DatetimeRange` (not the numeric `Range`) because the `date` payload
+> field is indexed as **DATETIME** — see "Where the data comes from" and
+> Exercise 6 below.
 
 (`embed_query` is already imported on line 29 — you do not need to add it.)
 
@@ -141,14 +145,16 @@ it in a `Filter` if there's at least one:
     if date_range:
         start_date, end_date = date_range.split(":")
         conditions.append(
-            FieldCondition(key="date", range=Range(gte=start_date, lte=end_date))
+            FieldCondition(key="date", range=DatetimeRange(gte=start_date, lte=end_date))
         )
 
     qdrant_filter = Filter(must=conditions) if conditions else None
 ```
 
 - `.upper()` on the ticker matters — payloads store `"NVDA"`, not `"nvda"`.
-- `date` is stored as a string `"YYYY-MM-DD"`; a string `Range` sorts correctly.
+- `date` is **DATETIME-indexed**, so use `DatetimeRange` — it accepts ISO date
+  strings (`"2025-01-01"`). Using the numeric `Range` here raises a pydantic
+  "valid number" error.
 - `must=[...]` means **all** conditions must hold (logical AND).
 
 ### Step 1.4 — Run the vector search
@@ -504,6 +510,182 @@ Expect 5 rows and **none** of them equal to your seed `point_id`.
 
 ---
 
+## 4b. Exercise 5 (stretch) — Filterable HNSW + payload indexes
+
+**Goal:** understand why the collection is configured so that *filtered* search
+stays fast and accurate, and be able to (re)build it that way.
+
+This is **collection/ingestion configuration**, not a query tool — it lives in
+`ingest/03_embed_and_index.py` (`ensure_collection`), and it's already applied to
+the workshop cluster. You don't need to run it; this exercise explains it.
+
+### Why filterable HNSW
+
+Plain HNSW searches the whole vector graph. When you add a restrictive filter
+(e.g. `ticker="NVDA"` AND a tight `date` range), most graph neighbours get
+rejected by the filter, so the walk can dead-end and recall drops — in the worst
+case Qdrant falls back to a brute-force scan. **Filterable HNSW** fixes this by
+building *extra graph edges per indexed payload value*, so there's always a
+well-connected sub-graph to traverse within any filtered subset.
+
+### How it's configured
+
+Two ingredients, both in `ensure_collection`:
+
+```python
+from qdrant_client.models import HnswConfigDiff, PayloadSchemaType
+
+# 1) Extra payload-aware edges: m = global edges, payload_m = per-payload edges
+client.create_collection(
+    collection_name=COLLECTION_NAME,
+    vectors_config=desired,
+    hnsw_config=HnswConfigDiff(m=16, payload_m=16),
+)
+
+# 2) Payload indexes — the extra edges are ONLY built for indexed fields
+client.create_payload_index(COLLECTION_NAME, "ticker", PayloadSchemaType.KEYWORD)
+client.create_payload_index(COLLECTION_NAME, "date",   PayloadSchemaType.DATETIME)
+client.create_payload_index(COLLECTION_NAME, "year",   PayloadSchemaType.INTEGER)
+client.create_payload_index(COLLECTION_NAME, "speaker",PayloadSchemaType.KEYWORD)
+```
+
+Two rules that matter:
+
+- **Order:** create the payload index *before* inserting points. Qdrant only adds
+  the extra HNSW edges for points that existed under the index — indexing after
+  ingest won't backfill the graph (you'd need to re-index).
+- **`date` is DATETIME, not KEYWORD.** That single choice powers both the
+  `DatetimeRange` filter (Exercise 1) and the recency boost (Exercise 6).
+
+To enable filterable edges on an **existing** collection without recreating it:
+
+```python
+client.update_collection(COLLECTION_NAME, hnsw_config=HnswConfigDiff(payload_m=16))
+```
+
+### Verify it on the cluster
+
+```bash
+python -c "
+from dotenv import load_dotenv; load_dotenv()
+import os
+from qdrant_client import QdrantClient
+c=QdrantClient(url=os.getenv('QDRANT_URL'), api_key=os.getenv('QDRANT_API_KEY'))
+i=c.get_collection('earnings_calls')
+print('payload_m:', i.config.hnsw_config.payload_m)
+print('indexes:', {k:str(v.data_type) for k,v in i.payload_schema.items()})
+"
+# payload_m: 16
+# indexes: {'ticker': 'keyword', 'date': 'datetime', 'year': 'integer', 'speaker': 'keyword'}
+```
+
+---
+
+## 4c. Exercise 6 (stretch) — Time-based score boosting
+
+**Goal:** rerank results so a more *recent* earnings call surfaces higher, while
+still respecting semantic relevance. This is a query-time feature — no reindexing.
+
+**Location:** `search_earnings` in `server.py`.
+
+### Step 6.1 — Add a flag to the signature
+
+```python
+def search_earnings(
+    query: str,
+    ticker: Optional[str] = None,
+    date_range: Optional[str] = None,
+    boost_recency: bool = False,
+) -> list[dict[str, Any]]:
+```
+
+### Step 6.2 — Add the formula imports
+
+```python
+from datetime import datetime, timezone
+from qdrant_client.models import (
+    Prefetch, FormulaQuery, SumExpression, MultExpression,
+    ExpDecayExpression, DecayParamsExpression,
+    DatetimeKeyExpression, DatetimeExpression,
+)
+```
+
+### Step 6.3 — When `boost_recency`, search with a formula instead
+
+The pattern is **prefetch then rerank**: pull a wider candidate pool by pure
+similarity, then compute `final = $score + weight * exp_decay(now − date)`.
+
+```python
+    if boost_recency:
+        now_iso = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        results = client.query_points(
+            collection_name=COLLECTION_NAME,
+            prefetch=Prefetch(
+                query=query_vector,
+                using="text",
+                filter=qdrant_filter,   # note: Prefetch uses `filter`, not `query_filter`
+                limit=30,
+            ),
+            query=FormulaQuery(
+                formula=SumExpression(sum=[
+                    "$score",                         # original similarity
+                    MultExpression(mult=[
+                        0.3,                          # boost weight
+                        ExpDecayExpression(exp_decay=DecayParamsExpression(
+                            x=DatetimeKeyExpression(datetime_key="date"),
+                            target=DatetimeExpression(datetime=now_iso),
+                            scale=180 * 86400,        # half-life ≈ 180 days (in seconds)
+                            midpoint=0.5,             # decay = 0.5 at one half-life
+                        )),
+                    ]),
+                ])
+            ),
+            limit=5,
+            with_payload=True,
+        )
+    else:
+        results = client.query_points(
+            collection_name=COLLECTION_NAME,
+            query=query_vector, using="text",
+            query_filter=qdrant_filter, limit=5, with_payload=True,
+        )
+```
+
+Formatting (Step 1.5) is unchanged — both branches expose `results.points`.
+
+### How the decay works
+
+- `$score` is the cosine similarity from the prefetch.
+- `exp_decay` returns `1.0` when `date == now` and decays toward `0` as the call
+  gets older; `scale` + `midpoint` set how fast (`0.5` at one half-life).
+- `MultExpression` scales that bonus by the weight (`0.3`), so semantics still
+  dominate and recency only breaks near-ties. Tune the weight/half-life to taste.
+
+### Step 6.4 — Test it
+
+```bash
+python -c "
+from mcp_server.server import search_earnings
+print('baseline:')
+for r in search_earnings('tariffs and supply chain'): print(' ', round(r['score'],3), r['ticker'], r['year'])
+print('boosted:')
+for r in search_earnings('tariffs and supply chain', boost_recency=True): print(' ', round(r['score'],3), r['ticker'], r['year'])
+"
+```
+
+The most recent call should climb the ranking, and boosted scores should exceed
+the raw cosine scores (because the decay term is added on top).
+
+**Common mistakes**
+- Using `query_filter=` inside `Prefetch` → it's `filter=` there (only the
+  top-level `query_points` call uses `query_filter`).
+- `Index required ... of types: [datetime]` → the `date` field isn't
+  DATETIME-indexed (see Exercise 5).
+- Forgetting the prefetch `limit` is the candidate pool; if it equals your final
+  `limit`, there's nothing for the formula to rerank.
+
+---
+
 ## 5. Run the server and register it with Claude
 
 Once your tools pass the standalone tests above:
@@ -535,6 +717,7 @@ automatically.
 | "What was happening in the news around NVDA's Q3 earnings?" | `get_news_context` |
 | "Find other chunks similar to that one" | `recommend_similar` |
 | "Which CEOs mentioned tariffs in Q1 2025?" | `search_earnings` (×ticker) |
+| "Find AI-investment mentions, prefer the most recent calls" | `search_earnings` (`boost_recency=True`) |
 
 ---
 
@@ -577,5 +760,7 @@ server, then ask Claude: *"What 10-Q filings did NVDA submit in 2024?"*
 - [ ] Ex2 `get_audio_clip` returns valid base64 mp3 + timestamps
 - [ ] Ex3 `get_news_context` returns cached articles for a point
 - [ ] Ex4 `recommend_similar` returns 5 chunks, excludes the seed
+- [ ] Ex5 cluster shows `payload_m: 16` and `date` indexed as `datetime`
+- [ ] Ex6 `search_earnings(boost_recency=True)` lifts recent calls; scores exceed raw cosine
 - [ ] `setup_mcp.py status` shows the server registered
-- [ ] Claude answers all five test questions
+- [ ] Claude answers the test questions

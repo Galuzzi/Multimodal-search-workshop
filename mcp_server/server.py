@@ -79,16 +79,24 @@ def search_earnings(
     #   You only need a filter when ticker or date_range is provided.
     #   Qdrant filter structure:
     #
-    #   from qdrant_client.models import Filter, FieldCondition, MatchValue, Range
+    #   from qdrant_client.models import Filter, FieldCondition, MatchValue, DatetimeRange
     #
     #   To filter by ticker:
     #       FieldCondition(key="ticker", match=MatchValue(value=ticker))
     #
-    #   To filter by date range (payload field "date" is a string "YYYY-MM-DD"):
+    #   To filter by date range — the "date" payload field is indexed as
+    #   DATETIME, so use DatetimeRange (NOT the numeric Range). It accepts
+    #   ISO date strings:
     #       Parse date_range.split(":") → [start_date, end_date]
-    #       FieldCondition(key="date", range=Range(gte=start_date, lte=end_date))
+    #       FieldCondition(key="date", range=DatetimeRange(gte=start_date, lte=end_date))
     #
     #   Wrap conditions in Filter(must=[...]) if you have any.
+    #
+    #   STRETCH — recency boosting: add a `boost_recency: bool = False` arg and,
+    #   when set, rerank with the Query API formula
+    #       final = $score + 0.3 * exp_decay(now - date)
+    #   using prefetch + FormulaQuery. See implementation_guide.md (Exercise 5)
+    #   and server_solution.py for the full pattern.
 
     # TODO Step 3: Run the vector search.
     #   The collection stores TWO named vectors per chunk — `text` and

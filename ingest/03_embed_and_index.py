@@ -173,13 +173,28 @@ def slice_audio_bytes(full_audio_path: Path, start_s: float, end_s: float) -> by
 # ---------------------------------------------------------------------------
 
 def ensure_collection(client: Any) -> None:
-    """Create or recreate the collection with named vectors {text, audio}."""
-    from qdrant_client.models import Distance, PayloadSchemaType, VectorParams  # type: ignore
+    """Create or recreate the collection with named vectors {text, audio}.
+
+    Uses a *filterable HNSW* graph: `payload_m` adds extra HNSW edges per
+    indexed payload value so that heavily-filtered searches (e.g. by ticker
+    or date) stay fast and recall-accurate instead of degrading toward a
+    brute-force scan. The extra edges are only built for fields that have a
+    payload index, and only for points inserted *after* the index exists —
+    so we create the indexes immediately after the collection, before upsert.
+    """
+    from qdrant_client.models import (  # type: ignore
+        Distance,
+        HnswConfigDiff,
+        PayloadSchemaType,
+        VectorParams,
+    )
 
     desired = {
         "text": VectorParams(size=VECTOR_SIZE, distance=Distance.COSINE),
         "audio": VectorParams(size=VECTOR_SIZE, distance=Distance.COSINE),
     }
+    # Filterable HNSW: m = global edges, payload_m = extra per-payload edges.
+    hnsw = HnswConfigDiff(m=16, payload_m=16)
 
     existing = {c.name for c in client.get_collections().collections}
     if COLLECTION_NAME in existing:
@@ -190,18 +205,23 @@ def ensure_collection(client: Any) -> None:
                 f"  Schema mismatch — recreating collection '{COLLECTION_NAME}'")
             client.delete_collection(COLLECTION_NAME)
             client.create_collection(
-                collection_name=COLLECTION_NAME, vectors_config=desired)
+                collection_name=COLLECTION_NAME, vectors_config=desired, hnsw_config=hnsw
+            )
         else:
-            print(
-                f"  Collection '{COLLECTION_NAME}' already exists (named: text, audio)")
+            print(f"  Collection '{COLLECTION_NAME}' already exists (named: text, audio)")
+            # Ensure filterable-HNSW edges are enabled on a pre-existing collection
+            client.update_collection(COLLECTION_NAME, hnsw_config=hnsw)
     else:
         client.create_collection(
-            collection_name=COLLECTION_NAME, vectors_config=desired)
-        print(f"  Created collection '{COLLECTION_NAME}' (named: text, audio)")
+            collection_name=COLLECTION_NAME, vectors_config=desired, hnsw_config=hnsw
+        )
+        print(f"  Created collection '{COLLECTION_NAME}' (named: text, audio; filterable HNSW)")
 
+    # `date` is indexed as DATETIME (not KEYWORD) so it supports both range
+    # filtering and time-decay score boosting at query time.
     for field, schema in [
         ("ticker", PayloadSchemaType.KEYWORD),
-        ("date", PayloadSchemaType.KEYWORD),
+        ("date", PayloadSchemaType.DATETIME),
         ("year", PayloadSchemaType.INTEGER),
         ("speaker", PayloadSchemaType.KEYWORD),
     ]:
