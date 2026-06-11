@@ -82,6 +82,24 @@ in the news when management spoke.
 
 ---
 
+## Exercises
+
+| # | Exercise | Tool / File | What it's about |
+|---|----------|-------------|-----------------|
+| 1 | `search_earnings` | `server.py` | The core tool. Embed a natural-language query, optionally filter by `ticker` and/or a `date_range`, run a vector search over the `text` named vector, and return matching transcript chunks. |
+| 2 | `get_audio_clip` | `server.py` | Retrieve a point by ID, find its pre-sliced `.mp3` clip, base64-encode it, and return it with timestamps — or a clean error if missing. |
+| 3 | `get_news_context` | `server.py` | For a given chunk, look up cached AskNews articles around that call's `ticker` + `date` (with a live-fetch fallback). |
+| 4 | `recommend_similar` *(stretch)* | `server.py` | "More like this": fetch a seed chunk's stored `text` vector, search with it, and exclude the seed itself (`HasIdCondition`). |
+| 5 | Filterable HNSW + payload indexes *(stretch)* | `ingest/03_embed_and_index.py` | Conceptual — why the collection uses `payload_m=16` and indexes `date` as DATETIME, so heavily-filtered searches stay fast and accurate instead of degrading to a brute-force scan. Already applied to the cluster; you just verify it. |
+| 6 | Time-based score boosting *(stretch)* | `server.py` | Add a `boost_recency` flag that reranks results with `score + 0.3 · exp_decay(now − date)` via prefetch + `FormulaQuery`, so recent calls surface higher. |
+| Bonus | `get_sec_filings` | `server.py` + `browser_agent/sec_scraper.py` | Wire the Playwright SEC EDGAR scraper in as a 5th MCP tool returning 10-Q/10-K filings. |
+
+See [`workshop/exercises.md`](workshop/exercises.md) for the overview and
+[`workshop/implementation_guide.md`](workshop/implementation_guide.md) for
+detailed, step-by-step instructions.
+
+---
+
 ## Prerequisites
 
 | Requirement | Notes |
