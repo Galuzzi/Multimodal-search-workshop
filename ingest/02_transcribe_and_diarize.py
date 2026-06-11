@@ -58,6 +58,9 @@ from typing import Any, Optional
 from dotenv import load_dotenv
 from pydantic import BaseModel
 
+import warnings
+warnings.filterwarnings("ignore", module=r"pyannote\.audio\.core\.io")
+
 load_dotenv()
 
 # Ensure ffmpeg is on PATH (uses static binary if system ffmpeg is absent)
@@ -111,8 +114,10 @@ def transcribe_file(mp3_path: Path) -> list[dict[str, Any]]:
         print("ERROR: openai-whisper is not installed.  Run: pip install openai-whisper")
         sys.exit(1)
 
-    print("  Loading Whisper model 'base'...")
-    model = whisper.load_model("base")
+    import torch  # type: ignore
+    device = "cuda" if torch.cuda.is_available() else "cpu"
+    print(f"  Loading Whisper model 'base' (device={device})...")
+    model = whisper.load_model("base", device=device)
 
     print(f"  Transcribing {mp3_path.name} ...")
     result = model.transcribe(
@@ -156,7 +161,8 @@ def diarize_audio(mp3_path: Path) -> list[dict[str, Any]]:
     Requires HF_TOKEN env var and accepted model license at:
     https://huggingface.co/pyannote/speaker-diarization-3.1
     """
-    hf_token = os.environ.get("HF_TOKEN") or os.environ.get("HUGGINGFACE_TOKEN", "")
+    hf_token = os.environ.get("HF_TOKEN") or os.environ.get(
+        "HUGGINGFACE_TOKEN", "")
     if not hf_token:
         print(
             "  [warn] HF_TOKEN not set — skipping diarization, speakers will be unknown")
@@ -181,47 +187,39 @@ def diarize_audio(mp3_path: Path) -> list[dict[str, Any]]:
     pipeline = pipeline.to(torch.device(device))
     print(f"  Running diarization on {mp3_path.name} (device={device}) ...")
 
-    # Convert MP3 to WAV first — pyannote has a known issue with MP3 sample
-    # count mismatches that causes a crash mid-file.
-    import tempfile
-    import subprocess
+    import whisper as _whisper  # type: ignore
     from tqdm import tqdm  # type: ignore
 
-    with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as tmp:
-        wav_path = tmp.name
+    # whisper.load_audio pipes raw PCM from ffmpeg — same path that drove transcription
+    print(f"  Loading audio for diarization ...")
+    audio_np = _whisper.load_audio(str(mp3_path))  # float32, 16 kHz, mono
+    audio_input = {"waveform": torch.tensor(
+        audio_np).unsqueeze(0), "sample_rate": 16000}
+
+    # Progress bar driven by pyannote's hook callback.
+    # The hook is called per step (segmentation, embeddings, clustering);
+    # we show one bar per step, updating as batches complete.
+    bars: dict[str, tqdm] = {}
+
+    def _hook(step_name: str, _chunk: Any, total: int = 1,
+              completed: int = 0, **kwargs: Any) -> None:
+        if step_name not in bars:
+            bars[step_name] = tqdm(
+                total=total,
+                desc=f"    {step_name}",
+                unit="batch",
+                leave=True,
+            )
+        bar = bars[step_name]
+        bar.total = total
+        bar.n = completed
+        bar.refresh()
+
     try:
-        subprocess.run(
-            ["ffmpeg", "-y", "-i", str(mp3_path),
-             "-ar", "16000", "-ac", "1", wav_path],
-            check=True, capture_output=True,
-        )
-
-        # Progress bar driven by pyannote's hook callback.
-        # The hook is called per step (segmentation, embeddings, clustering);
-        # we show one bar per step, updating as batches complete.
-        bars: dict[str, tqdm] = {}
-
-        def _hook(step_name: str, _chunk: Any, total: int = 1,
-                  completed: int = 0, **kwargs: Any) -> None:
-            if step_name not in bars:
-                bars[step_name] = tqdm(
-                    total=total,
-                    desc=f"    {step_name}",
-                    unit="batch",
-                    leave=True,
-                )
-            bar = bars[step_name]
-            bar.total = total
-            bar.n = completed
-            bar.refresh()
-
-        try:
-            diarization = pipeline(wav_path, hook=_hook)
-        finally:
-            for bar in bars.values():
-                bar.close()
+        diarization = pipeline(audio_input, hook=_hook)
     finally:
-        Path(wav_path).unlink(missing_ok=True)
+        for bar in bars.values():
+            bar.close()
 
     # DiarizeOutput wraps the Annotation; fall back gracefully for older versions
     annotation = getattr(diarization, "speaker_diarization", diarization)
