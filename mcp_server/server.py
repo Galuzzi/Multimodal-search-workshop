@@ -12,11 +12,14 @@ To register with Claude Desktop / Claude Code first run:
     python cli/setup_mcp.py install
 """
 
+import base64
+from datetime import datetime
 import os
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 from dotenv import load_dotenv
+from qdrant_client import models
 
 # Load environment variables from .env
 load_dotenv()
@@ -29,9 +32,9 @@ from qdrant_client import QdrantClient
 from mcp_server.embeddings import embed_query
 
 # ── Configuration (from .env) ─────────────────────────────────────────────────
-QDRANT_URL: Optional[str] = os.getenv("QDRANT_URL") or None
-QDRANT_API_KEY: Optional[str] = os.getenv("QDRANT_API_KEY") or None
-QDRANT_PATH: Optional[str] = os.getenv("QDRANT_PATH") or None
+QDRANT_URL: str | None = os.getenv("QDRANT_URL") or None
+QDRANT_API_KEY: str | None = os.getenv("QDRANT_API_KEY") or None
+QDRANT_PATH: str | None = os.getenv("QDRANT_PATH") or None
 COLLECTION_NAME: str = os.getenv("COLLECTION_NAME", "earnings_calls")
 CLIPS_DIR: Path = Path(os.getenv("CLIPS_DIR", "./data/audio_clips"))
 ASKNEWS_CACHE_DIR: Path = Path("./data/asknews_cache")
@@ -50,11 +53,12 @@ mcp = FastMCP("earnings-call-server")
 # Tool 1: search_earnings
 # ─────────────────────────────────────────────────────────────────────────────
 
+
 @mcp.tool()
 def search_earnings(
     query: str,
-    ticker: Optional[str] = None,
-    date_range: Optional[str] = None,
+    ticker: str | None = None,
+    date_range: str | None = None,
 ) -> list[dict[str, Any]]:
     """
     Semantic search over earnings call transcripts stored in Qdrant.
@@ -73,7 +77,7 @@ def search_earnings(
     #   It returns a list[float] of length 3072 from Gemini Embedding 2
     #   (multimodal — text and audio share this vector space).
     #
-    #   query_vector = embed_query(query)
+    query_vector = embed_query(query)
 
     # TODO Step 2: Build an optional Qdrant filter.
     #   You only need a filter when ticker or date_range is provided.
@@ -97,6 +101,22 @@ def search_earnings(
     #       final = $score + 0.3 * exp_decay(now - date)
     #   using prefetch + FormulaQuery. See implementation_guide.md (Exercise 5)
     #   and server_solution.py for the full pattern.
+    filters: list[models.Condition] = []
+    if ticker:
+        filters.append(
+            models.FieldCondition(key="ticker", match=models.MatchValue(value=ticker))
+        )
+
+    if date_range:
+        start_date, end_date = [
+            datetime.fromisoformat(date) for date in date_range.split(":")
+        ]
+
+        filters.append(
+            models.FieldCondition(
+                key="date", range=models.DatetimeRange(lte=start_date, gte=end_date)
+            )
+        )
 
     # TODO Step 3: Run the vector search.
     #   The collection stores TWO named vectors per chunk — `text` and
@@ -114,6 +134,28 @@ def search_earnings(
     #   )
     #
     #   Each result has: .id, .score, .payload (dict)
+
+    results = client.query_points(
+        collection_name=COLLECTION_NAME,
+        query_vector=query_vector,
+        query_filter=models.Filter(must=filters),
+    )
+
+    return [
+        {
+            "point_id": str(r.id),
+            "ticker": r.payload.get("ticker"),
+            "company": r.payload.get("company"),
+            "quarter": r.payload.get("quarter"),
+            "year": r.payload.get("year"),
+            "chunk_text": r.payload.get("chunk_text"),
+            "speaker": r.payload.get("speaker"),
+            "start_time": r.payload.get("start_time"),
+            "score": r.score,
+        }
+        for r in results.points
+        if r.payload
+    ]
 
     # TODO Step 4: Format the results.
     #   Return a list of dicts, one per result, containing:
@@ -137,12 +179,13 @@ def search_earnings(
     #   ]
 
     # Remove this placeholder once you've implemented the steps above
-    return [{"error": "search_earnings is not yet implemented — complete the TODOs!"}]
+    # return [{"error": "search_earnings is not yet implemented — complete the TODOs!"}]
 
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Tool 2: get_audio_clip
 # ─────────────────────────────────────────────────────────────────────────────
+
 
 @mcp.tool()
 def get_audio_clip(point_id: str) -> dict[str, Any]:
@@ -162,36 +205,36 @@ def get_audio_clip(point_id: str) -> dict[str, Any]:
     # TODO: Implement get_audio_clip
     #
     # Step 1: Retrieve the point from Qdrant
-    #   points = client.retrieve(
-    #       collection_name=COLLECTION_NAME,
-    #       ids=[point_id],
-    #       with_payload=True,
-    #   )
-    #   if not points:
-    #       return {"error": f"Point {point_id} not found"}
-    #   payload = points[0].payload
+    points = client.retrieve(
+        collection_name=COLLECTION_NAME,
+        ids=[point_id],
+        with_payload=True,
+    )
+    if not points:
+        return {"error": f"Point {point_id} not found"}
+    payload = points[0].payload
     #
     # Step 2: Check if a pre-sliced clip exists
-    #   clip_path = CLIPS_DIR / f"{point_id}.mp3"
-    #   if clip_path.exists():
-    #       import base64
-    #       audio_b64 = base64.b64encode(clip_path.read_bytes()).decode()
-    #       return {
-    #           "point_id": point_id,
-    #           "ticker": payload.get("ticker"),
-    #           "audio_base64": audio_b64,
-    #           "start_time": payload.get("start_time"),
-    #           "end_time": payload.get("end_time"),
-    #           "format": "mp3",
-    #       }
+    clip_path = CLIPS_DIR / f"{point_id}.mp3"
+    audio_b64 = ""
+    if clip_path.exists():
+        audio_b64 = base64.b64encode(clip_path.read_bytes()).decode()
+        return {
+            "point_id": point_id,
+            "ticker": payload.get("ticker") if payload else None,
+            "audio_base64": audio_b64,
+            "start_time": payload.get("start_time") if payload else None,
+            "end_time": payload.get("end_time") if payload else None,
+            "format": "mp3",
+        }
     #
     # Step 3: If no clip file, return a helpful error
-    #   return {
-    #       "error": (
-    #           f"No pre-sliced clip found for {point_id}. "
-    #           "Run the ingestion pipeline or slice manually."
-    #       )
-    #   }
+    return {
+        "error": (
+            f"No pre-sliced clip found for {point_id}. "
+            "Run the ingestion pipeline or slice manually."
+        )
+    }
 
     return {"error": "get_audio_clip is not yet implemented — complete the TODOs!"}
 
@@ -199,6 +242,7 @@ def get_audio_clip(point_id: str) -> dict[str, Any]:
 # ─────────────────────────────────────────────────────────────────────────────
 # Tool 3: get_news_context
 # ─────────────────────────────────────────────────────────────────────────────
+
 
 @mcp.tool()
 def get_news_context(point_id: str) -> dict[str, Any]:
@@ -248,6 +292,7 @@ def get_news_context(point_id: str) -> dict[str, Any]:
 # ─────────────────────────────────────────────────────────────────────────────
 # Tool 4: recommend_similar
 # ─────────────────────────────────────────────────────────────────────────────
+
 
 @mcp.tool()
 def recommend_similar(point_id: str) -> list[dict[str, Any]]:
