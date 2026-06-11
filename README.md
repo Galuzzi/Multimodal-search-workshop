@@ -6,6 +6,14 @@ in the news when management spoke.
 
 ---
 
+## Demo
+
+<video src="https://github.com/qdrant-labs/Multimodal-search-workshop/raw/main/docs/EarningsCalls.mp4" controls width="100%"></video>
+
+> If the player doesn't load, [watch/download the demo video](docs/EarningsCalls.mp4).
+
+---
+
 ## Architecture
 
 ```
