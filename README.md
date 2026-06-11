@@ -107,7 +107,7 @@ detailed, step-by-step instructions.
 | Python 3.12 | `python3 --version`; use `uv` to install if needed |
 | `GEMINI_API_KEY` | [aistudio.google.com](https://aistudio.google.com) — free tier |
 | `QDRANT_URL` + `QDRANT_API_KEY` | Qdrant Cloud cluster (pre-provisioned for workshop) |
-| `ASKNEWS_API_KEY` | [AskNews](https://my.asknews.app) — go to https://my.asknews.app/plans and use promo code `SEARCHWEEK` to get the Spelunker plan ($250 value). Then create your API key in your settings at https://my.asknews.app/en/settings/api-credentials |
+| `ASKNEWS_API_KEY` | [AskNews](https://my.asknews.app) — if you want your own free month ($250 value) of AskNews, go to https://my.asknews.app/plans and use promo code `SEARCHWEEK` to get the Spelunker plan (it will ask for payment details, but your card will not be charged for your first month). Then create your API key in your settings at https://my.asknews.app/en/settings/api-credentials. Otherwise, a test key is available that will work for the duration of the workshop. |
 | `HF_TOKEN` | Only for step 02b (diarization). Accept terms at [pyannote/speaker-diarization-3.1](https://huggingface.co/pyannote/speaker-diarization-3.1), [pyannote/segmentation-3.0](https://huggingface.co/pyannote/segmentation-3.0), and [pyannote/speaker-diarization-community-1](https://huggingface.co/pyannote/speaker-diarization-community-1). |
 | ffmpeg | Bundled via `static-ffmpeg` — no system install needed |
 
