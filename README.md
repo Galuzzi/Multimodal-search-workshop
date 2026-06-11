@@ -9,14 +9,29 @@ in the news when management spoke.
 ## Architecture
 
 ```
-┌─────────────────────────── INGESTION PIPELINE (pre-built, run once) ───────────────────────────┐
-│                                                                                                  │
-│  YouTube ──► yt-dlp ──► MP3 ──► Whisper + pyannote ──► JSON chunks ──► Gemini Embedding 2 ──► Qdrant │
-│                                                          │                                       │
-│                                              AskNews API                            │
-│                                                          │                                       │
-│                                              data/asknews_cache/*.json                           │
-└──────────────────────────────────────────────────────────────────────────────────────────────────┘
+INGESTION PIPELINE  (pre-built, run once)
+═══════════════════════════════════════════
+
+  Source A · Benzinga API ───────────────► transcript text + MP3 ┐
+                                                                  │   (Whisper only runs on
+  Source B · YouTube ─► yt-dlp ─► MP3 ─► Whisper ─► transcript ───┤    the YouTube path; Benzinga
+                                        (word timestamps)         │    supplies the transcript)
+                                                                  ▼
+              pyannote.audio diarization  +  Gemini 2.5 Flash-Lite (resolve speaker names)
+                                                                  │
+                                                                  ▼
+                          30-second chunks  { chunk_text , 30s audio clip }
+                                     │                                  │
+            ┌────────────────────────┘                                  └────────────────────────┐
+            ▼                                                                                      ▼
+  Gemini Embedding 2 ─► text vector (3072-d cosine)            Gemini Embedding 2 ─► audio vector (3072-d cosine)
+            │            (embeds chunk_text)                    (embeds the audio clip DIRECTLY — no Whisper)    │
+            └────────────────────────┐                                  ┌────────────────────────┘
+                                     ▼                                  ▼
+                        Qdrant · collection "earnings_calls"
+                        named vectors { text, audio } in one shared multimodal space
+
+  AskNews DeepNews ──► data/asknews_cache/{ticker}_{date}_{point_id}.json   (per-chunk world context)
 
                           ┌─────────────────────────────────────────────────────┐
                           │            Qdrant Cloud (vector database)           │
