@@ -31,7 +31,7 @@ INGESTION PIPELINE  (pre-built, run once)
 
   Source A · YouTube ─► yt-dlp ─► MP3 ─► Whisper ─► transcript ───┐
                                         (word timestamps)         │   (Whisper only runs on
-  Source B · Benzinga API ───────────────► transcript text + MP3 ┤    the YouTube path; Benzinga
+  Source B · Benzinga API ───────────────► transcript text + MP3  ┤    the YouTube path; Benzinga
                                                                   │    supplies the transcript)
                                                                   ▼
               pyannote.audio diarization  +  Gemini 2.5 Flash-Lite (resolve speaker names)
@@ -140,7 +140,7 @@ detailed, step-by-step instructions.
 | `GEMINI_API_KEY` | [aistudio.google.com](https://aistudio.google.com) — free tier |
 | `QDRANT_URL` + `QDRANT_API_KEY` | Qdrant Cloud cluster (pre-provisioned for workshop) |
 | `ASKNEWS_API_KEY` | [AskNews](https://my.asknews.app) — if you want your own free month ($250 value) of AskNews, go to https://my.asknews.app/plans and use promo code `SEARCHWEEK` to get the Spelunker plan (it will ask for payment details, but your card will not be charged for your first month). Then create your API key in your settings at https://my.asknews.app/en/settings/api-credentials. Otherwise, a test key is available that will work for the duration of the workshop. |
-| `HF_TOKEN` | Only for step 02b (diarization). Accept terms at [pyannote/speaker-diarization-3.1](https://huggingface.co/pyannote/speaker-diarization-3.1), [pyannote/segmentation-3.0](https://huggingface.co/pyannote/segmentation-3.0), and [pyannote/speaker-diarization-community-1](https://huggingface.co/pyannote/speaker-diarization-community-1). |
+| `HF_TOKEN` | Required for the diarization in step 2. Accept terms at [pyannote/speaker-diarization-3.1](https://huggingface.co/pyannote/speaker-diarization-3.1), [pyannote/segmentation-3.0](https://huggingface.co/pyannote/segmentation-3.0), and [pyannote/speaker-diarization-community-1](https://huggingface.co/pyannote/speaker-diarization-community-1). |
 | ffmpeg | Bundled via `static-ffmpeg` — no system install needed |
 
 ---
@@ -161,7 +161,7 @@ nano .env   # set GEMINI_API_KEY, QDRANT_URL, QDRANT_API_KEY
 
 # 4. (Instructor only) Run the ingestion pipeline
 python3 ingest/01_download_audio.py   # download earnings calls from YouTube
-python3 ingest/01b_fetch_benzinga.py   # fetch transcripts and audio from Benzinga API
+python3 ingest/01b_fetch_benzinga.py   # fetch transcripts and audio from Benzinga API (optional)
 python3 ingest/02_transcribe_and_diarize.py # Whisper transcription → 30s chunks + pyannote diarization + Gemini speaker ID
 python3 ingest/03_embed_and_index.py  # Gemini embeddings → Qdrant Cloud
 python3 ingest/04_build_asknews_context.py                # pre-fetch news (optional)
