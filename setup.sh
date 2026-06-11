@@ -8,7 +8,8 @@ echo ""
 
 # 1. Install Python dependencies
 echo "[1/4] Installing Python dependencies..."
-pip install -r requirements.txt
+uv venv --python 3.12 && source .venv/bin/activate # if no uv install uv here: https://docs.astral.sh/uv/getting-started/installation/
+python -m ensurepip && python -m pip install -r requirements.txt  # or: uv pip install -r requirements.txt
 echo "      Done."
 echo ""
 
