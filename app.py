@@ -273,7 +273,7 @@ def _audio_block(point_id: str) -> str:
 
 
 def _render_results(query: str, ticker: str | None = None) -> str:
-     results = search_earnings(query=query, ticker=ticker)
+    results = search_earnings(query=query, ticker=ticker)
     if not results or "error" in results[0]:
         msg = results[0].get("error", "No results") if results else "No results"
         return f'<p class="empty">{msg}</p>'
