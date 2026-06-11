@@ -135,7 +135,7 @@ detailed, step-by-step instructions.
 cd BerlinWorkshop
 
 # 2. Install dependencies
-uv venv --python 3.12 && source .venv/bin/activate
+uv venv --python 3.12 && source .venv/bin/activate # if no uv install uv here: https://docs.astral.sh/uv/getting-started/installation/
 python -m ensurepip && python -m pip install -r requirements.txt  # or: uv pip install -r requirements.txt
 
 # 3. Copy env template and fill in your API keys
