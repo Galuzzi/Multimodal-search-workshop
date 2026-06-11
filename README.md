@@ -8,9 +8,18 @@ in the news when management spoke.
 
 ## Demo
 
+[![Watch the demo on YouTube](https://img.youtube.com/vi/R3icD5DWLHw/hqdefault.jpg)](https://youtu.be/R3icD5DWLHw)
+
+▶️ **[Watch the demo on YouTube](https://youtu.be/R3icD5DWLHw)**
+
+<details>
+<summary>Or play the local recording</summary>
+
 <video src="https://github.com/qdrant-labs/Multimodal-search-workshop/raw/main/docs/EarningsCalls.mp4" controls width="100%"></video>
 
 > If the player doesn't load, [watch/download the demo video](docs/EarningsCalls.mp4).
+
+</details>
 
 ---
 
