@@ -14,25 +14,16 @@ import json
 import os
 import shutil
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 from dotenv import load_dotenv
-
-load_dotenv()
-
-# Ensure ffmpeg/ffprobe are available for audio slicing
-if not shutil.which("ffmpeg"):
-    try:
-        import static_ffmpeg  # type: ignore
-        static_ffmpeg.add_paths()
-    except ImportError:
-        pass
 
 from datetime import datetime, timezone
 
 from mcp.server.fastmcp import FastMCP
 from qdrant_client import QdrantClient
 from qdrant_client.models import (
+    Condition,
     DatetimeExpression,
     DatetimeKeyExpression,
     DatetimeRange,
@@ -45,10 +36,21 @@ from qdrant_client.models import (
     MatchValue,
     MultExpression,
     Prefetch,
-    Range,
     SumExpression,
 )
 
+load_dotenv()
+
+# Ensure ffmpeg/ffprobe are available for audio slicing
+if not shutil.which("ffmpeg"):
+    try:
+        import static_ffmpeg  # type: ignore
+        static_ffmpeg.add_paths()
+    except ImportError:
+        pass
+
+import sys
+sys.path.insert(0, str(Path(__file__).parent.parent))
 from mcp_server.embeddings import embed_query
 
 # Recency boost: weight applied to the decay term, and the half-life
@@ -57,9 +59,9 @@ RECENCY_BOOST_WEIGHT = 0.3
 RECENCY_HALF_LIFE_DAYS = 180
 
 # ── Configuration ─────────────────────────────────────────────────────────────
-QDRANT_URL: Optional[str] = os.getenv("QDRANT_URL") or None
-QDRANT_API_KEY: Optional[str] = os.getenv("QDRANT_API_KEY") or None
-QDRANT_PATH: Optional[str] = os.getenv("QDRANT_PATH") or None
+QDRANT_URL: str | None = os.getenv("QDRANT_URL") or None
+QDRANT_API_KEY: str | None = os.getenv("QDRANT_API_KEY") or None
+QDRANT_PATH: str | None = os.getenv("QDRANT_PATH") or None
 COLLECTION_NAME: str = os.getenv("COLLECTION_NAME", "earnings_calls")
 CLIPS_DIR: Path = Path(os.getenv("CLIPS_DIR", "./data/audio_clips"))
 ASKNEWS_CACHE_DIR: Path = Path("./data/asknews_cache")
@@ -82,8 +84,8 @@ mcp = FastMCP("earnings-call-server")
 @mcp.tool()
 def search_earnings(
     query: str,
-    ticker: Optional[str] = None,
-    date_range: Optional[str] = None,
+    ticker: str | None = None,
+    date_range: str | None = None,
     boost_recency: bool = False,
 ) -> list[dict[str, Any]]:
     """
@@ -106,7 +108,7 @@ def search_earnings(
         # Step 2: Build Qdrant filter.
         # `date` is a DATETIME-indexed field, so use DatetimeRange (NOT the
         # numeric Range) — it accepts ISO date strings like "2025-01-01".
-        conditions: list[FieldCondition] = []
+        conditions: list[Condition] = []
 
         if ticker:
             conditions.append(
@@ -116,7 +118,10 @@ def search_earnings(
         if date_range:
             parts = date_range.split(":")
             if len(parts) == 2:
-                start_date, end_date = parts[0].strip(), parts[1].strip()
+                start_date, end_date = (
+                    datetime.fromisoformat(parts[0].strip()).replace(tzinfo=timezone.utc), 
+                    datetime.fromisoformat(parts[1].strip()).replace(tzinfo=timezone.utc)
+                )
                 conditions.append(
                     FieldCondition(
                         key="date",
@@ -135,7 +140,7 @@ def search_earnings(
             # Prefetch pulls a wider candidate pool by pure similarity, then
             # the formula reranks them. The decay reads the DATETIME `date`
             # field; midpoint=0.5 means the bonus halves at one half-life.
-            now_iso = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+            now_iso = datetime.now(timezone.utc).isoformat()
             results = client.query_points(
                 collection_name=COLLECTION_NAME,
                 prefetch=Prefetch(
@@ -179,19 +184,20 @@ def search_earnings(
 
         # Step 4: Format results
         return [
-            {
-                "point_id": str(r.id),
-                "ticker": r.payload.get("ticker"),
-                "company": r.payload.get("company"),
-                "quarter": r.payload.get("quarter"),
-                "year": r.payload.get("year"),
-                "chunk_text": r.payload.get("chunk_text"),
-                "speaker": r.payload.get("speaker"),
-                "start_time": r.payload.get("start_time"),
-                "score": r.score,
-            }
-            for r in results.points
-        ]
+                {
+                    "point_id": str(r.id),
+                    "ticker": payload.get("ticker"),
+                    "company": payload.get("company"),
+                    "quarter": payload.get("quarter"),
+                    "year": payload.get("year"),
+                    "chunk_text": payload.get("chunk_text"),
+                    "speaker": payload.get("speaker"),
+                    "start_time": payload.get("start_time"),
+                    "score": r.score,
+                }
+                for r in results.points
+                for payload in [r.payload or {}]
+            ]
 
     except Exception as exc:
         return [{"error": str(exc)}]
@@ -223,7 +229,10 @@ def get_audio_clip(point_id: str) -> dict[str, Any]:
             return {"error": f"Point {point_id} not found in collection"}
 
         payload = points[0].payload
-        ticker = payload.get("ticker", "")
+        if payload is None: 
+            raise ValueError("Payload is not in the point return")
+        
+        ticker: str = payload.get("ticker", "")
         start_time: float = payload.get("start_time", 0.0)
         end_time: float = payload.get("end_time", 0.0)
 
@@ -310,6 +319,8 @@ def get_news_context(point_id: str) -> dict[str, Any]:
             return {"error": f"Point {point_id} not found"}
 
         payload = points[0].payload
+        if payload is None: 
+            raise ValueError("Payload is not in the point return")
         ticker: str = payload.get("ticker", "")
         company: str = payload.get("company", "")
         quarter: str = payload.get("quarter", "")
@@ -519,13 +530,14 @@ def recommend_similar(point_id: str) -> list[dict[str, Any]]:
         return [
             {
                 "point_id": str(r.id),
-                "ticker": r.payload.get("ticker"),
-                "chunk_text": r.payload.get("chunk_text"),
+                "ticker": payload.get("ticker"),
+                "chunk_text": payload.get("chunk_text"),
                 "score": r.score,
-                "quarter": r.payload.get("quarter"),
-                "year": r.payload.get("year"),
+                "quarter": payload.get("quarter"),
+                "year": payload.get("year"),
             }
             for r in results.points
+            for payload in [r.payload or {}]
         ]
 
     except Exception as exc:
