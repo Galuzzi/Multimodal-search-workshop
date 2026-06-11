@@ -60,7 +60,7 @@ in the news when management spoke.
 |---|---|---|
 | Ingestion pipeline (`ingest/01–04`) | Pre-built | Run once to populate the DB |
 | Qdrant collection | Pre-built via pipeline | 577 points across AAPL, AMZN, NVDA, TSLA — each carries named vectors `text` (3072-dim) and `audio` (3072-dim) |
-| AskNews cache (`data/asknews_cache/`) | Pre-built via pipeline | News, tweetes, and more for ticker+date+speaker per transcription chunk |
+| AskNews cache (`data/asknews_cache/`) | Pre-built via pipeline | News, tweets, and more for ticker+date+speaker per transcription chunk |
 | Audio clips (`data/audio_clips/`) | Pre-built via pipeline | 30-second MP3 slices per point, also fed into the audio embedding |
 | `mcp_server/embeddings.py` | Pre-built | Gemini Embedding 2 text-side embed + disk cache fallback |
 | `mcp_server/server.py` — **`search_earnings`** | **You build** | Exercise 1 — core vector search |
@@ -88,7 +88,7 @@ in the news when management spoke.
 |---|----------|-------------|-----------------|
 | 1 | `search_earnings` | `server.py` | The core tool. Embed a natural-language query, optionally filter by `ticker` and/or a `date_range`, run a vector search over the `text` named vector, and return matching transcript chunks. |
 | 2 | `get_audio_clip` | `server.py` | Retrieve a point by ID, find its pre-sliced `.mp3` clip, base64-encode it, and return it with timestamps — or a clean error if missing. |
-| 3 | `get_news_context` | `server.py` | For a given chunk, look up cached AskNews articles around that call's `ticker` + `date` (with a live-fetch fallback). |
+| 3 | `get_news_context` | `server.py` | For a given chunk, look up cached AskNews articles, tweets, and more around the chunk's context (with a live-fetch fallback). |
 | 4 | `recommend_similar` *(stretch)* | `server.py` | "More like this": fetch a seed chunk's stored `text` vector, search with it, and exclude the seed itself (`HasIdCondition`). |
 | 5 | Filterable HNSW + payload indexes *(stretch)* | `ingest/03_embed_and_index.py` | Conceptual — why the collection uses `payload_m=16` and indexes `date` as DATETIME, so heavily-filtered searches stay fast and accurate instead of degrading to a brute-force scan. Already applied to the cluster; you just verify it. |
 | 6 | Time-based score boosting *(stretch)* | `server.py` | Add a `boost_recency` flag that reranks results with `score + 0.3 · exp_decay(now − date)` via prefetch + `FormulaQuery`, so recent calls surface higher. |
@@ -107,7 +107,7 @@ detailed, step-by-step instructions.
 | Python 3.12 | `python3 --version`; use `uv` to install if needed |
 | `GEMINI_API_KEY` | [aistudio.google.com](https://aistudio.google.com) — free tier |
 | `QDRANT_URL` + `QDRANT_API_KEY` | Qdrant Cloud cluster (pre-provisioned for workshop) |
-| `ASKNEWS_API_KEY` | [asknews.app](https://asknews.app) — optional; cache works offline |
+| `ASKNEWS_API_KEY` | [AskNews](https://my.asknews.app) — go to https://my.asknews.app/plans and use promo code `SEARCHWEEK` to get the Spelunker plan ($250 value). Then create your API key in your settings at https://my.asknews.app/en/settings/api-credentials |
 | `HF_TOKEN` | Only for step 02b (diarization). Accept terms at [pyannote/speaker-diarization-3.1](https://huggingface.co/pyannote/speaker-diarization-3.1), [pyannote/segmentation-3.0](https://huggingface.co/pyannote/segmentation-3.0), and [pyannote/speaker-diarization-community-1](https://huggingface.co/pyannote/speaker-diarization-community-1). |
 | ffmpeg | Bundled via `static-ffmpeg` — no system install needed |
 

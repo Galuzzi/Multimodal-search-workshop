@@ -109,7 +109,7 @@ def fetch_deep_news_context(
     response = ask.chat.get_deep_news(
         messages=[{"role": "user", "content": query}],
         search_depth=1,
-        max_depth=6,
+        max_depth=4,
         sources=["asknews", "google", "x", "wiki"],
         stream=True,
         return_sources=True,
