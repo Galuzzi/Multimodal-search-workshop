@@ -25,7 +25,7 @@ on a plain MP3 + metadata JSON, so any audio source works — the repo also ship
 `ingest/01_download_audio.py` (YouTube via `yt-dlp`). Benzinga is the *default
 showcase*, not a hard dependency.
 
-**Why diarization exists (`ingest/02b_diarize.py`):** Benzinga transcript segments
+**Why diarization exists (`ingest/02_transcribe_and_diarize.py`):** Benzinga transcript segments
 include a `speaker` field, but it arrives **empty** — the API gives you *what* was
 said and *when*, not *who* said it. So the pipeline recovers speaker identity from
 the audio itself: `pyannote` diarizes the call into anonymous turns

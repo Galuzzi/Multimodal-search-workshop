@@ -97,14 +97,12 @@ PIPE_X0 = 0.4
 steps = [
     ("01_download_audio.py",
      ["yt-dlp", "→ data/audio/*.mp3", "(+ sidecar JSON)"], EDGE),
-    ("02_transcribe.py",
-     ["OpenAI Whisper (word ts)", "30s chunks · placeholder", "→ data/transcripts/*.json"], EDGE),
-    ("02b_diarize.py  NEW",
-     ["pyannote 3.1 → SPEAKER_NN", "Gemini 2.5 Flash speaker ID", "rewrites speaker in JSON"], GOOD),
+    ("02_transcribe_and_diarize.py",
+     ["Whisper (word ts) + pyannote 3.1", "Gemini 2.5 Flash speaker ID", "→ data/transcripts/*.json"], GOOD),
     ("03_embed_and_index.py",
      ["slice clip → audio_clips/", "Gemini Embedding 2 (text+audio)", "named vectors → Qdrant"], GOOD),
-    ("04_cache_asknews.py",
-     ["AskNews API (historical)", "± 7d window per call", "→ data/asknews_cache/"], EDGE),
+    ("04_build_asknews_context.py",
+     ["AskNews DeepNews", "per-chunk context", "→ data/asknews_cache/"], EDGE),
 ]
 
 for i, (title, lines, c) in enumerate(steps):
@@ -119,13 +117,6 @@ for i, (title, lines, c) in enumerate(steps):
 
 # Arrow YouTube → step 01
 arrow(11, HEIGHT - 2.4, PIPE_X0 + PIPE_W / 2, PIPE_Y + PIPE_H, color=ACCENT)
-
-# Annotation: 04b
-ax.text(
-    PIPE_X0 + 3.5 * (PIPE_W + PIPE_GAP) + PIPE_W / 2 - 1.2, PIPE_Y - 0.45,
-    "↳ 04b_update_speakers.py   (payload-only refresh after re-diarize)",
-    color=WARN, ha="center", va="center", fontsize=8.5, style="italic",
-)
 
 
 # ── Storage row ──────────────────────────────────────────────────────────────

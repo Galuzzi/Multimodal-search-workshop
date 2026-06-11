@@ -349,7 +349,7 @@ def main() -> None:
     ]
     if not transcript_files:
         print(f"No transcript JSONs found in {TRANSCRIPTS_DIR.resolve()}")
-        print("Run 02_transcribe.py (and ideally 02b_diarize.py) first.")
+        print("Run 02_transcribe_and_diarize.py first.")
         sys.exit(0)
 
     if QDRANT_URL:

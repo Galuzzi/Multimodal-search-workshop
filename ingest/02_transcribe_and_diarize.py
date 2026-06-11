@@ -13,7 +13,7 @@ For each .mp3 in data/audio/ (that has a matching .json sidecar) the script:
   - Saves a structured JSON to data/transcripts/{ticker}_{quarter}_{year}.json
 
 Requirements:
-  - HUGGINGFACE_TOKEN env var: required to download pyannote models.
+  - HF_TOKEN env var: required to download pyannote models.
     Accept the pyannote/speaker-diarization-3.1 license at:
     https://huggingface.co/pyannote/speaker-diarization-3.1
   - GEMINI_API_KEY env var: required for speaker name identification.
@@ -153,13 +153,13 @@ def diarize_audio(mp3_path: Path) -> list[dict[str, Any]]:
         [{"start": float, "end": float, "speaker": str}, ...]
 
     Speaker labels are pyannote's internal IDs, e.g. "SPEAKER_00".
-    Requires HUGGINGFACE_TOKEN env var and accepted model license at:
+    Requires HF_TOKEN env var and accepted model license at:
     https://huggingface.co/pyannote/speaker-diarization-3.1
     """
-    hf_token = os.environ.get("HUGGINGFACE_TOKEN", "")
+    hf_token = os.environ.get("HF_TOKEN") or os.environ.get("HUGGINGFACE_TOKEN", "")
     if not hf_token:
         print(
-            "  [warn] HUGGINGFACE_TOKEN not set — skipping diarization, speakers will be unknown")
+            "  [warn] HF_TOKEN not set — skipping diarization, speakers will be unknown")
         return []
 
     try:

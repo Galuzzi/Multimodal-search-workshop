@@ -334,8 +334,8 @@ Then run the pipeline:
 # Download audio (NVDA earnings call)
 python ingest/01_download_audio.py
 
-# Transcribe with Whisper
-python ingest/02_transcribe.py
+# Transcribe (Whisper) + diarize (pyannote) + identify speakers (Gemini)
+python ingest/02_transcribe_and_diarize.py
 
 # Embed with Gemini and upsert to Qdrant
 # (also configures filterable HNSW + payload indexes — see Exercise 5)
@@ -377,5 +377,5 @@ print(client.get_collection("earnings_calls"))
 - Check `python cli/setup_mcp.py status`
 
 **Whisper is slow:**
-- Use `whisper.load_model("tiny")` in `02_transcribe.py` for faster (less accurate) transcription
+- Use `whisper.load_model("tiny")` in `02_transcribe_and_diarize.py` for faster (less accurate) transcription
 - For production, use `"medium"` or `"large"` for better accuracy

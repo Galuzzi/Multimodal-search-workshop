@@ -153,7 +153,7 @@ def main() -> None:
             print(
                 f"  [error] {call['ticker']} {call['quarter']} {call['year']}: {exc}")
 
-    print("\nDone.  Next step: python3 ingest/02_transcribe.py")
+    print("\nDone.  Next step: python3 ingest/02_transcribe_and_diarize.py")
 
 
 if __name__ == "__main__":

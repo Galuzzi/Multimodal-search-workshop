@@ -20,10 +20,10 @@ in the news when management spoke.
 INGESTION PIPELINE  (pre-built, run once)
 ═══════════════════════════════════════════
 
-  Source A · Benzinga API ───────────────► transcript text + MP3 ┐
-                                                                  │   (Whisper only runs on
-  Source B · YouTube ─► yt-dlp ─► MP3 ─► Whisper ─► transcript ───┤    the YouTube path; Benzinga
-                                        (word timestamps)         │    supplies the transcript)
+  Source A · YouTube ─► yt-dlp ─► MP3 ─► Whisper ─► transcript ───┐
+                                        (word timestamps)         │   (Whisper only runs on
+  Source B · Benzinga API ───────────────► transcript text + MP3 ┤    the YouTube path; Benzinga
+                                                                  │    supplies the transcript)
                                                                   ▼
               pyannote.audio diarization  +  Gemini 2.5 Flash-Lite (resolve speaker names)
                                                                   │
@@ -154,8 +154,6 @@ nano .env   # set GEMINI_API_KEY, QDRANT_URL, QDRANT_API_KEY
 python3 ingest/01_download_audio.py   # download earnings calls from YouTube
 python3 ingest/01b_fetch_benzinga.py   # fetch transcripts and audio from Benzinga API
 python3 ingest/02_transcribe_and_diarize.py # Whisper transcription → 30s chunks + pyannote diarization + Gemini speaker ID
-python3 ingest/02_transcribe.py       # Whisper transcription → 30s chunks
-python3 ingest/02b_diarize.py         # pyannote diarization + Gemini speaker ID
 python3 ingest/03_embed_and_index.py  # Gemini embeddings → Qdrant Cloud
 python3 ingest/04_build_asknews_context.py                # pre-fetch news (optional)
 
@@ -191,12 +189,9 @@ BerlinWorkshop/
 ├── ingest/
 │   ├── 01_download_audio.py          ← yt-dlp → MP3
 │   ├── 01b_fetch_benzinga.py         ← api → MP3 + transcript
-│   ├── 02_transcribe_and_diarize.py  ← OpenAI Whisper → word-timestamped chunks
-│   ├── 02_transcribe.py              ← OpenAI Whisper → word-timestamped chunks
-│   ├── 02b_diarize.py                ← pyannote diarization + Gemini speaker ID
+│   ├── 02_transcribe_and_diarize.py  ← Whisper transcription + pyannote diarization + Gemini speaker ID
 │   ├── 03_embed_and_index.py         ← Gemini Embedding 2 (text + audio) → Qdrant upsert
-│   ├── 04_cache_asknews.py           ← AskNews context → JSON cache
-│   └── 04b_update_speakers.py        ← payload-only refresh of `speaker` after re-diarize
+│   └── 04_build_asknews_context.py   ← AskNews context → JSON cache
 ├── mcp_server/
 │   ├── server.py                     ← SKELETON — participants complete this
 │   ├── server_solution.py            ← full working solution (instructor reference)
@@ -305,4 +300,4 @@ python cli/setup_mcp.py install
 - If empty, `pydub` will slice on demand from `data/audio/` (needs `static-ffmpeg` installed)
 
 **Whisper takes too long (if re-transcribing):**
-- Edit `ingest/benzinga_youtube/02_transcribe.py` and change `"base"` to `"tiny"` for speed
+- In `ingest/02_transcribe_and_diarize.py` change `whisper.load_model("base")` to `"tiny"` for speed
